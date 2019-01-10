@@ -94,6 +94,8 @@ typedef enum : NSUInteger {
 @property SKColor *secondHandColor;
 @property SKColor *inlayColor;
 
+@property SKSpriteNode *datePlaceHolder;
+
 @property SKColor *majorMarkColor;
 @property SKColor *minorMarkColor;
 @property SKColor *textColor;
