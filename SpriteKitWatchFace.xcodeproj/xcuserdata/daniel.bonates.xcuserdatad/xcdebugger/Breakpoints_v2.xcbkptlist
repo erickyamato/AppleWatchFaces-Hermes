@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpriteKitWatchFace WatchKit Extension/FaceScene.m"
-            timestampString = "568867966.101462"
+            timestampString = "568961292.295853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "513"
-            endingLineNumber = "513"
-            landmarkName = "-setupTickmarksForRectangularFaceWithLayerName:"
+            startingLineNumber = "1191"
+            endingLineNumber = "1191"
+            landmarkName = "-updateHands"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

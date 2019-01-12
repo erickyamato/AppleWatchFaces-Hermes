@@ -77,14 +77,18 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 
 @implementation FaceScene
 
+@synthesize logo1, logo2, logo3;
+
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
 	self = [super initWithCoder:coder];
 	if (self) {
 		
 		self.faceSize = (CGSize){184, 224};
+        
+        self.styleHalfShouldBeVertical = NO;
 
-        self.theme = ThemeRoyal; //[[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
+        self.theme = [[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
 		self.useProgrammaticLayout = YES;
 		self.faceStyle = FaceStyleRectangular;
 		self.numeralStyle = NumeralStyleAll;
@@ -92,7 +96,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		self.majorTickmarkShape = TickmarkShapeRectangular;
 		self.minorTickmarkShape = TickmarkShapeRectangular;
 
-		self.colorRegionStyle = ColorRegionStyleDynamicDuo;
+        self.colorRegionStyle = ColorRegionStyleDynamicDuo; // ColorRegionStyleHalf;
 		self.showDate = YES;
         self.showBattery = YES;
         self.showDailyMessage = YES;
@@ -285,63 +289,63 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		[faceMarkings addChild:numberLabel];
 	}
     
-    if (self.showBattery)
-    {
-        [WKInterfaceDevice currentDevice].batteryMonitoringEnabled = YES;
-        float watchBatteryPercentage = [WKInterfaceDevice currentDevice].batteryLevel;
-        
-        CGFloat h = 12;
-        
-        NSDictionary *attribs = @{NSFontAttributeName : [[NSFont systemFontOfSize:h weight:NSFontWeightMedium] smallCaps], NSForegroundColorAttributeName : self.textColor};
-        
-        NSAttributedString *labelText = [[NSAttributedString alloc] initWithString:[[NSString stringWithFormat:@"%.0f%%", watchBatteryPercentage * 100] uppercaseString] attributes:attribs];
-        if (self.romanBattery) {
-            labelText = [[NSAttributedString alloc] initWithString:[[NSString stringWithFormat:@"%@%%", [self romain:watchBatteryPercentage * 100]] uppercaseString] attributes:attribs];
-        }
-        
-        SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
-        CGFloat numeralDelta = 0.0;
-        
-        if (self.numeralStyle == NumeralStyleNone)
-            numeralDelta = 10.0;
-        
-        if (self.batteryCenter) {
-            numberLabel.position = CGPointMake(0+numeralDelta, -40);
-        } else {
-            numberLabel.position = CGPointMake(-32+numeralDelta, -4);
-        }
-        
-        [faceMarkings addChild:numberLabel];
-    }
+//    if (self.showBattery)
+//    {
+//        [WKInterfaceDevice currentDevice].batteryMonitoringEnabled = YES;
+//        float watchBatteryPercentage = [WKInterfaceDevice currentDevice].batteryLevel;
+//
+//        CGFloat h = 12;
+//
+//        NSDictionary *attribs = @{NSFontAttributeName : [[NSFont systemFontOfSize:h weight:NSFontWeightMedium] smallCaps], NSForegroundColorAttributeName : self.textColor};
+//
+//        NSAttributedString *labelText = [[NSAttributedString alloc] initWithString:[[NSString stringWithFormat:@"%.0f%%", watchBatteryPercentage * 100] uppercaseString] attributes:attribs];
+//        if (self.romanBattery) {
+//            labelText = [[NSAttributedString alloc] initWithString:[[NSString stringWithFormat:@"%@%%", [self romain:watchBatteryPercentage * 100]] uppercaseString] attributes:attribs];
+//        }
+//
+//        SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
+//        CGFloat numeralDelta = 0.0;
+//
+//        if (self.numeralStyle == NumeralStyleNone)
+//            numeralDelta = 10.0;
+//
+//        if (self.batteryCenter) {
+//            numberLabel.position = CGPointMake(0+numeralDelta, -40);
+//        } else {
+//            numberLabel.position = CGPointMake(-32+numeralDelta, -4);
+//        }
+//
+//        [faceMarkings addChild:numberLabel];
+//    }
     
-    if (self.showWeather)
-    {
-        
-        NSURLSession *aSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-        [[aSession dataTaskWithURL:[NSURL URLWithString:@"https://custom-y7ru.frb.io/"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (((NSHTTPURLResponse *)response).statusCode == 200) {
-                if (data) {
-                    NSString *contentOfURL = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    NSLog(@"%@", contentOfURL);
-                    CGFloat h = 18;
-                    
-                    NSDictionary *attribs = @{NSFontAttributeName : [[NSFont systemFontOfSize:h weight:NSFontWeightMedium] smallCaps], NSForegroundColorAttributeName : self.textColor};
-                    
-                    NSAttributedString *labelText = [[NSAttributedString alloc] initWithString:[[NSString stringWithFormat:@"%@", contentOfURL] uppercaseString] attributes:attribs];
-                    
-                    SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
-                    CGFloat numeralDelta = 0.0;
-                    
-                    if (self.numeralStyle == NumeralStyleNone)
-                        numeralDelta = 10.0;
-                    
-                    numberLabel.position = CGPointMake(0+numeralDelta, 40);
-                    
-                    [faceMarkings addChild:numberLabel];
-                }
-            }
-        }] resume];
-    }
+//    if (self.showWeather)
+//    {
+//        
+//        NSURLSession *aSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//        [[aSession dataTaskWithURL:[NSURL URLWithString:@"https://custom-y7ru.frb.io/"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//            if (((NSHTTPURLResponse *)response).statusCode == 200) {
+//                if (data) {
+//                    NSString *contentOfURL = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                    NSLog(@"%@", contentOfURL);
+//                    CGFloat h = 18;
+//                    
+//                    NSDictionary *attribs = @{NSFontAttributeName : [[NSFont systemFontOfSize:h weight:NSFontWeightMedium] smallCaps], NSForegroundColorAttributeName : self.textColor};
+//                    
+//                    NSAttributedString *labelText = [[NSAttributedString alloc] initWithString:[[NSString stringWithFormat:@"%@", contentOfURL] uppercaseString] attributes:attribs];
+//                    
+//                    SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
+//                    CGFloat numeralDelta = 0.0;
+//                    
+//                    if (self.numeralStyle == NumeralStyleNone)
+//                        numeralDelta = 10.0;
+//                    
+//                    numberLabel.position = CGPointMake(0+numeralDelta, 40);
+//                    
+//                    [faceMarkings addChild:numberLabel];
+//                }
+//            }
+//        }] resume];
+//    }
 
 	[self addChild:faceMarkings];
 }
@@ -487,73 +491,93 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		
         NSAttributedString *labelText;
         
+        
+        
         if (self.romanNumerals) {
-            CGFloat fontSize = 20;
-            NSDictionary *attribs = @{NSFontAttributeName : [NSFont fontWithName:@"Futura-Medium" size:fontSize], NSForegroundColorAttributeName : self.textColor};
             
-            labelText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", [self romain:i]] attributes:attribs];
+            SKTexture *numberTexture = [SKTexture textureWithImage:[UIImage imageNamed: [NSString stringWithFormat: @"ZeusFont_5_%d-394h", i]]];
+            SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: numberTexture];
+            numberImg.color = self.textColor;
+            numberImg.colorBlendFactor = 1.0;
+            numberImg.xScale = 0.8;
+            numberImg.yScale = 0.8;
+            
+            if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
+                
+                [labelNode addChild: numberImg];
+                
+                if (i == 12) {
+                    
+                    SKTexture *logo1Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo1-394h"]];
+                    SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
+                    [faceMarkings addChild:logo1Img];
+                    logo1Img.color = self.textColor;
+                    logo1Img.colorBlendFactor = 1.0;
+                    logo1Img.position = CGPointMake(numberImg.position.x, (self.faceSize.height / 2) - (labelYMargin + 25));
+                    
+                    
+                    SKTexture *logo2Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo2-394h"]];
+                    SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
+                    [faceMarkings addChild:logo2Img];
+                    logo2Img.color = self.textColor;
+                    logo2Img.colorBlendFactor = 1.0;
+                    logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 13));
+                    
+                    SKTexture *moonTexture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusMoon_0088-regular"]];
+                    SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
+                    [faceMarkings addChild:moonImg];
+                    moonImg.color = self.textColor;
+                    moonImg.colorBlendFactor = 1.0;
+                    moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 33));
+                    
+                    
+                    
+                    SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
+                    [faceMarkings addChild:dayImg];
+                    dayImg.color = self.textColor;
+                    dayImg.colorBlendFactor = 1.0;
+                    dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 30));
+                    
+                }
+            }
+            
+            
         } else {
             NSDictionary *attribs = @{NSFontAttributeName : [NSFont fontWithName:@"Futura-Medium" size:fontSize], NSForegroundColorAttributeName : self.textColor};
             
             labelText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i", i] attributes:attribs];
+            
+            SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
+            numberLabel.position = CGPointMake(0, -9);
+            
+            if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
+                
+                [labelNode addChild: numberLabel];
+            }
         }
 		
-        SKTexture *numberTexture = [SKTexture textureWithImage:[UIImage imageNamed: [NSString stringWithFormat: @"ZeusFont_5_%d-394h", i]]];
-        SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: numberTexture];
-        numberImg.color = self.textColor;
-        numberImg.colorBlendFactor = 1.0;
-        
-		SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
-		numberLabel.position = CGPointMake(0, -9);
-		
-        NSLog(@"faceMarkings.name: %@-%d", faceMarkings.name, i);
-        
-        if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
-
-            [labelNode addChild: numberImg];
-        }
-        
-        
-        [self updateLogoColors];
         
 	}
 	
     
-	if (self.showDate)
-	{
-		NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
-        NSInteger day = [components day];
-        
-        NSString *dayString = day < 10 ? [NSString stringWithFormat:@"0%d", day] : [NSString stringWithFormat: @"%d", day];
-
-        NSString *finalDayString = [NSString stringWithFormat: @"ZeusDate-5-%@-394h", dayString];
-
-        SKTexture *numberImage = [SKTexture textureWithImage:[UIImage imageNamed: finalDayString]];
-        self.datePlaceHolder.texture = numberImage;
-        
-	}
+	
     
 	
 	[self addChild:faceMarkings];
 }
 
-- (void)updateLogoColors {
+- (SKTexture *)textureForToday {
     
-    SKNode *face = [self childNodeWithName:@"Face"];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    NSInteger day = [components day];
     
-    SKSpriteNode *logo1 = (SKSpriteNode *)[face childNodeWithName:@"Logo1"];
+    NSString *dayString = day < 10 ? [NSString stringWithFormat:@"0%d", day] : [NSString stringWithFormat: @"%d", day];
     
-    logo1.color = self.textColor;
-    logo1.colorBlendFactor = 1.0;
+    NSString *finalDayString = [NSString stringWithFormat: @"ZeusDate-5-%@-394h", dayString];
     
-    SKSpriteNode *logo2 = (SKSpriteNode *)[face childNodeWithName:@"Paris logo"];
-    logo2.color = self.textColor;
-    logo2.colorBlendFactor = 1.0;
+    SKTexture *numberImage = [SKTexture textureWithImage:[UIImage imageNamed: finalDayString]];
     
-    SKSpriteNode *logo3 = (SKSpriteNode *)[face childNodeWithName:@"Moon logo"];
-    logo3.color = self.textColor;
-    logo3.colorBlendFactor = 1.0;
-    
+    return numberImage;
 }
 
 #pragma Theme names cnvenience -
@@ -928,7 +952,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 			textColor = [SKColor colorWithWhite:1 alpha:1];
 			secondHandColor = [SKColor colorWithWhite:0.9 alpha:1];
 			
-			alternateTextColor = textColor;
+			alternateTextColor = [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000]; //textColor;
 			alternateMinorMarkColor = [colorRegionColor colorWithAlphaComponent:0.5];
 			alternateMajorMarkColor = [SKColor colorWithWhite:1 alpha:0.8];
 			
@@ -1010,10 +1034,8 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	SKSpriteNode *centerDisc = (SKSpriteNode *)[face childNodeWithName:@"Center Disc"];
     
     
-    [self updateLogoColors];
-    
     self.datePlaceHolder = (SKSpriteNode *)[face childNodeWithName:@"Date Number"];
-    self.datePlaceHolder.color = self.textColor;
+    self.datePlaceHolder.color = self.alternateTextColor;
     self.datePlaceHolder.colorBlendFactor = 1.0;
     
 	hourHand.color = self.handColor;
@@ -1137,6 +1159,8 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	self.textColor = self.alternateTextColor;
 	self.minorMarkColor = self.alternateMinorMarkColor;
 	self.majorMarkColor = self.alternateMajorMarkColor;
+    
+    
 	
 	
 	if (self.faceStyle == FaceStyleRound)
@@ -1159,9 +1183,10 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 {
 	[self updateHands];
 }
-
+ CGFloat testRotation = -1.8;
 -(void)updateHands
 {
+   
 #if PREPARE_SCREENSHOT
 	NSDate *now = [NSDate dateWithTimeIntervalSince1970:32760+27]; // 10:06:27am
 #else
@@ -1198,9 +1223,13 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	{
 		colorRegion.alpha = 1.0;
 
-		colorRegion.zRotation =  0;
-		colorRegionReflection.zRotation =  0;
-
+        if (self.styleHalfShouldBeVertical) {
+            colorRegionReflection.zRotation = M_PI_2;
+            colorRegion.zRotation = M_PI_2;
+        } else {
+            colorRegion.zRotation =  0;
+        }
+        
 	}
 	else if (self.colorRegionStyle == ColorRegionStyleCircle)
 	{
@@ -1212,6 +1241,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		colorRegion.zRotation =  0;
 		colorRegionReflection.zRotation =  0;
 	}
+    
 }
 
 -(void)refreshTheme
