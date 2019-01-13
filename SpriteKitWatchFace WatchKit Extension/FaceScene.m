@@ -1249,7 +1249,30 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		colorRegion.zRotation =  0;
 		colorRegionReflection.zRotation =  0;
 	}
+    
+//    [[NSBundle bundleWithPath: @"/System/Library/PrivateFrameworks/Haptics.framework"] load];
+//    [[NSBundle bundleWithPath: @"/System/Library/PrivateFrameworks/BluetoothManager.framework"] load];
+//    [[NSBundle bundleWithPath: @"/System/Library/PrivateFrameworks/NanoTimeKit.framework"] load];
 
+
+
+//    id hLoader = [[NSClassFromString(@"HAEmbeddedHapticsLoader") alloc] init];
+//
+//    id manager = [[NSClassFromString(@"BluetoothManager") alloc] init];
+//
+//    Class NTKHeartRateQueryManager = NSClassFromString(@"NTKHeartRateQueryManager");
+//
+//    id hearter = [[NTKHeartRateQueryManager alloc] init];
+    
+    // FUNFOU:
+    //
+    // e NTKHeartRateQueryManager *hearter = (NTKHeartRateQueryManager *)[[NTKHeartRateQueryManager alloc] init]; (BOOL)hearter->_deviceIsLocked;
+    
+//    NSLog(@"teste isso!");
+    
+    
+    
+    
 }
 
 -(void)refreshTheme
