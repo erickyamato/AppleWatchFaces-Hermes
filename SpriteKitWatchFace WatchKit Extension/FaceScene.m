@@ -102,16 +102,19 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         self.showDailyMessage = YES;
         self.showWeather = YES;
         self.batteryCenter = NO;
-        self.romanNumerals = YES;
+        self.romanNumerals = NO;
         self.romanBattery = NO;
-        self.alternateTextColor = [SKColor purpleColor];
+        
+        self.useAlternateColorOnLogosAndDate = YES;
         
 		[self refreshTheme];
 		
 		self.delegate = self;
+        
 	}
 	return self;
 }
+
 
 - (NSString*)romain:(int)num {
     if (num < 0 || num > 9999) { return @""; } // out of range
@@ -488,9 +491,6 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 			labelNode.position = CGPointMake(-self.faceSize.height/2+fontSize+labelXMargin, -(self.faceSize.width-labelXMargin*2)/2 + ((i+1)%3) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelYMargin*2)/6.0);
 		
         [faceMarkings addChild:labelNode];
-		
-        NSAttributedString *labelText;
-        
         
         
         if (self.romanNumerals) {
@@ -505,62 +505,63 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
             if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
                 
                 [labelNode addChild: numberImg];
-                
-                if (i == 12) {
-                    
-                    SKTexture *logo1Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo1-394h"]];
-                    SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
-                    [faceMarkings addChild:logo1Img];
-                    logo1Img.color = self.textColor;
-                    logo1Img.colorBlendFactor = 1.0;
-                    logo1Img.position = CGPointMake(numberImg.position.x, (self.faceSize.height / 2) - (labelYMargin + 25));
-                    
-                    
-                    SKTexture *logo2Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo2-394h"]];
-                    SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
-                    [faceMarkings addChild:logo2Img];
-                    logo2Img.color = self.textColor;
-                    logo2Img.colorBlendFactor = 1.0;
-                    logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 13));
-                    
-                    SKTexture *moonTexture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusMoon_0088-regular"]];
-                    SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
-                    [faceMarkings addChild:moonImg];
-                    moonImg.color = self.textColor;
-                    moonImg.colorBlendFactor = 1.0;
-                    moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 33));
-                    
-                    
-                    
-                    SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
-                    [faceMarkings addChild:dayImg];
-                    dayImg.color = self.textColor;
-                    dayImg.colorBlendFactor = 1.0;
-                    dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 30));
-                    
-                }
             }
+                
             
             
         } else {
-            NSDictionary *attribs = @{NSFontAttributeName : [NSFont fontWithName:@"Futura-Medium" size:fontSize], NSForegroundColorAttributeName : self.textColor};
+
             
-            labelText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i", i] attributes:attribs];
+            SKTexture *numberTexture = [SKTexture textureWithImage:[UIImage imageNamed: [NSString stringWithFormat: @"ZeusFont_3_%d-394h", i]]];
             
-            SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
-            numberLabel.position = CGPointMake(0, -9);
+            
+            SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: numberTexture];
+            numberImg.color = self.textColor;
+            numberImg.colorBlendFactor = 1.0;
+            numberImg.xScale = 0.8;
+            numberImg.yScale = 0.8;
             
             if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
                 
-                [labelNode addChild: numberLabel];
+                [labelNode addChild: numberImg];
             }
+            
         }
 		
         
 	}
 	
     
-	
+            
+            SKTexture *logo1Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo1-394h"]];
+            SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
+            [faceMarkings addChild:logo1Img];
+            logo1Img.color = self.textColor;
+            logo1Img.colorBlendFactor = 1.0;
+            logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 29));
+            
+            
+            SKTexture *logo2Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo2-394h"]];
+            SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
+            [faceMarkings addChild:logo2Img];
+            logo2Img.color = self.textColor;
+            logo2Img.colorBlendFactor = 1.0;
+            logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 13));
+            
+            SKTexture *moonTexture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusMoon_0088-regular"]];
+            SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
+            [faceMarkings addChild:moonImg];
+            moonImg.color = self.textColor;
+            moonImg.colorBlendFactor = 1.0;
+            moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 33));
+            
+    
+            SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
+            [faceMarkings addChild:dayImg];
+            dayImg.color = self.textColor;
+            dayImg.colorBlendFactor = 1.0;
+            dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 37));
+            
     
 	
 	[self addChild:faceMarkings];
@@ -857,6 +858,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 			textColor = [SKColor colorWithWhite:1.0 alpha:1.0];
 			secondHandColor = [SKColor colorWithRed:0.486 green:0.784 blue:0.906 alpha:1.000];
 			
+            
 			alternateTextColor = [SKColor colorWithWhite:0.6 alpha:1];
 			alternateMinorMarkColor = [SKColor colorWithWhite:0.6 alpha:1];
 			alternateMajorMarkColor = [SKColor colorWithWhite:0.6 alpha:1];
@@ -952,7 +954,12 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 			textColor = [SKColor colorWithWhite:1 alpha:1];
 			secondHandColor = [SKColor colorWithWhite:0.9 alpha:1];
 			
-			alternateTextColor = [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000]; //textColor;
+            UIColor *logoAndDateColor = textColor;
+            if (self.useAlternateColorOnLogosAndDate) {
+                logoAndDateColor = [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000];
+            }
+            
+			alternateTextColor = logoAndDateColor;
 			alternateMinorMarkColor = [colorRegionColor colorWithAlphaComponent:0.5];
 			alternateMajorMarkColor = [SKColor colorWithWhite:1 alpha:0.8];
 			
@@ -1227,6 +1234,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
             colorRegionReflection.zRotation = M_PI_2;
             colorRegion.zRotation = M_PI_2;
         } else {
+            colorRegionReflection.zRotation = 0;
             colorRegion.zRotation =  0;
         }
         
@@ -1241,7 +1249,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		colorRegion.zRotation =  0;
 		colorRegionReflection.zRotation =  0;
 	}
-    
+
 }
 
 -(void)refreshTheme

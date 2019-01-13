@@ -195,6 +195,65 @@ CGFloat totalRotation = 0;
     }
 }
 
+
+// one tap switch default and romans
+- (IBAction)tapped:(id)sender {
+    
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    scene.romanNumerals = !scene.romanNumerals;
+    [scene refreshTheme];
+}
+
+// swipe right set Horizontal ColorRegionStyleHalf
+- (IBAction)swipedRight:(id)sender {
+    
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    scene.styleHalfShouldBeVertical = NO;
+    scene.colorRegionStyle = ColorRegionStyleHalf;
+    [scene refreshTheme];
+}
+
+// swipe down set Vertical ColorRegionStyleHalf
+- (IBAction)swipedDown:(id)sender {
+    
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+        scene.styleHalfShouldBeVertical = YES;
+    scene.colorRegionStyle = ColorRegionStyleHalf;
+    [scene refreshTheme];
+}
+
+// swipe left set ColorRegionStyleDynamicDuo
+- (IBAction)dynamicDuo:(id)sender {
+
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    scene.styleHalfShouldBeVertical = NO;
+    scene.colorRegionStyle = ColorRegionStyleDynamicDuo;
+    [scene refreshTheme];
+}
+
+// swipe up toogle useAlternateColorOnLogosAndDate
+- (IBAction)alternateColorAction:(id)sender {
+    
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    
+    scene.useAlternateColorOnLogosAndDate = !scene.useAlternateColorOnLogosAndDate;
+    
+    [scene refreshTheme];
+}
+
+- (IBAction)toogleCardinal:(id)sender {
+    
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    
+    if (scene.numeralStyle == NumeralStyleAll) {
+        scene.numeralStyle = NumeralStyleCardinal;
+    } else {
+        scene.numeralStyle = NumeralStyleAll;
+    }
+    
+    [scene refreshTheme];
+}
+
 @end
 
 

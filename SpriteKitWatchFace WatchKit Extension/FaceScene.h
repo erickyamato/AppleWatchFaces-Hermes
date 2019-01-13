@@ -117,6 +117,7 @@ typedef enum : NSUInteger {
 @property BOOL romanBattery;
 
 @property BOOL styleHalfShouldBeVertical; //good for masking tests
+@property BOOL useAlternateColorOnLogosAndDate;
 
 @property CGSize faceSize;
 @property SKSpriteNode *dateNumberImgRef;
