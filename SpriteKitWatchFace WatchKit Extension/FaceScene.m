@@ -68,6 +68,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	return workingRadius;
 }
 
+CGFloat regionTransitionDuration = 0.2;
 
 @implementation FaceScene
 
@@ -528,7 +529,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		{
             
             colorRegionColor = [SKColor colorWithWhite:0.082 alpha:1.000];
-			faceBackgroundColor = [SKColor colorWithWhite:0.082 alpha:1.000];
+			faceBackgroundColor = [SKColor blackColor];
 			inlayColor = [SKColor colorWithRed:0.969 green:0.878 blue:0.780 alpha:1.000];
 			majorMarkColor = [SKColor colorWithRed:0.804 green:0.710 blue:0.639 alpha:1.000];
 			minorMarkColor = majorMarkColor;
@@ -727,6 +728,8 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
     
 }
 
+
+
 -(void)setupScene
 {
 	SKNode *face = [self childNodeWithName:@"Face"];
@@ -747,19 +750,16 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
     self.datePlaceHolder.color = self.alternateTextColor;
     self.datePlaceHolder.colorBlendFactor = 1.0;
     
-	hourHand.color = self.handColor;
-	hourHand.colorBlendFactor = 1.0;
 	
-	minuteHand.color = self.handColor;
-	minuteHand.colorBlendFactor = 1.0;
+    [hourHand runAction: [SKAction colorizeWithColor: self.handColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
-	secondHand.color = self.secondHandColor;
-	secondHand.colorBlendFactor = 1.0;
+	[minuteHand runAction: [SKAction colorizeWithColor: self.handColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
-	self.backgroundColor = self.faceBackgroundColor;
+	[secondHand runAction: [SKAction colorizeWithColor: self.secondHandColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
-	colorRegion.color = self.colorRegionColor;
-	colorRegion.colorBlendFactor = 1.0;
+    [self runAction: [SKAction colorizeWithColor: self.faceBackgroundColor colorBlendFactor: 1 duration: regionTransitionDuration]];
+    
+    [colorRegion runAction: [SKAction colorizeWithColor: self.colorRegionColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
 	numbers.color = self.textColor;
 	numbers.colorBlendFactor = 1.0;
