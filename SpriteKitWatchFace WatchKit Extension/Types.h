@@ -41,7 +41,8 @@ typedef enum : NSUInteger {
     DialStyleNone,
     DialStyleAll,
     DialStyleCardinal,
-    DialStyleTweoveOnTop
+    DialStyleTweoveOnTop,
+    DialStyleMAX
 } DialStyle;
 
 

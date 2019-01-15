@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)refreshTheme;
 -(void)nextTypeface;
 -(void)nextColorRegionStyle;
+-(void)nextColorDialStyle;
 
 @property Theme theme;
 @property DialStyle dialStyle;

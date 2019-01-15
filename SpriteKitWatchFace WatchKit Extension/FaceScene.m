@@ -112,70 +112,152 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	faceMarkings.name = layerName;
 	
 	/* Numerals */
-	for (int i = 1; i <= 12; i++)
-	{
-		CGFloat fontSize = 25;
+    
+    if (self.dialStyle == DialStyleTweoveOnTop) { //12 only
         
-		SKSpriteNode *labelNode = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(fontSize, fontSize)];
-		labelNode.anchorPoint = CGPointMake(0.5,0.5);
-		
-		if (i == 1 || i == 11 || i == 12)
-			labelNode.position = CGPointMake(labelXMargin-self.faceSize.width/2 + ((i+1)%3) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelXMargin*2)/6.0, self.faceSize.height/2-labelYMargin);
-		else if (i == 5 || i == 6 || i == 7)
-			labelNode.position = CGPointMake(labelXMargin-self.faceSize.width/2 + (2-((i+1)%3)) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelXMargin*2)/6.0, -self.faceSize.height/2+labelYMargin);
-		else if (i == 2 || i == 3 || i == 4)
-			labelNode.position = CGPointMake(self.faceSize.height/2-fontSize-labelXMargin, -(self.faceSize.width-labelXMargin*2)/2 + (2-((i+1)%3)) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelYMargin*2)/6.0);
-		else if (i == 8 || i == 9 || i == 10)
-			labelNode.position = CGPointMake(-self.faceSize.height/2+fontSize+labelXMargin, -(self.faceSize.width-labelXMargin*2)/2 + ((i+1)%3) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelYMargin*2)/6.0);
-		
+        CGFloat fontSize = 25;
+        
+        SKSpriteNode *labelNode = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(fontSize, fontSize)];
+        labelNode.anchorPoint = CGPointMake(0.5,0.5);
+        
+        labelNode.position = CGPointMake(labelXMargin-self.faceSize.width/2 + ((12+1)%3) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelXMargin*2)/6.0, self.faceSize.height/2-labelYMargin);
+        
         [faceMarkings addChild:labelNode];
         
         
-        SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: i]];
+        SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: 12]];
         numberImg.color = self.textColor;
         numberImg.colorBlendFactor = 1.0;
         numberImg.xScale = 0.8;
         numberImg.yScale = 0.8;
+        numberImg.alpha = 0;
         
-        if (self.dialStyle == DialStyleAll || ((self.dialStyle == DialStyleCardinal) && (i % 3 == 0))) {
+        [labelNode addChild: numberImg];
+        
+        [numberImg runAction: [SKAction fadeInWithDuration: 0.2]];
+        
+        
+    } if (self.dialStyle == DialStyleCardinal || self.dialStyle == DialStyleAll) {
+    
+        NSMutableArray *allNumbers = [NSMutableArray array];
+        
+        for (int i = 1; i <= 12; i++)
+        {
+            CGFloat fontSize = 25;
+
+            SKSpriteNode *labelNode = [SKSpriteNode spriteNodeWithColor:[SKColor clearColor] size:CGSizeMake(fontSize, fontSize)];
+            labelNode.anchorPoint = CGPointMake(0.5,0.5);
+
+            if (i == 1 || i == 11 || i == 12)
+                labelNode.position = CGPointMake(labelXMargin-self.faceSize.width/2 + ((i+1)%3) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelXMargin*2)/6.0, self.faceSize.height/2-labelYMargin);
+            else if (i == 5 || i == 6 || i == 7)
+                labelNode.position = CGPointMake(labelXMargin-self.faceSize.width/2 + (2-((i+1)%3)) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelXMargin*2)/6.0, -self.faceSize.height/2+labelYMargin);
+            else if (i == 2 || i == 3 || i == 4)
+                labelNode.position = CGPointMake(self.faceSize.height/2-fontSize-labelXMargin, -(self.faceSize.width-labelXMargin*2)/2 + (2-((i+1)%3)) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelYMargin*2)/6.0);
+            else if (i == 8 || i == 9 || i == 10)
+                labelNode.position = CGPointMake(-self.faceSize.height/2+fontSize+labelXMargin, -(self.faceSize.width-labelXMargin*2)/2 + ((i+1)%3) * (self.faceSize.width-labelXMargin*2)/3.0 + (self.faceSize.width-labelYMargin*2)/6.0);
+
+            [faceMarkings addChild:labelNode];
+
+
+            SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: i]];
+            numberImg.color = self.textColor;
+            numberImg.colorBlendFactor = 1.0;
+            numberImg.xScale = 0.8;
+            numberImg.yScale = 0.8;
+            numberImg.alpha = 0;
             
-            [labelNode addChild: numberImg];
+            if (self.dialStyle == DialStyleAll || ((self.dialStyle == DialStyleCardinal) && (i % 3 == 0))) {
+
+                [labelNode addChild: numberImg];
+            } else if (i == 12 && self.dialStyle == DialStyleTweoveOnTop) {
+                [labelNode addChild: numberImg];
+            }
+            
+            [allNumbers addObject:numberImg];
+
+
         }
-		
         
-	}
-	
+
+        NSMutableArray *actions = [NSMutableArray array];
+        
+        for (int i = 0; i < allNumbers.count; i++)
+        {
+            [actions addObject: [SKAction waitForDuration: 0.05 * i]];
+            [actions addObject: [SKAction fadeInWithDuration: 0.2]];
             
-            SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
-            SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
-            [faceMarkings addChild:logo1Img];
-            logo1Img.color = self.textColor;
-            logo1Img.colorBlendFactor = 1.0;
-            logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 29));
+            [[allNumbers objectAtIndex: i] runAction: [SKAction sequence: actions]];
             
-            
-            SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
-            SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
-            [faceMarkings addChild:logo2Img];
-            logo2Img.color = self.textColor;
-            logo2Img.colorBlendFactor = 1.0;
-            logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 13));
-            
-            SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
-            SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
-            [faceMarkings addChild:moonImg];
-            moonImg.color = self.textColor;
-            moonImg.colorBlendFactor = 1.0;
-            moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 33));
-            
+            [actions removeAllObjects];
+        }
     
-            SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
-            [faceMarkings addChild:dayImg];
-            dayImg.color = self.textColor;
-            dayImg.colorBlendFactor = 1.0;
-            dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 37));
-            
+    }
     
+    
+//    SKTexture *dialTexture;
+//
+//    if (self.dialStyle != DialStyleNone) {
+//
+//        switch (self.dialStyle) {
+//
+//            case DialStyleAll:
+//                dialTexture = [SKTexture textureWithImage: [NSImage imageNamed: @"Swatch-Zeus-Numbers2-Detail3-luxo-nobg-n1y1"]];
+//                break;
+//
+//            case DialStyleCardinal:
+//                dialTexture = [SKTexture textureWithImage: [NSImage imageNamed: @"Swatch-Zeus-Numbers2-Detail2-luxo-nobg-n1y1"]];
+//                break;
+//
+//            case DialStyleTweoveOnTop:
+//                dialTexture = [SKTexture textureWithImage: [NSImage imageNamed: @"Swatch-Zeus-Numbers2-Detail1-luxo-nobg-n1y1"]];
+//                break;
+//
+//            default:
+//                break;
+//        }
+//
+//        SKSpriteNode *dialImg = [SKSpriteNode spriteNodeWithTexture: dialTexture];
+//        dialImg.alpha = 0;
+//        [faceMarkings addChild:dialImg];
+//        dialImg.color = self.textColor;
+//        dialImg.colorBlendFactor = 1.0;
+//        dialImg.size = CGSizeMake(self.faceSize.width * 0.95, self.faceSize.height * 0.95);
+//
+//        SKAction *fadeIn = [SKAction fadeInWithDuration:0.3];
+//        [dialImg runAction:fadeIn];
+//    }
+    
+    SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
+    SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
+    [faceMarkings addChild:logo1Img];
+    logo1Img.color = self.textColor;
+    logo1Img.colorBlendFactor = 1.0;
+    logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 29));
+    
+    
+    SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
+    SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
+    [faceMarkings addChild:logo2Img];
+    logo2Img.color = self.textColor;
+    logo2Img.colorBlendFactor = 1.0;
+    logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 13));
+    
+    SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
+    SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
+    [faceMarkings addChild:moonImg];
+    moonImg.color = self.textColor;
+    moonImg.colorBlendFactor = 1.0;
+    moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 33));
+            
+    if (self.dialStyle != DialStyleNone) {
+        
+        SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
+        [faceMarkings addChild:dayImg];
+        dayImg.color = self.textColor;
+        dayImg.colorBlendFactor = 1.0;
+        dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 37));
+    }
 	
 	[self addChild:faceMarkings];
 }
@@ -729,7 +811,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		colorRegionReflection.texture = nil;
 
 	}
-	else // should be ColorRegionStyleHalf
+	else
 	{
 		colorRegion.alpha = 1.0;
 		colorRegion.texture = nil;
@@ -843,6 +925,15 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         self.colorRegionStyle = 0;
     } else {
         self.colorRegionStyle++;
+    }
+}
+
+
+-(void)nextColorDialStyle {
+    if (self.dialStyle >= DialStyleMAX - 1) {
+        self.dialStyle = 0;
+    } else {
+        self.dialStyle++;
     }
 }
 

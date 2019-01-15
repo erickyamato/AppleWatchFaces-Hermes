@@ -255,10 +255,10 @@ CGFloat totalRotation = 0;
 // swipe down set Vertical ColorRegionStyleHalf
 - (IBAction)swipedDown:(id)sender {
     
-//    FaceScene *scene = (FaceScene *)self.scene.scene;
-//        scene.styleHalfShouldBeVertical = YES;
-//    scene.colorRegionStyle = ColorRegionStyleHalf;
-//    [scene refreshTheme];
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+
+    [scene nextColorDialStyle];
+    [scene refreshTheme];
 }
 
 // swipe left set ColorRegionStyleDynamicDuo
