@@ -798,7 +798,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		
 	if (self.colorRegionStyle == ColorRegionStyleNone)
 	{
-		colorRegion.alpha = 0.0;
+        colorRegion.alpha = 0.0;
 		
 	}
 	else if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
@@ -849,7 +849,8 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	[self setupTickmarksForRectangularFaceWithLayerName:@"Markings Alternate"];
 	
 	SKCropNode *alternateFaceMarkings = (SKCropNode *)[self childNodeWithName:@"Markings Alternate"];
-	colorRegionReflection.alpha = 1;
+    colorRegionReflection.alpha = 1;
+    
 	alternateFaceMarkings.maskNode = colorRegionReflection;
 }
 
@@ -887,24 +888,41 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	
 	if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
 	{
-		colorRegion.alpha = 1.0;
+//        colorRegion.alpha = 1.0;
+        
+        [colorRegion runAction: [SKAction fadeInWithDuration:0.20]];
+        
 		
-		colorRegion.zRotation =  M_PI_2 -(2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
-		colorRegionReflection.zRotation =  M_PI_2 - (2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
+        CGFloat regionDesiredRotation = M_PI_2 -(2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
+        
+        [colorRegion runAction: [SKAction rotateToAngle:regionDesiredRotation duration:0.2 shortestUnitArc:YES]];
+        
+         CGFloat reflectionDesiredRotation = M_PI_2 - (2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
+        
+        [colorRegionReflection runAction: [SKAction rotateToAngle:reflectionDesiredRotation duration:0.2 shortestUnitArc:YES]];
 	}
 	else if (self.colorRegionStyle == ColorRegionStyleHalfHorizontal)
 	{
 		colorRegion.alpha = 1.0;
 
-        colorRegionReflection.zRotation = 0;
-        colorRegion.zRotation =  0;
+        CGFloat desiredRotation = 0;
+        
+        SKAction *rotation = [SKAction rotateToAngle:desiredRotation duration:0.15 shortestUnitArc:YES];
+        
+        [colorRegionReflection runAction: rotation];
+        [colorRegion runAction: rotation];
         
     } else if (self.colorRegionStyle == ColorRegionStyleHalfVertical) {
         
         colorRegion.alpha = 1.0;
         
-        colorRegionReflection.zRotation = M_PI_2;
-        colorRegion.zRotation = M_PI_2;
+        
+        CGFloat desiredRotation = M_PI_2;
+        
+        SKAction *rotation = [SKAction rotateToAngle:desiredRotation duration:0.15 shortestUnitArc:YES];
+        
+        [colorRegionReflection runAction: rotation];
+        [colorRegion runAction: rotation];
         
     }
     else {} // solid color
