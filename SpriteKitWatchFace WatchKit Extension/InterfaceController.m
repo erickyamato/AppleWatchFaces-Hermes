@@ -238,7 +238,7 @@ CGFloat totalRotation = 0;
     FaceScene *scene = (FaceScene *)self.scene.scene;
     
     [scene nextTypeface];
-    
+    scene.updatingTypeFace = YES;
     [scene refreshTheme];
 }
 
@@ -248,7 +248,7 @@ CGFloat totalRotation = 0;
     FaceScene *scene = (FaceScene *)self.scene.scene;
     
     [scene nextColorRegionStyle];
-    
+    scene.updatingTypeFace = NO;
     [scene refreshTheme];
 }
 
@@ -256,7 +256,7 @@ CGFloat totalRotation = 0;
 - (IBAction)swipedDown:(id)sender {
     
     FaceScene *scene = (FaceScene *)self.scene.scene;
-
+    scene.updatingTypeFace = YES;
     [scene nextColorDialStyle];
     [scene refreshTheme];
 }

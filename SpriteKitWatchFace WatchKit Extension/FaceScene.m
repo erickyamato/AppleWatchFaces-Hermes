@@ -89,6 +89,9 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         
         self.useAlternateColorOnLogosAndDate = YES;
         
+        self.updatingTypeFace = YES;
+        
+        
 		[self refreshTheme];
 		
 		self.delegate = self;
@@ -130,11 +133,13 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         numberImg.colorBlendFactor = 1.0;
         numberImg.xScale = 0.8;
         numberImg.yScale = 0.8;
-        numberImg.alpha = 0;
+        numberImg.alpha = self.updatingTypeFace ? 0 : 1;
         
         [labelNode addChild: numberImg];
         
-        [numberImg runAction: [SKAction fadeInWithDuration: 0.2]];
+        if (self.updatingTypeFace) {
+            [numberImg runAction: [SKAction fadeInWithDuration: 0.2]];
+        }
         
         
     } if (self.dialStyle == DialStyleCardinal || self.dialStyle == DialStyleAll) {
@@ -165,7 +170,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
             numberImg.colorBlendFactor = 1.0;
             numberImg.xScale = 0.8;
             numberImg.yScale = 0.8;
-            numberImg.alpha = 0;
+            numberImg.alpha = self.updatingTypeFace ? 0 : 1.0;
             
             if (self.dialStyle == DialStyleAll || ((self.dialStyle == DialStyleCardinal) && (i % 3 == 0))) {
 
@@ -179,54 +184,23 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 
         }
         
-
-        NSMutableArray *actions = [NSMutableArray array];
-        
-        for (int i = 0; i < allNumbers.count; i++)
-        {
-            [actions addObject: [SKAction waitForDuration: 0.05 * i]];
-            [actions addObject: [SKAction fadeInWithDuration: 0.2]];
+        if (self.updatingTypeFace) {
+            NSMutableArray *actions = [NSMutableArray array];
             
-            [[allNumbers objectAtIndex: i] runAction: [SKAction sequence: actions]];
+            for (int i = 0; i < allNumbers.count; i++)
+            {
+                [actions addObject: [SKAction waitForDuration: 0.05 * i]];
+                [actions addObject: [SKAction fadeInWithDuration: 0.2]];
+                
+                [[allNumbers objectAtIndex: i] runAction: [SKAction sequence: actions]];
+                
+                [actions removeAllObjects];
+            }
             
-            [actions removeAllObjects];
         }
     
+    
     }
-    
-    
-//    SKTexture *dialTexture;
-//
-//    if (self.dialStyle != DialStyleNone) {
-//
-//        switch (self.dialStyle) {
-//
-//            case DialStyleAll:
-//                dialTexture = [SKTexture textureWithImage: [NSImage imageNamed: @"Swatch-Zeus-Numbers2-Detail3-luxo-nobg-n1y1"]];
-//                break;
-//
-//            case DialStyleCardinal:
-//                dialTexture = [SKTexture textureWithImage: [NSImage imageNamed: @"Swatch-Zeus-Numbers2-Detail2-luxo-nobg-n1y1"]];
-//                break;
-//
-//            case DialStyleTweoveOnTop:
-//                dialTexture = [SKTexture textureWithImage: [NSImage imageNamed: @"Swatch-Zeus-Numbers2-Detail1-luxo-nobg-n1y1"]];
-//                break;
-//
-//            default:
-//                break;
-//        }
-//
-//        SKSpriteNode *dialImg = [SKSpriteNode spriteNodeWithTexture: dialTexture];
-//        dialImg.alpha = 0;
-//        [faceMarkings addChild:dialImg];
-//        dialImg.color = self.textColor;
-//        dialImg.colorBlendFactor = 1.0;
-//        dialImg.size = CGSizeMake(self.faceSize.width * 0.95, self.faceSize.height * 0.95);
-//
-//        SKAction *fadeIn = [SKAction fadeInWithDuration:0.3];
-//        [dialImg runAction:fadeIn];
-//    }
     
     SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
     SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
@@ -822,13 +796,12 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 
 	}
 	
-	SKSpriteNode *numbersLayer = (SKSpriteNode *)[face childNodeWithName:@"Numbers"];
+    SKSpriteNode *numbersLayer = (SKSpriteNode *)[face childNodeWithName:@"Numbers"];
 
-		numbersLayer.alpha = 0;
+        numbersLayer.alpha = 0;
         [self setupTickmarksForRectangularFaceWithLayerName:@"Markings"];
-	
-	
-	colorRegionReflection.alpha = 0;
+
+    colorRegionReflection.alpha = 0;
 }
 
 

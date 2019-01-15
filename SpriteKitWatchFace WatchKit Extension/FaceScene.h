@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property BOOL useMasking;
 
+@property BOOL updatingTypeFace;
+
 @property BOOL useAlternateColorOnLogosAndDate;
 
 @property CGSize faceSize;
