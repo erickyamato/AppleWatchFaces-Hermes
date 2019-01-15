@@ -7,54 +7,11 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import <WatchKit/WatchKit.h>
+
+#import "Types.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum : NSUInteger {
-	ThemeHermesPink,
-	ThemeHermesOrange,
-	ThemeNavy,
-	ThemeTidepod,
-	ThemeBretonnia,
-	ThemeNoir,
-	ThemeContrast,
-	ThemeVictoire,
-	ThemeLiquid,
-	ThemeAngler,
-	ThemeSculley,
-	ThemeKitty,
-	ThemeDelay,
-	ThemeDiesel,
-	ThemeLuxe,
-	ThemeSage,
-	ThemeBondi,
-	ThemeTangerine,
-	ThemeStrawberry,
-	ThemePawn,
-	ThemeRoyal,
-	ThemeMarques,
-	ThemeVox,
-	ThemeSummer,
-	ThemeMAX
-} Theme;
-
-typedef enum : NSUInteger {
-    NumeralStyleNone,
-    NumeralStyleAll,
-    NumeralStyleCardinal,
-	NumeralStyleTweoveOnTop
-} NumeralStyle;
-
-
-typedef enum : NSUInteger {
-	ColorRegionStyleNone,
-	ColorRegionStyleDynamicDuo,
-	ColorRegionStyleHalf,
-	ColorRegionStyleCircle,
-	ColorRegionStyleRing,
-	ColorRegionStyleMAX
-} ColorRegionStyle;
 
 
 @interface FaceScene : SKScene <SKSceneDelegate>
@@ -64,6 +21,7 @@ typedef enum : NSUInteger {
 @property Theme theme;
 @property NumeralStyle numeralStyle;
 @property ColorRegionStyle colorRegionStyle;
+@property Typeface typeface;
 
 @property SKColor *colorRegionColor;
 @property SKColor *faceBackgroundColor;
@@ -82,9 +40,6 @@ typedef enum : NSUInteger {
 @property SKColor *alternateTextColor;
 
 @property BOOL useMasking;
-
-
-@property BOOL romanNumerals;
 
 
 @property BOOL styleHalfShouldBeVertical; //good for masking tests

@@ -236,7 +236,6 @@ CGFloat totalRotation = 0;
 - (IBAction)tapped:(id)sender {
     
     FaceScene *scene = (FaceScene *)self.scene.scene;
-    scene.romanNumerals = !scene.romanNumerals;
     [scene refreshTheme];
 }
 

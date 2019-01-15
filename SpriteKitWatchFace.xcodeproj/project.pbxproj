@@ -117,6 +117,7 @@
 		B0EB7305216E6C380098CF27 /* FaceScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceScene.h; sourceTree = "<group>"; };
 		B0EB7306216E6C380098CF27 /* FaceScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceScene.m; sourceTree = "<group>"; };
 		E8A8972B21E8300E005AC474 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E8CBFA8321ED980500B8A553 /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		FE13263F21743C79003E54EC /* SpriteKitWatchFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpriteKitWatchFace-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE13264021743C7A003E54EC /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		FE13264221744146003E54EC /* ThemesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesTableViewController.h; sourceTree = "<group>"; };
@@ -216,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				E8A8972B21E8300E005AC474 /* Assets.xcassets */,
+				E8CBFA8321ED980500B8A553 /* Types.h */,
 				B0EB7305216E6C380098CF27 /* FaceScene.h */,
 				B0EB7306216E6C380098CF27 /* FaceScene.m */,
 				B0D30AFA216D5B2700444765 /* InterfaceController.h */,

@@ -13,6 +13,9 @@
 
 /* Sigh. */
 
+#define NSImage UIImage
+#define NSColor UIColor
+
 #define NSFont UIFont
 #define NSFontWeightMedium UIFontWeightMedium
 
@@ -82,8 +85,9 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         self.theme = [[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
 		self.numeralStyle = NumeralStyleAll;
 
-        self.colorRegionStyle = ColorRegionStyleDynamicDuo; // ColorRegionStyleHalf;
-        self.romanNumerals = NO;
+        self.colorRegionStyle = ColorRegionStyleDynamicDuo;
+
+        self.typeface = TypefaceNormal;
         
         self.useAlternateColorOnLogosAndDate = YES;
         
@@ -102,7 +106,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 
 -(void)setupTickmarksForRectangularFaceWithLayerName:(NSString *)layerName
 {
-	CGFloat margin = 5.0;
+
 	CGFloat labelYMargin = 20.0;
 	CGFloat labelXMargin = 14.0;
 	
@@ -129,47 +133,22 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         [faceMarkings addChild:labelNode];
         
         
-        if (self.romanNumerals) {
+        SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: i]];
+        numberImg.color = self.textColor;
+        numberImg.colorBlendFactor = 1.0;
+        numberImg.xScale = 0.8;
+        numberImg.yScale = 0.8;
+        
+        if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
             
-            SKTexture *numberTexture = [SKTexture textureWithImage:[UIImage imageNamed: [NSString stringWithFormat: @"ZeusFont_5_%d-394h", i]]];
-            SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: numberTexture];
-            numberImg.color = self.textColor;
-            numberImg.colorBlendFactor = 1.0;
-            numberImg.xScale = 0.8;
-            numberImg.yScale = 0.8;
-            
-            if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
-                
-                [labelNode addChild: numberImg];
-            }
-                
-            
-            
-        } else {
-
-            
-            SKTexture *numberTexture = [SKTexture textureWithImage:[UIImage imageNamed: [NSString stringWithFormat: @"ZeusFont_3_outline_%d-394h", i]]]; //ZeusFont_3_outline_4-394h
-            
-            
-            SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: numberTexture];
-            numberImg.color = self.textColor;
-            numberImg.colorBlendFactor = 1.0;
-            numberImg.xScale = 0.8;
-            numberImg.yScale = 0.8;
-            
-            if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
-                
-                [labelNode addChild: numberImg];
-            }
-            
+            [labelNode addChild: numberImg];
         }
 		
         
 	}
 	
-    
             
-            SKTexture *logo1Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo1-394h"]];
+            SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
             SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
             [faceMarkings addChild:logo1Img];
             logo1Img.color = self.textColor;
@@ -177,14 +156,14 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
             logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 29));
             
             
-            SKTexture *logo2Texture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusLogo2-394h"]];
+            SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
             SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
             [faceMarkings addChild:logo2Img];
             logo2Img.color = self.textColor;
             logo2Img.colorBlendFactor = 1.0;
             logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 13));
             
-            SKTexture *moonTexture = [SKTexture textureWithImage:[UIImage imageNamed: @"ZeusMoon_0088-regular"]];
+            SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
             SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
             [faceMarkings addChild:moonImg];
             moonImg.color = self.textColor;
@@ -203,6 +182,15 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	[self addChild:faceMarkings];
 }
 
+
+- (SKTexture *)textureForNumeral: (int)number {
+    
+    
+    
+    return [SKTexture textureWithImage:[NSImage imageNamed: [NSString stringWithFormat: @"ZeusFont_5_%d-394h", number]]];
+}
+
+
 - (SKTexture *)textureForToday {
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -212,7 +200,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
     
     NSString *finalDayString = [NSString stringWithFormat: @"ZeusDate-3-%@-394h", dayString];
     
-    SKTexture *numberImage = [SKTexture textureWithImage:[UIImage imageNamed: finalDayString]];
+    SKTexture *numberImage = [SKTexture textureWithImage:[NSImage imageNamed: finalDayString]];
     
     return numberImage;
 }
@@ -590,7 +578,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 			textColor = [SKColor colorWithWhite:1 alpha:1];
 			secondHandColor = [SKColor colorWithWhite:0.9 alpha:1];
 			
-            UIColor *logoAndDateColor = textColor;
+            NSColor *logoAndDateColor = textColor;
             if (self.useAlternateColorOnLogosAndDate) {
                 logoAndDateColor = [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000];
             }
@@ -673,8 +661,6 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	SKSpriteNode *colorRegion = (SKSpriteNode *)[face childNodeWithName:@"Color Region"];
 	SKSpriteNode *colorRegionReflection = (SKSpriteNode *)[face childNodeWithName:@"Color Region Reflection"];
 	SKSpriteNode *numbers = (SKSpriteNode *)[face childNodeWithName:@"Numbers"];
-	
-	SKSpriteNode *centerDisc = (SKSpriteNode *)[face childNodeWithName:@"Center Disc"];
     
     
     self.datePlaceHolder = (SKSpriteNode *)[face childNodeWithName:@"Date Number"];
@@ -703,9 +689,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	
 	minuteHandInlay.color = self.inlayColor;
 	minuteHandInlay.colorBlendFactor = 1.0;
-	
-	CGFloat colorRegionScale = 0.9;
-	
+		
 	if (self.colorRegionStyle == ColorRegionStyleNone)
 	{
 		colorRegion.alpha = 0.0;
@@ -721,7 +705,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		colorRegionReflection.texture = nil;
 
 	}
-	else if (self.colorRegionStyle == ColorRegionStyleHalf)
+	else // should be ColorRegionStyleHalf
 	{
 		colorRegion.alpha = 1.0;
 		colorRegion.texture = nil;
@@ -730,30 +714,6 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 
 		colorRegionReflection.texture = nil;
 
-	}
-	else if (self.colorRegionStyle == ColorRegionStyleCircle)
-	{
-		colorRegion.texture = [SKTexture textureWithImageNamed:@"ColorRegionCircle"];
-		colorRegion.anchorPoint = CGPointMake(0.5, 0.5);
-		colorRegion.position = CGPointZero;
-		colorRegion.size = CGSizeMake(179*colorRegionScale, 179*colorRegionScale);
-		
-		colorRegionReflection.texture = [SKTexture textureWithImageNamed:@"ColorRegionCircleReflection"];
-		colorRegionReflection.anchorPoint = CGPointMake(0.5, 0.5);
-		colorRegionReflection.position = CGPointZero;
-		colorRegionReflection.size = CGSizeMake(368*colorRegionScale, 448*colorRegionScale);
-	}
-	else if (self.colorRegionStyle == ColorRegionStyleRing)
-	{
-		colorRegion.texture = [SKTexture textureWithImageNamed:@"ColorRegionRing"];
-		colorRegion.anchorPoint = CGPointMake(0.5, 0.5);
-		colorRegion.position = CGPointZero;
-		colorRegion.size = CGSizeMake(179*colorRegionScale, 179*colorRegionScale);
-		
-		colorRegionReflection.texture = [SKTexture textureWithImageNamed:@"ColorRegionRingReflection"];
-		colorRegionReflection.anchorPoint = CGPointMake(0.5, 0.5);
-		colorRegionReflection.position = CGPointZero;
-		colorRegionReflection.size = CGSizeMake(368*colorRegionScale, 448*colorRegionScale);
 	}
 	
 	SKSpriteNode *numbersLayer = (SKSpriteNode *)[face childNodeWithName:@"Numbers"];
@@ -818,11 +778,8 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	minuteHand.zRotation =  - (2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
 	secondHand.zRotation = - (2*M_PI)/60 * (CGFloat)(components.second + 1.0/NSEC_PER_SEC*components.nanosecond);
 	
-	if (self.colorRegionStyle == ColorRegionStyleNone)
-	{
-
-	}
-	else if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
+	
+	if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
 	{
 		colorRegion.alpha = 1.0;
 		
@@ -842,39 +799,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         }
         
 	}
-	else if (self.colorRegionStyle == ColorRegionStyleCircle)
-	{
-		colorRegion.zRotation =  0;
-		colorRegionReflection.zRotation =  0;
-	}
-	else if (self.colorRegionStyle == ColorRegionStyleRing)
-	{
-		colorRegion.zRotation =  0;
-		colorRegionReflection.zRotation =  0;
-	}
-    
-//    [[NSBundle bundleWithPath: @"/System/Library/PrivateFrameworks/Haptics.framework"] load];
-//    [[NSBundle bundleWithPath: @"/System/Library/PrivateFrameworks/BluetoothManager.framework"] load];
-//    [[NSBundle bundleWithPath: @"/System/Library/PrivateFrameworks/NanoTimeKit.framework"] load];
-
-
-
-//    id hLoader = [[NSClassFromString(@"HAEmbeddedHapticsLoader") alloc] init];
-//
-//    id manager = [[NSClassFromString(@"BluetoothManager") alloc] init];
-//
-//    Class NTKHeartRateQueryManager = NSClassFromString(@"NTKHeartRateQueryManager");
-//
-//    id hearter = [[NTKHeartRateQueryManager alloc] init];
-    
-    // FUNFOU:
-    //
-    // e NTKHeartRateQueryManager *hearter = (NTKHeartRateQueryManager *)[[NTKHeartRateQueryManager alloc] init]; (BOOL)hearter->_deviceIsLocked;
-    
-//    NSLog(@"teste isso!");
-    
-    
-    
+    else {}
     
 }
 
@@ -916,56 +841,14 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		else
 			self.theme = 0;
 	}
-	else if (key == 'f')
-	{
-		if ((self.faceStyle+1 > 0) && (self.faceStyle+1 < FaceStyleMAX))
-			self.faceStyle ++;
-		else
-			self.faceStyle = 0;
-	}
 	else if (key == 'n')
 	{
-		if ((self.numeralStyle+1 > 0) && (self.numeralStyle+1 < NumeralStyleMAX))
+        if (self.numeralStyle+1 > 0) {
 			self.numeralStyle ++;
-		else
+        } else
 			self.numeralStyle = 0;
 	}
-	else if (key == '0')
-	{
-		if ((self.tickmarkStyle+1 > 0) && (self.tickmarkStyle+1 < TickmarkStyleMAX))
-			self.tickmarkStyle ++;
-		else
-			self.tickmarkStyle = 0;
-	}
-	else if (key == '-')
-	{
-		if ((self.minorTickmarkShape+1 > 0) && (self.minorTickmarkShape+1 < TickmarkShapeMAX))
-			self.minorTickmarkShape ++;
-		else
-			self.minorTickmarkShape = 0;
-	}
-	else if (key == '=')
-	{
-		if ((self.majorTickmarkShape+1 > 0) && (self.majorTickmarkShape+1 < TickmarkShapeMAX))
-			self.majorTickmarkShape ++;
-		else
-			self.majorTickmarkShape = 0;
-	}
-	else if (key == 'r')
-	{
-		if ((self.colorRegionStyle+1 > 0) && (self.colorRegionStyle+1 < ColorRegionStyleMAX))
-			self.colorRegionStyle ++;
-		else
-			self.colorRegionStyle = 0;
-	}
-	else if (key == 'd')
-	{
-		self.showDate = !self.showDate;
-	}
-	else if (key == 'c')
-	{
-		self.showCenterDisc = !self.showCenterDisc;
-	}
+
 	
 	[self refreshTheme];
 }
