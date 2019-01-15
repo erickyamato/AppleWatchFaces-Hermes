@@ -40,25 +40,12 @@ typedef enum : NSUInteger {
 } Theme;
 
 typedef enum : NSUInteger {
-	NumeralStyleAll,
-	NumeralStyleCardinal,
-	NumeralStyleNone,
-	NumeralStyleMAX
+    NumeralStyleNone,
+    NumeralStyleAll,
+    NumeralStyleCardinal,
+	NumeralStyleTweoveOnTop
 } NumeralStyle;
 
-typedef enum : NSUInteger {
-	TickmarkStyleAll,
-	TickmarkStyleMajor,
-	TickmarkStyleMinor,
-	TickmarkStyleNone,
-	TickmarkStyleMAX
-} TickmarkStyle;
-
-typedef enum : NSUInteger {
-	FaceStyleRound,
-	FaceStyleRectangular,
-	FaceStyleMAX
-} FaceStyle;
 
 typedef enum : NSUInteger {
 	ColorRegionStyleNone,
@@ -69,12 +56,6 @@ typedef enum : NSUInteger {
 	ColorRegionStyleMAX
 } ColorRegionStyle;
 
-typedef enum : NSUInteger {
-	TickmarkShapeRectangular,
-	TickmarkShapeCircular,
-	TickmarkShapeTriangular,
-	TickmarkShapeMAX
-} TickmarkShape;
 
 @interface FaceScene : SKScene <SKSceneDelegate>
 
@@ -82,10 +63,6 @@ typedef enum : NSUInteger {
 
 @property Theme theme;
 @property NumeralStyle numeralStyle;
-@property TickmarkStyle tickmarkStyle;
-@property TickmarkShape majorTickmarkShape;
-@property TickmarkShape minorTickmarkShape;
-@property FaceStyle faceStyle;
 @property ColorRegionStyle colorRegionStyle;
 
 @property SKColor *colorRegionColor;
@@ -104,17 +81,11 @@ typedef enum : NSUInteger {
 @property SKColor *alternateMinorMarkColor;
 @property SKColor *alternateTextColor;
 
-@property BOOL useProgrammaticLayout;
 @property BOOL useMasking;
-@property BOOL showDate;
-@property BOOL showBattery;
-@property BOOL showDailyMessage;
-@property BOOL showWeather;
-@property BOOL showCenterDisc;
 
-@property BOOL batteryCenter;
+
 @property BOOL romanNumerals;
-@property BOOL romanBattery;
+
 
 @property BOOL styleHalfShouldBeVertical; //good for masking tests
 @property BOOL useAlternateColorOnLogosAndDate;
