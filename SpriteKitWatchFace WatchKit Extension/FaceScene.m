@@ -169,8 +169,8 @@ CGFloat regionTransitionDuration = 0.2;
             SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: i]];
             numberImg.color = self.textColor;
             numberImg.colorBlendFactor = 1.0;
-            numberImg.xScale = 0.8;
-            numberImg.yScale = 0.8;
+            numberImg.xScale = 0.9;
+            numberImg.yScale = 0.9;
             numberImg.alpha = self.updatingTypeFace ? 0 : 1.0;
             
             if (self.dialStyle == DialStyleAll || ((self.dialStyle == DialStyleCardinal) && (i % 3 == 0))) {
@@ -208,7 +208,9 @@ CGFloat regionTransitionDuration = 0.2;
     [faceMarkings addChild:logo1Img];
     logo1Img.color = self.textColor;
     logo1Img.colorBlendFactor = 1.0;
-    logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 29));
+    logo1Img.xScale = 1.2;
+    logo1Img.yScale = 1.2;
+    logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 25));
     
     
     SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
@@ -216,14 +218,16 @@ CGFloat regionTransitionDuration = 0.2;
     [faceMarkings addChild:logo2Img];
     logo2Img.color = self.textColor;
     logo2Img.colorBlendFactor = 1.0;
-    logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 13));
+    logo2Img.xScale = 1.2;
+    logo2Img.yScale = 1.2;
+    logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 11));
     
     SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
     SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
     [faceMarkings addChild:moonImg];
     moonImg.color = self.textColor;
     moonImg.colorBlendFactor = 1.0;
-    moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 33));
+    moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 27));
             
     if (self.dialStyle != DialStyleNone) {
         
@@ -231,7 +235,7 @@ CGFloat regionTransitionDuration = 0.2;
         [faceMarkings addChild:dayImg];
         dayImg.color = self.textColor;
         dayImg.colorBlendFactor = 1.0;
-        dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 37));
+        dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 30));
     }
 	
 	[self addChild:faceMarkings];
