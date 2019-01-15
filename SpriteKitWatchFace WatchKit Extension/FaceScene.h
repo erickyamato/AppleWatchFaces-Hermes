@@ -17,9 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FaceScene : SKScene <SKSceneDelegate>
 
 -(void)refreshTheme;
+-(void)nextTypeface;
 
 @property Theme theme;
-@property NumeralStyle numeralStyle;
+@property DialStyle dialStyle;
 @property ColorRegionStyle colorRegionStyle;
 @property Typeface typeface;
 

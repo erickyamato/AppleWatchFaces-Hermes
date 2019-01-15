@@ -83,7 +83,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         self.styleHalfShouldBeVertical = NO;
 
         self.theme = [[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
-		self.numeralStyle = NumeralStyleAll;
+		self.dialStyle = DialStyleAll;
 
         self.colorRegionStyle = ColorRegionStyleDynamicDuo;
 
@@ -139,7 +139,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         numberImg.xScale = 0.8;
         numberImg.yScale = 0.8;
         
-        if (self.numeralStyle == NumeralStyleAll || ((self.numeralStyle == NumeralStyleCardinal) && (i % 3 == 0))) {
+        if (self.dialStyle == DialStyleAll || ((self.dialStyle == DialStyleCardinal) && (i % 3 == 0))) {
             
             [labelNode addChild: numberImg];
         }
@@ -185,9 +185,35 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 
 - (SKTexture *)textureForNumeral: (int)number {
     
+    NSString *imgName = @"";
+
+    switch (self.typeface) {
+        case TypefaceNormal:
+            
+            imgName =  [NSString stringWithFormat: @"ZeusFont_2_%d-394h", number];
+            break;
+            
+        case TypefaceTech:
+            imgName =  [NSString stringWithFormat: @"ZeusFont_4_%d-394h", number];
+            break;
+            
+        case TypefaceFunny:
+            imgName =  [NSString stringWithFormat: @"ZeusFont_3_%d-394h", number];
+            break;
+        
+        case TypefaceFunnyOutline:
+            imgName =  [NSString stringWithFormat: @"ZeusFont_3_outline_%d-394h", number];
+            break;
+            
+        case TypefaceRoman:
+            imgName =  [NSString stringWithFormat: @"ZeusFont_5_%d-394h", number];
+            break;
+            
+        default:
+            break;
+    }
     
-    
-    return [SKTexture textureWithImage:[NSImage imageNamed: [NSString stringWithFormat: @"ZeusFont_5_%d-394h", number]]];
+    return [SKTexture textureWithImage:[NSImage imageNamed: imgName]];
 }
 
 
@@ -803,6 +829,16 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
     
 }
 
+-(void)nextTypeface {
+    if (self.typeface >= TypefaceMAX - 1) {
+        self.typeface = 0;
+    } else {
+        self.typeface++;
+    }
+    NSLog(@"self.typeface: %d", self.typeface);
+
+}
+
 -(void)refreshTheme
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:self.theme forKey:@"Theme"];
@@ -843,10 +879,10 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	}
 	else if (key == 'n')
 	{
-        if (self.numeralStyle+1 > 0) {
-			self.numeralStyle ++;
+        if (self.dialStyle+1 > 0) {
+			self.dialStyle ++;
         } else
-			self.numeralStyle = 0;
+			self.dialStyle = 0;
 	}
 
 	

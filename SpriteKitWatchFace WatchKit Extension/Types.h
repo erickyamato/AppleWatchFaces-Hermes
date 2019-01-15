@@ -38,11 +38,11 @@ typedef enum : NSUInteger {
 } Theme;
 
 typedef enum : NSUInteger {
-    NumeralStyleNone,
-    NumeralStyleAll,
-    NumeralStyleCardinal,
-    NumeralStyleTweoveOnTop
-} NumeralStyle;
+    DialStyleNone,
+    DialStyleAll,
+    DialStyleCardinal,
+    DialStyleTweoveOnTop
+} DialStyle;
 
 
 typedef enum : NSUInteger {
@@ -56,7 +56,8 @@ typedef enum : NSUInteger {
     TypefaceTech,
     TypefaceFunny,
     TypefaceFunnyOutline,
-    TypefaceRoman
+    TypefaceRoman,
+    TypefaceMAX
 } Typeface;
 
 #endif /* Types_h */

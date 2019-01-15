@@ -236,6 +236,9 @@ CGFloat totalRotation = 0;
 - (IBAction)tapped:(id)sender {
     
     FaceScene *scene = (FaceScene *)self.scene.scene;
+    
+    [scene nextTypeface];
+    
     [scene refreshTheme];
 }
 
@@ -280,10 +283,10 @@ CGFloat totalRotation = 0;
     
     FaceScene *scene = (FaceScene *)self.scene.scene;
     
-    if (scene.numeralStyle == NumeralStyleAll) {
-        scene.numeralStyle = NumeralStyleCardinal;
+    if (scene.dialStyle == DialStyleAll) {
+        scene.dialStyle = DialStyleCardinal;
     } else {
-        scene.numeralStyle = NumeralStyleAll;
+        scene.dialStyle = DialStyleAll;
     }
     
     [scene refreshTheme];
