@@ -196,6 +196,42 @@ CGFloat totalRotation = 0;
 }
 
 
+// features to setup
+
+// on real hermes we have 3 setups (the fourth would be the complication, I only want the date
+// 1 - color theme, many options
+// 2 - dial style, 3 options
+// 3 - type face, 5 options at least
+
+
+// - choose between hermes typefaces:
+//      - normal1
+//      - normal2
+//      - funny
+//      - funny outline
+//      - roman
+//
+// - choose between dial styles:
+//      - full
+//      - cardinal
+//      - only 12 on top
+//
+// - choose between shames: 
+//
+//      - one color (black)
+//      - dynamic duo (combinations)
+
+
+//      * debug helpers
+//      - half horizontal
+//      - half vertical
+//
+// - choose between color for logos and date
+//      - use textColor
+//      - use Alternate color (to contrast um splited bgs)
+//
+
+
 // one tap switch default and romans
 - (IBAction)tapped:(id)sender {
     

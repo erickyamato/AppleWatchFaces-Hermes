@@ -512,7 +512,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
         } else {
 
             
-            SKTexture *numberTexture = [SKTexture textureWithImage:[UIImage imageNamed: [NSString stringWithFormat: @"ZeusFont_3_%d-394h", i]]];
+            SKTexture *numberTexture = [SKTexture textureWithImage:[UIImage imageNamed: [NSString stringWithFormat: @"ZeusFont_3_outline_%d-394h", i]]]; //ZeusFont_3_outline_4-394h
             
             
             SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: numberTexture];
@@ -574,7 +574,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
     
     NSString *dayString = day < 10 ? [NSString stringWithFormat:@"0%d", day] : [NSString stringWithFormat: @"%d", day];
     
-    NSString *finalDayString = [NSString stringWithFormat: @"ZeusDate-5-%@-394h", dayString];
+    NSString *finalDayString = [NSString stringWithFormat: @"ZeusDate-3-%@-394h", dayString];
     
     SKTexture *numberImage = [SKTexture textureWithImage:[UIImage imageNamed: finalDayString]];
     
