@@ -232,7 +232,7 @@ CGFloat totalRotation = 0;
 //
 
 
-// one tap switch default and romans
+// switch tapefaces
 - (IBAction)tapped:(id)sender {
     
     FaceScene *scene = (FaceScene *)self.scene.scene;
@@ -242,31 +242,32 @@ CGFloat totalRotation = 0;
     [scene refreshTheme];
 }
 
-// swipe right set Horizontal ColorRegionStyleHalf
+// swipe right set background stype
 - (IBAction)swipedRight:(id)sender {
     
     FaceScene *scene = (FaceScene *)self.scene.scene;
-    scene.styleHalfShouldBeVertical = NO;
-    scene.colorRegionStyle = ColorRegionStyleHalf;
+    
+    [scene nextColorRegionStyle];
+    
     [scene refreshTheme];
 }
 
 // swipe down set Vertical ColorRegionStyleHalf
 - (IBAction)swipedDown:(id)sender {
     
-    FaceScene *scene = (FaceScene *)self.scene.scene;
-        scene.styleHalfShouldBeVertical = YES;
-    scene.colorRegionStyle = ColorRegionStyleHalf;
-    [scene refreshTheme];
+//    FaceScene *scene = (FaceScene *)self.scene.scene;
+//        scene.styleHalfShouldBeVertical = YES;
+//    scene.colorRegionStyle = ColorRegionStyleHalf;
+//    [scene refreshTheme];
 }
 
 // swipe left set ColorRegionStyleDynamicDuo
 - (IBAction)dynamicDuo:(id)sender {
 
-    FaceScene *scene = (FaceScene *)self.scene.scene;
-    scene.styleHalfShouldBeVertical = NO;
-    scene.colorRegionStyle = ColorRegionStyleDynamicDuo;
-    [scene refreshTheme];
+//    FaceScene *scene = (FaceScene *)self.scene.scene;
+//    scene.styleHalfShouldBeVertical = NO;
+//    scene.colorRegionStyle = ColorRegionStyleDynamicDuo;
+//    [scene refreshTheme];
 }
 
 // swipe up toogle useAlternateColorOnLogosAndDate

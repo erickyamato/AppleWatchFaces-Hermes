@@ -48,7 +48,9 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     ColorRegionStyleNone,
     ColorRegionStyleDynamicDuo,
-    ColorRegionStyleHalf
+    ColorRegionStyleHalfHorizontal,
+    ColorRegionStyleHalfVertical,
+    ColorRegionStyleMAX,
 } ColorRegionStyle;
 
 typedef enum : NSUInteger {

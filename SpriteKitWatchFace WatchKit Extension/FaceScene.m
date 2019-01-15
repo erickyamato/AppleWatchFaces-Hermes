@@ -80,8 +80,6 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		
 		self.faceSize = (CGSize){184, 224};
         
-        self.styleHalfShouldBeVertical = NO;
-
         self.theme = [[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
 		self.dialStyle = DialStyleAll;
 
@@ -812,31 +810,40 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 		colorRegion.zRotation =  M_PI_2 -(2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
 		colorRegionReflection.zRotation =  M_PI_2 - (2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
 	}
-	else if (self.colorRegionStyle == ColorRegionStyleHalf)
+	else if (self.colorRegionStyle == ColorRegionStyleHalfHorizontal)
 	{
 		colorRegion.alpha = 1.0;
 
-        if (self.styleHalfShouldBeVertical) {
-            colorRegionReflection.zRotation = M_PI_2;
-            colorRegion.zRotation = M_PI_2;
-        } else {
-            colorRegionReflection.zRotation = 0;
-            colorRegion.zRotation =  0;
-        }
+        colorRegionReflection.zRotation = 0;
+        colorRegion.zRotation =  0;
         
-	}
-    else {}
+    } else if (self.colorRegionStyle == ColorRegionStyleHalfVertical) {
+        
+        colorRegion.alpha = 1.0;
+        
+        colorRegionReflection.zRotation = M_PI_2;
+        colorRegion.zRotation = M_PI_2;
+        
+    }
+    else {} // solid color
     
 }
 
 -(void)nextTypeface {
+    
     if (self.typeface >= TypefaceMAX - 1) {
         self.typeface = 0;
     } else {
         self.typeface++;
     }
-    NSLog(@"self.typeface: %d", self.typeface);
+}
 
+-(void)nextColorRegionStyle {
+    if (self.colorRegionStyle >= ColorRegionStyleMAX - 1) {
+        self.colorRegionStyle = 0;
+    } else {
+        self.colorRegionStyle++;
+    }
 }
 
 -(void)refreshTheme
@@ -855,7 +862,7 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 	[self setupColors];
 	[self setupScene];
 	
-	if (self.useMasking && ((self.colorRegionStyle == ColorRegionStyleDynamicDuo) || (self.colorRegionStyle == ColorRegionStyleHalf)))
+	if (self.useMasking && ((self.colorRegionStyle == ColorRegionStyleDynamicDuo) || (self.colorRegionStyle == ColorRegionStyleHalfHorizontal)  || (self.colorRegionStyle == ColorRegionStyleHalfVertical)))
 	{
 		[self setupMasking];
 	}

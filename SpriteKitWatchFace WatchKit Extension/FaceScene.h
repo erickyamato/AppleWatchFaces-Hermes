@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)refreshTheme;
 -(void)nextTypeface;
+-(void)nextColorRegionStyle;
 
 @property Theme theme;
 @property DialStyle dialStyle;
@@ -42,8 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property BOOL useMasking;
 
-
-@property BOOL styleHalfShouldBeVertical; //good for masking tests
 @property BOOL useAlternateColorOnLogosAndDate;
 
 @property CGSize faceSize;
