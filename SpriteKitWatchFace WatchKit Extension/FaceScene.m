@@ -235,7 +235,7 @@ CGFloat regionTransitionDuration = 0.2;
         [faceMarkings addChild:dayImg];
         dayImg.color = self.textColor;
         dayImg.colorBlendFactor = 1.0;
-        dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 30));
+        dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 40));
     }
 	
 	[self addChild:faceMarkings];
@@ -539,7 +539,7 @@ CGFloat regionTransitionDuration = 0.2;
 			minorMarkColor = majorMarkColor;
 			handColor = majorMarkColor;
 			textColor = handColor;
-			secondHandColor = inlayColor;
+            secondHandColor = [SKColor redColor]; //inlayColor;
 			break;
 		}
 		case ThemeSage:
