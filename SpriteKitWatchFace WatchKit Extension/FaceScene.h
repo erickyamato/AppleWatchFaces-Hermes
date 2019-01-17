@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property ColorRegionStyle colorRegionStyle;
 @property Typeface typeface;
 @property DateFontIdentifier dateFontIdentifier;
+@property EditMode crownEditMode;
 
 @property SKColor *bgColor1;
 @property SKColor *bgColor2;
@@ -58,11 +59,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property SKSpriteNode *logo2;
 @property SKSpriteNode *logo3;
 
+-(void)digitalCrownScrolledUp;
+-(void)digitalCrownScrolledDown;
 
 @end
-
-
-
-
 
 NS_ASSUME_NONNULL_END

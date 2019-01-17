@@ -8,6 +8,8 @@
 
 #import "FaceScene.h"
 #import "HermesPalette.h"
+#import "ThemeManager.h"
+
 @import CoreText;
 
 #if TARGET_OS_IPHONE
@@ -73,7 +75,7 @@ CGFloat regionTransitionDuration = 0.2;
 
 @implementation FaceScene
 
-@synthesize logo1, logo2, logo3, bgColor1, bgColor2, typeface, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier;
+@synthesize logo1, logo2, logo3, bgColor1, bgColor2, typeface, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier, crownEditMode;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -97,7 +99,9 @@ CGFloat regionTransitionDuration = 0.2;
         
         showSeconds = YES;
         
+        crownEditMode = EditModeFace;
         
+        [[ThemeManager sharedInstance] setCurrentFaceIndex: ThemeHermesBlackOrange];
         
 		[self refreshTheme];
 		
@@ -111,7 +115,6 @@ CGFloat regionTransitionDuration = 0.2;
 #pragma mark -
 
 
-
 -(void)setupTickmarksForRectangularFaceWithLayerName:(NSString *)layerName
 {
 
@@ -123,7 +126,9 @@ CGFloat regionTransitionDuration = 0.2;
 	
 	/* Numerals */
     
-    if (self.dialStyle == DialStyleTweoveOnTop) { //12 only
+    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+
+    if (theme.dialStyle == DialStyleTweoveOnTop) { //12 only
         
         CGFloat fontSize = 25;
         
@@ -134,9 +139,8 @@ CGFloat regionTransitionDuration = 0.2;
         
         [faceMarkings addChild:labelNode];
         
-        
         SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: 12]];
-        numberImg.color = self.typefaceColor;
+        numberImg.color = theme.typefaceColor;
         numberImg.colorBlendFactor = 1.0;
         numberImg.xScale = 1;
         numberImg.yScale = 1;
@@ -149,7 +153,7 @@ CGFloat regionTransitionDuration = 0.2;
         }
         
         
-    } else if (self.dialStyle == DialStyleCardinal || self.dialStyle == DialStyleAll) {
+    } else if (theme.dialStyle == DialStyleCardinal || theme.dialStyle == DialStyleAll) {
     
         NSMutableArray *allNumbers = [NSMutableArray array];
         
@@ -173,20 +177,29 @@ CGFloat regionTransitionDuration = 0.2;
 
 
             SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: i]];
-            numberImg.color = self.typefaceColor;
+            numberImg.color = theme.typefaceColor;
             numberImg.colorBlendFactor = 1.0;
             numberImg.xScale = 0.9;
             numberImg.yScale = 0.9;
             numberImg.alpha = self.updatingTypeFace ? 0 : 1.0;
             
-            if (self.dialStyle == DialStyleAll || ((self.dialStyle == DialStyleCardinal) && (i % 3 == 0))) {
+            if (theme.dialStyle == DialStyleAll) {
 
                 [labelNode addChild: numberImg];
-            } else if (i == 12 && self.dialStyle == DialStyleTweoveOnTop) {
+                [allNumbers addObject:numberImg];
+                
+            } else if (theme.dialStyle == DialStyleCardinal && (i % 3 == 0)) {
+                
                 [labelNode addChild: numberImg];
+                [allNumbers addObject:numberImg];
+                
+            } else if (i == 12 && theme.dialStyle == DialStyleTweoveOnTop) {
+                
+                [labelNode addChild: numberImg];
+                [allNumbers addObject:numberImg];
             }
             
-            [allNumbers addObject:numberImg];
+            
 
 
         }
@@ -212,7 +225,7 @@ CGFloat regionTransitionDuration = 0.2;
     SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
     SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
     [faceMarkings addChild:logo1Img];
-    logo1Img.color = self.logoAndDateColor;
+    logo1Img.color = theme.logoAndDateColor;
     logo1Img.colorBlendFactor = 1.0;
     logo1Img.xScale = 1.2;
     logo1Img.yScale = 1.2;
@@ -222,7 +235,7 @@ CGFloat regionTransitionDuration = 0.2;
     SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
     SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
     [faceMarkings addChild:logo2Img];
-    logo2Img.color = self.logoAndDateColor;
+    logo2Img.color = theme.logoAndDateColor;
     logo2Img.colorBlendFactor = 1.0;
     logo2Img.xScale = 1.2;
     logo2Img.yScale = 1.2;
@@ -231,15 +244,15 @@ CGFloat regionTransitionDuration = 0.2;
     SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
     SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
     [faceMarkings addChild:moonImg];
-    moonImg.color = self.logoAndDateColor;
+    moonImg.color = theme.logoAndDateColor;
     moonImg.colorBlendFactor = 1.0;
     moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 27));
             
-    if (self.dialStyle != DialStyleNone) {
+    if (theme.dialStyle != DialStyleNone) {
         
         SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
         [faceMarkings addChild:dayImg];
-        dayImg.color = self.logoAndDateColor;
+        dayImg.color = theme.logoAndDateColor;
         dayImg.colorBlendFactor = 1.0;
         dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 40));
     }
@@ -252,8 +265,9 @@ CGFloat regionTransitionDuration = 0.2;
     
     NSString *imgName = @"";
 
-    NSLog(@"%d", typeface);
-    switch (typeface) {
+    
+    switch ([[ThemeManager sharedInstance] currentTheme].typeface) {
+            
         case TypefaceNormal:
             
             imgName =  [NSString stringWithFormat: @"ZeusFont_2_%d-394h", number];
@@ -298,7 +312,8 @@ CGFloat regionTransitionDuration = 0.2;
 }
 
 - (NSString *)dateFontIdentifierForCurrentTheme {
-    return dateFontIdentifier == DateFontNormal ? @"5" : @"3";
+    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+    return theme.dateFontIdentifier == DateFontNormal ? @"5" : @"3";
 }
 
 #pragma Theme names cnvenience -
@@ -341,226 +356,15 @@ CGFloat regionTransitionDuration = 0.2;
 
 	self.useMasking = NO;
 	
-    [self showThemenameOnScreen];
-    
-	switch (self.theme) {
-		case ThemeHermesRose:
-		{
-        
-            bgColor1 = roseBg1Color;
-            bgColor2 = roseBg2Color;
-            innerColor = roseHandsInnerColor;
-            outerColor = roseHandsOutterColor;
-            hourMinuteColor = roseTypefaceColor;
-            typefaceColor = roseTypefaceColor;
-            logoAndDateColor = roseLogoColor;
-            secondsHandColor = roseBg2Color;
-            typeface = TypefaceFunnyOutline;
-            dateFontIdentifier = DateFontFunny;
-            showSeconds = NO;
-            
-            
-            break;
-		}
-		case ThemeHermesOrange:
-		{
-            
-            bgColor1 = orangeBg1Color;
-            bgColor2 = orangeBg2Color;
-            innerColor = orangeHandsInnerColor;
-            outerColor = orangeHandsOutterColor;
-            hourMinuteColor = orangeTypefaceColor;
-            typefaceColor = orangeTypefaceColor;
-            logoAndDateColor = orangeLogoColor;
-            secondsHandColor = orangeBg2Color;
-            typeface = TypefaceFunnyOutline;
-            dateFontIdentifier = DateFontFunny;
-            showSeconds = NO;
-            
-			break;
-        }
-        case ThemeHermesYellowPink:
-        {
-            
-            bgColor1 = yellowPinkBg1Color;
-            bgColor2 = yellowPinkBg2Color;
-            innerColor = yellowPinkHandsInnerColor;
-            outerColor = yellowPinkHandsOutterColor;
-            hourMinuteColor = yellowPinkTypefaceColor;
-            typefaceColor = yellowPinkTypefaceColor;
-            logoAndDateColor = yellowPinkLogoColor;
-            secondsHandColor = yellowPinkBg2Color;
-            typeface = TypefaceFunnyOutline;
-            dateFontIdentifier = DateFontFunny;
-            
-            showSeconds = NO;
-            
-            break;
-        }
-            
-        case ThemeHermesBlackElegance:
-        {
-            
-            bgColor1 = blackEleganceBg1Color;
-            bgColor2 = blackEleganceBg2Color;
-            innerColor = blackEleganceHandsInnerColor;
-            outerColor = blackEleganceHandsOutterColor;
-            hourMinuteColor = blackEleganceTypefaceColor;
-            typefaceColor = blackEleganceTypefaceColor;
-            logoAndDateColor = blackEleganceLogoColor;
-            secondsHandColor = blackEleganceSecondHandColor;
-            typeface = TypefaceRoman;
-            showSeconds = YES;
-            dateFontIdentifier = DateFontNormal;
-            
-            break;
-            
-        }
-        case ThemeHermesBlackOrange:
-        {
-            
-            bgColor1 = blackOrangeBg1Color;
-            bgColor2 = blackOrangeBg2Color;
-            innerColor = blackOrangeHandsInnerColor;
-            outerColor = blackOrangeHandsOutterColor;
-            hourMinuteColor = blackOrangeTypefaceColor;
-            typefaceColor = blackOrangeTypefaceColor;
-            logoAndDateColor = blackOrangeLogoColor;
-            secondsHandColor = blackOrangeSecondHandColor;
-            typeface = TypefaceNormal;
-            showSeconds = NO;
-            dateFontIdentifier = DateFontNormal;
-            self.dialStyle = DialStyleCardinal;
-            
-            break;
-            
-        }
-//        case ThemeNavy:
-//        {
-//
-//            colorRegionColor = [SKColor colorWithRed:0.067 green:0.471 blue:0.651 alpha:1.000];
-//            faceBackgroundColor = [SKColor colorWithRed:0.118 green:0.188 blue:0.239 alpha:1.000];
-//            innerColor = colorRegionColor;
-//            majorMarkColor = [SKColor whiteColor];
-//            minorMarkColor = majorMarkColor;
-//            outerColor = [SKColor whiteColor];
-//            textColor = [SKColor whiteColor];
-//            secondHandColor = majorMarkColor;
-//            break;
-//        }
-//        case ThemeTidepod:
-//        {
-//
-//            colorRegionColor = [SKColor colorWithRed:1.000 green:0.450 blue:0.136 alpha:1.000];
-//            faceBackgroundColor = [SKColor colorWithRed:0.067 green:0.471 blue:0.651 alpha:1.000];
-//            innerColor = [SKColor colorWithRed:0.953 green:0.569 blue:0.196 alpha:1.000];
-//            majorMarkColor = [SKColor whiteColor];
-//            minorMarkColor = majorMarkColor;
-//            outerColor = [SKColor whiteColor];
-//            textColor = [SKColor whiteColor];
-//            secondHandColor = majorMarkColor;
-//            break;
-//        }
-//        case ThemeBretonnia:
-//        {
-//
-//            colorRegionColor = [SKColor colorWithRed:0.067 green:0.420 blue:0.843 alpha:1.000];
-//            faceBackgroundColor = [SKColor colorWithRed:0.956 green:0.137 blue:0.294 alpha:1.000];
-//            innerColor = faceBackgroundColor;
-//            majorMarkColor = [SKColor whiteColor];
-//            minorMarkColor = majorMarkColor;
-//            outerColor = [SKColor whiteColor];
-//            textColor = [SKColor whiteColor];
-//            secondHandColor = majorMarkColor;
-//            break;
-//        }
-//
-//        case ThemeContrast:
-//        {
-//
-//            colorRegionColor = [SKColor whiteColor];
-//            faceBackgroundColor = [SKColor whiteColor];
-//            innerColor = [SKColor whiteColor];
-//            majorMarkColor = [SKColor blackColor];
-//            minorMarkColor = majorMarkColor;
-//            outerColor = [SKColor blackColor];
-//            textColor = [SKColor blackColor];
-//            secondHandColor = majorMarkColor;
-//            break;
-//        }
-//
-//        case ThemeRoyal:
-//        {
-//
-//            colorRegionColor = [SKColor colorWithRed:0.118 green:0.188 blue:0.239 alpha:1.000];
-//            faceBackgroundColor = [SKColor colorWithWhite:0.9 alpha:1.0];
-//            innerColor = colorRegionColor;
-//            majorMarkColor = [SKColor colorWithRed:0.318 green:0.388 blue:0.539 alpha:1.000];
-//            minorMarkColor = majorMarkColor;
-//            outerColor = [SKColor whiteColor];
-//            textColor = [SKColor colorWithWhite:0.9 alpha:1];
-//            secondHandColor = [SKColor colorWithRed:0.912 green:0.198 blue:0.410 alpha:1.000];
-//
-//            alternateTextColor = [SKColor colorWithRed:0.218 green:0.288 blue:0.439 alpha:1.000];
-//            alternateMinorMarkColor = alternateTextColor;
-//            alternateMajorMarkColor = alternateTextColor;
-//
-//            self.useMasking = YES;
-//            break;
-//        }
-//        case ThemeMarques:
-//        {
-//
-//            colorRegionColor = [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000];
-//            faceBackgroundColor = [SKColor colorWithRed:0.145 green:0.157 blue:0.176 alpha:1.000];
-//            innerColor = colorRegionColor;
-//            majorMarkColor = [SKColor colorWithWhite:1 alpha:0.8];
-//            minorMarkColor = [faceBackgroundColor colorWithAlphaComponent:0.5];
-//            outerColor = [SKColor whiteColor];
-//            textColor = [SKColor colorWithWhite:1 alpha:1];
-//            secondHandColor = [SKColor colorWithWhite:0.9 alpha:1];
-//
-//            NSColor *logoAndDateColor = textColor;
-//            if (self.useAlternateColorOnLogosAndDate) {
-//                logoAndDateColor = [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000];
-//            }
-//
-//            alternateTextColor = logoAndDateColor;
-//            alternateMinorMarkColor = [colorRegionColor colorWithAlphaComponent:0.5];
-//            alternateMajorMarkColor = [SKColor colorWithWhite:1 alpha:0.8];
-//
-//            self.useMasking = YES;
-//            break;
-//        }
-//        case ThemeSummer:
-//        {
-//
-//            colorRegionColor = [SKColor colorWithRed:0.969 green:0.796 blue:0.204 alpha:1.000];
-//            faceBackgroundColor = [SKColor colorWithRed:0.949 green:0.482 blue:0.188 alpha:1.000];
-//            innerColor = faceBackgroundColor;
-//            majorMarkColor = [SKColor whiteColor];
-//            minorMarkColor = [SKColor colorWithRed:0.267 green:0.278 blue:0.271 alpha:0.3];
-//            outerColor = [SKColor colorWithRed:0.467 green:0.478 blue:0.471 alpha:1.000];
-//            textColor = [SKColor colorWithRed:0.949 green:0.482 blue:0.188 alpha:1.000];
-//            secondHandColor = [SKColor colorWithRed:0.649 green:0.282 blue:0.188 alpha:1.000];
-//
-//            alternateTextColor = [SKColor whiteColor];
-//            alternateMinorMarkColor = minorMarkColor;
-//            alternateMajorMarkColor = majorMarkColor;
-//
-//            self.useMasking = YES;
-//            break;
-//        }
-		default:
-			break;
-	}
+    [self showThemenameOnScreenIfNeeded];
+
 
 	self.alternateTextColor = alternateTextColor;
     
 }
 
--(void)showThemenameOnScreen {
-    NSLog(@"theme: %@", [self themeNameFor: self.theme]);
+-(void)showThemenameOnScreenIfNeeded {
+    NSLog(@"theme: %@", [[ThemeManager sharedInstance] currentTheme].name);
 }
 
 -(void)setupScene
@@ -580,29 +384,30 @@ CGFloat regionTransitionDuration = 0.2;
     
     
     self.datePlaceHolder = (SKSpriteNode *)[face childNodeWithName:@"Date Number"];
-    self.datePlaceHolder.color = self.alternateTextColor;
-    self.datePlaceHolder.colorBlendFactor = 1.0;
+//    self.datePlaceHolder.color = self.alternateTextColor;
+//    self.datePlaceHolder.colorBlendFactor = 1.0;
     
-	
-    [hourHand runAction: [SKAction colorizeWithColor: outerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
+    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+    
+    [hourHand runAction: [SKAction colorizeWithColor: theme.outerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 
-    [hourHandInlay runAction: [SKAction colorizeWithColor: innerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
+    [hourHandInlay runAction: [SKAction colorizeWithColor: theme.innerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
-	[minuteHand runAction: [SKAction colorizeWithColor: outerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
+	[minuteHand runAction: [SKAction colorizeWithColor: theme.outerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
     
-    [minuteHandInlay runAction: [SKAction colorizeWithColor: innerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
+    [minuteHandInlay runAction: [SKAction colorizeWithColor: theme.innerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
-    [secondHand runAction: [SKAction colorizeWithColor: secondsHandColor colorBlendFactor: 1 duration: regionTransitionDuration]];
+    [secondHand runAction: [SKAction colorizeWithColor: theme.secondsHandColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
-    [self runAction: [SKAction colorizeWithColor: bgColor2 colorBlendFactor: 1 duration: regionTransitionDuration]];
+    [self runAction: [SKAction colorizeWithColor: theme.bgColor2 colorBlendFactor: 1 duration: regionTransitionDuration]];
     
-    [colorRegion runAction: [SKAction colorizeWithColor: bgColor1 colorBlendFactor: 1 duration: regionTransitionDuration]];
+    [colorRegion runAction: [SKAction colorizeWithColor: theme.bgColor1 colorBlendFactor: 1 duration: regionTransitionDuration]];
 	
-	numbers.color = typefaceColor;
+	numbers.color = theme.typefaceColor;
 	numbers.colorBlendFactor = 1.0;
 	
 
-    secondHand.color = [UIColor blueColor];
+    secondHand.color = theme.secondsHandColor;
     secondHand.colorBlendFactor = 1.0;
 		
 	if (self.colorRegionStyle == ColorRegionStyleNone)
@@ -684,7 +489,8 @@ CGFloat regionTransitionDuration = 0.2;
 	SKNode *minuteHand = [face childNodeWithName:@"Minutes"];
 	SKNode *secondHand = [face childNodeWithName:@"Seconds"];
     
-    secondHand.alpha = showSeconds ? 1.0 : 0;
+    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+    secondHand.alpha = theme.showSeconds ? 1.0 : 0;
     
 	
 	SKNode *colorRegion = [face childNodeWithName:@"Color Region"];
@@ -733,6 +539,75 @@ CGFloat regionTransitionDuration = 0.2;
     }
     else {} // solid color
     
+}
+
+-(void)digitalCrownScrolledUp {
+    
+    switch (crownEditMode) {
+        case EditModeFace:
+            [self nextTheme];
+            break;
+            
+        case EditModeTypeface:
+            //
+            break;
+            
+        case EditModeDialStyle:
+            //
+            break;
+            
+        default:
+            break;
+    }
+}
+-(void)digitalCrownScrolledDown {
+    
+    switch (crownEditMode) {
+        case EditModeFace:
+            [self previousTheme];
+            break;
+            
+        case EditModeTypeface:
+            //
+            break;
+            
+        case EditModeDialStyle:
+            //
+            break;
+            
+        default:
+            break;
+    }
+}
+
+-(void)nextTheme {
+    
+    ThemeManager *tm = [ThemeManager sharedInstance];
+    
+    int themeId = tm.currentFaceIndex;
+    themeId++;
+    if (themeId >= ThemeMAX) {
+        tm.currentFaceIndex = 0;
+    } else {
+        tm.currentFaceIndex = themeId;
+    }
+    
+    [self refreshTheme];
+}
+
+-(void)previousTheme {
+    
+    ThemeManager *tm = [ThemeManager sharedInstance];
+    
+    int themeId = tm.currentFaceIndex;
+    themeId--;
+    if (themeId < 0) {
+        tm.currentFaceIndex = ThemeMAX - 1;
+    } else {
+        tm.currentFaceIndex = themeId;
+    }
+    
+    [self refreshTheme];
 }
 
 -(void)nextTypeface {

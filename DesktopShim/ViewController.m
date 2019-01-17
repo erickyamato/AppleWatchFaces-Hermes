@@ -14,7 +14,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	[[NSUserDefaults standardUserDefaults] registerDefaults:@{@"Theme":@(ThemeMarques)}];
+//    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"Theme":@(ThemeMarques)}];
 
     FaceScene *scene = [FaceScene nodeWithFileNamed:@"FaceScene"];
 	

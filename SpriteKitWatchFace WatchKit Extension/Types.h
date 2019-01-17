@@ -52,10 +52,18 @@ typedef enum : NSUInteger {
 } Typeface;
 
 
-
 typedef enum : NSUInteger {
     DateFontNormal,
     DateFontFunny
 } DateFontIdentifier;
+
+
+typedef enum : NSUInteger {
+    EditModeFace,
+    EditModeTypeface,
+    EditModeDialStyle,
+    EditModeNone,
+    EditModeMax
+} EditMode;
 
 #endif /* Types_h */

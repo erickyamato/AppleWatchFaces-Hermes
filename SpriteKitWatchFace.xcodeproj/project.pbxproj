@@ -30,6 +30,8 @@
 		B0EB7307216E6C380098CF27 /* FaceScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7306216E6C380098CF27 /* FaceScene.m */; };
 		B0EB7308216E6C380098CF27 /* FaceScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7306216E6C380098CF27 /* FaceScene.m */; };
 		E8A8972C21E83011005AC474 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A8972B21E8300E005AC474 /* Assets.xcassets */; };
+		E8DA9ECE21F0F6310064559F /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ECD21F0F6310064559F /* ThemeManager.m */; };
+		E8DA9ED121F0F98A0064559F /* FaceTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ED021F0F98A0064559F /* FaceTheme.m */; };
 		FE13264121743C7A003E54EC /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE13264021743C7A003E54EC /* RoundedView.swift */; };
 		FE13264421744146003E54EC /* ThemesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE13264321744146003E54EC /* ThemesTableViewController.m */; };
 		FE8B39DB2174317C0097622D /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE8B39DA2174317C0097622D /* WatchConnectivity.framework */; };
@@ -119,6 +121,10 @@
 		E834C7F721F0304C0002BA48 /* HermesPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HermesPalette.h; sourceTree = "<group>"; };
 		E8A8972B21E8300E005AC474 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8CBFA8321ED980500B8A553 /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
+		E8DA9ECC21F0F6310064559F /* ThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
+		E8DA9ECD21F0F6310064559F /* ThemeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
+		E8DA9ECF21F0F98A0064559F /* FaceTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceTheme.h; sourceTree = "<group>"; };
+		E8DA9ED021F0F98A0064559F /* FaceTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceTheme.m; sourceTree = "<group>"; };
 		FE13263F21743C79003E54EC /* SpriteKitWatchFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpriteKitWatchFace-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE13264021743C7A003E54EC /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		FE13264221744146003E54EC /* ThemesTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesTableViewController.h; sourceTree = "<group>"; };
@@ -220,6 +226,10 @@
 				E8A8972B21E8300E005AC474 /* Assets.xcassets */,
 				E8CBFA8321ED980500B8A553 /* Types.h */,
 				E834C7F721F0304C0002BA48 /* HermesPalette.h */,
+				E8DA9ECC21F0F6310064559F /* ThemeManager.h */,
+				E8DA9ECD21F0F6310064559F /* ThemeManager.m */,
+				E8DA9ECF21F0F98A0064559F /* FaceTheme.h */,
+				E8DA9ED021F0F98A0064559F /* FaceTheme.m */,
 				B0EB7305216E6C380098CF27 /* FaceScene.h */,
 				B0EB7306216E6C380098CF27 /* FaceScene.m */,
 				B0D30AFA216D5B2700444765 /* InterfaceController.h */,
@@ -439,6 +449,8 @@
 				B0D30AFF216D5B2700444765 /* ExtensionDelegate.m in Sources */,
 				B0EB7307216E6C380098CF27 /* FaceScene.m in Sources */,
 				B0D30AFC216D5B2700444765 /* InterfaceController.m in Sources */,
+				E8DA9ED121F0F98A0064559F /* FaceTheme.m in Sources */,
+				E8DA9ECE21F0F6310064559F /* ThemeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

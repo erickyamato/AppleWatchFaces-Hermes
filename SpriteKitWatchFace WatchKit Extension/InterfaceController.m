@@ -82,19 +82,19 @@ CGFloat totalRotation = 0;
 	totalRotation += fabs(rotationalDelta);
 	
 	if (rotationalDelta < 0)
-		direction = -1;
+    {
+        direction = -1;
+    }
 	
-	if (totalRotation > (M_PI_4/2))
+	if (totalRotation > (M_PI_2/3))
 	{
-		FaceScene *scene = (FaceScene *)self.scene.scene;
-		
-		if ((scene.theme+direction > 0) && (scene.theme+direction < ThemeMAX))
-			scene.theme += direction;
-		else
-			scene.theme = 0;
-		
-		[scene refreshTheme];
-        
+    
+        FaceScene *scene = (FaceScene *)self.scene.scene;
+        if (direction == 1) {
+            [scene digitalCrownScrolledUp];
+        } else {
+            [scene digitalCrownScrolledDown];
+        }
 		totalRotation = 0;
 	}
 }
