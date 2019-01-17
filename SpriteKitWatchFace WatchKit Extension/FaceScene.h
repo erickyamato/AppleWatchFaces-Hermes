@@ -25,12 +25,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property DialStyle dialStyle;
 @property ColorRegionStyle colorRegionStyle;
 @property Typeface typeface;
+@property DateFontIdentifier dateFontIdentifier;
 
-@property SKColor *colorRegionColor;
-@property SKColor *faceBackgroundColor;
-@property SKColor *handColor;
-@property SKColor *secondHandColor;
-@property SKColor *inlayColor;
+@property SKColor *bgColor1;
+@property SKColor *bgColor2;
+@property SKColor *hourMinuteColor;
+@property SKColor *secondsHandColor;
+@property SKColor *innerColor;
+@property SKColor *outerColor;
+@property SKColor *typefaceColor;
+@property SKColor *logoAndDateColor;
 
 @property SKSpriteNode *datePlaceHolder;
 
@@ -38,11 +42,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property SKColor *minorMarkColor;
 @property SKColor *textColor;
 
-@property SKColor *alternateMajorMarkColor;
-@property SKColor *alternateMinorMarkColor;
 @property SKColor *alternateTextColor;
 
 @property BOOL useMasking;
+
+@property BOOL showSeconds;
 
 @property BOOL updatingTypeFace;
 

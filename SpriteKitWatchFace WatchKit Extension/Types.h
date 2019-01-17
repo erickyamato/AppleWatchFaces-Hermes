@@ -10,30 +10,18 @@
 #define Types_h
 
 typedef enum : NSUInteger {
-    ThemeHermesPink,
+    ThemeHermesRose,
     ThemeHermesOrange,
-    ThemeNavy,
-    ThemeTidepod,
-    ThemeBretonnia,
-    ThemeNoir,
-    ThemeContrast,
-    ThemeVictoire,
-    ThemeLiquid,
-    ThemeAngler,
-    ThemeSculley,
-    ThemeKitty,
-    ThemeDelay,
-    ThemeDiesel,
-    ThemeLuxe,
-    ThemeSage,
-    ThemeBondi,
-    ThemeTangerine,
-    ThemeStrawberry,
-    ThemePawn,
-    ThemeRoyal,
-    ThemeMarques,
-    ThemeVox,
-    ThemeSummer,
+    ThemeHermesYellowPink,
+    ThemeHermesBlackElegance,
+    ThemeHermesBlackOrange,
+//    ThemeContrast,
+//    ThemeMarques,
+//    ThemeNavy,
+//    ThemeRoyal,
+//    ThemeTidepod,
+//    ThemeSummer,
+//    ThemeBretonnia,
     ThemeMAX
 } Theme;
 
@@ -62,5 +50,12 @@ typedef enum : NSUInteger {
     TypefaceRoman,
     TypefaceMAX
 } Typeface;
+
+
+
+typedef enum : NSUInteger {
+    DateFontNormal,
+    DateFontFunny
+} DateFontIdentifier;
 
 #endif /* Types_h */

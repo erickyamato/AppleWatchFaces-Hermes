@@ -116,6 +116,7 @@
 		B0EB72FF216E69AB0098CF27 /* DesktopShim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesktopShim.entitlements; sourceTree = "<group>"; };
 		B0EB7305216E6C380098CF27 /* FaceScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceScene.h; sourceTree = "<group>"; };
 		B0EB7306216E6C380098CF27 /* FaceScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceScene.m; sourceTree = "<group>"; };
+		E834C7F721F0304C0002BA48 /* HermesPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HermesPalette.h; sourceTree = "<group>"; };
 		E8A8972B21E8300E005AC474 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8CBFA8321ED980500B8A553 /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		FE13263F21743C79003E54EC /* SpriteKitWatchFace-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpriteKitWatchFace-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -218,6 +219,7 @@
 			children = (
 				E8A8972B21E8300E005AC474 /* Assets.xcassets */,
 				E8CBFA8321ED980500B8A553 /* Types.h */,
+				E834C7F721F0304C0002BA48 /* HermesPalette.h */,
 				B0EB7305216E6C380098CF27 /* FaceScene.h */,
 				B0EB7306216E6C380098CF27 /* FaceScene.m */,
 				B0D30AFA216D5B2700444765 /* InterfaceController.h */,
