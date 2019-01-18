@@ -7,3 +7,4 @@ Apple Watch watch Hermès face (and more) using Sprite Kit.
 ![screenshot](screenshots/IMG_1019.PNG)
 ![screenshot](screenshots/IMG_1020.PNG)
 ![screenshot](screenshots/IMG_1021.PNG)
+![DigitalCrown: Edit Mode Menu](screenshots/IMG_1022.PNG)
