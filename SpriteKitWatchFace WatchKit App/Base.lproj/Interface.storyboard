@@ -16,29 +16,37 @@
                     <items>
                         <group width="1" alignment="left" spacing="0.0" id="r4w-8v-T2Z">
                             <items>
-                                <spriteKitScene width="184" height="224" alignment="center" preferredFramesPerSecond="60" scene="FaceScene.sks" id="Vbc-Dd-smI"/>
+                                <spriteKitScene width="184" height="224" alignment="center" preferredFramesPerSecond="60" scene="FaceScene.sks" id="Vbc-Dd-smI">
+                                    <gestureRecognizers>
+                                        <tapGestureRecognizer numberOfTapsRequired="7" id="h1o-Cp-lQB">
+                                            <connections>
+                                                <action selector="askForResetStyles:" destination="OkN-RN-cDt" id="eYB-Cn-lxk"/>
+                                            </connections>
+                                        </tapGestureRecognizer>
+                                    </gestureRecognizers>
+                                </spriteKitScene>
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <menu key="menu" id="3v7-Zg-AtG">
                         <items>
-                            <menuItem title="Edit mode off" icon="accept" id="Z1C-8S-c7R">
+                            <menuItem title="Edit mode off" image="edit-off" id="Z1C-8S-c7R">
                                 <connections>
                                     <action selector="editModeOffTapped" destination="OkN-RN-cDt" id="V56-Ay-Obd"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Face" icon="add" id="qOz-n3-x01">
+                            <menuItem title="Face" image="face" id="qOz-n3-x01">
                                 <connections>
                                     <action selector="editFaceModeTapped" destination="OkN-RN-cDt" id="6Po-kt-W0a"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Dial Style" icon="block" id="IpP-iX-O4N">
+                            <menuItem title="Dial Style" image="dial" id="IpP-iX-O4N">
                                 <connections>
                                     <action selector="editDialTypeModeTapped" destination="OkN-RN-cDt" id="idv-Lj-s12"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Font" icon="speaker" id="BIw-y5-gA0">
+                            <menuItem title="Font" image="font" id="BIw-y5-gA0">
                                 <connections>
                                     <action selector="editFontModeTapped" destination="OkN-RN-cDt" id="Lfc-Mw-e5U"/>
                                 </connections>

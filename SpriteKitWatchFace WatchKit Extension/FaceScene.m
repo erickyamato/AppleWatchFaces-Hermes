@@ -95,8 +95,6 @@ CGFloat regionTransitionDuration = 0.2;
         
 		self.faceSize = (CGSize){184, 224};
         
-        self.theme = ThemeHermesBlackOrange; //[[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
-
         self.colorRegionStyle = ColorRegionStyleDynamicDuo;
         
         self.useAlternateColorOnLogosAndDate = YES;
@@ -109,7 +107,7 @@ CGFloat regionTransitionDuration = 0.2;
         
         crownEditMode = EditModeNone;
         
-        [tm setCurrentFaceIndex: ThemeHermesBlackOrange];
+        [tm setCurrentFaceIndex: [[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"]]; //ThemeHermesBlackOrange; //
         
 		[self refreshTheme];
 		
@@ -645,7 +643,6 @@ CGFloat regionTransitionDuration = 0.2;
     
 }
 
-
 -(void)nextColorDialStyle {
     
     DialStyle dialStyle = tm.currentTheme.dialStyle;
@@ -691,7 +688,7 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)refreshTheme
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:self.theme forKey:@"Theme"];
+	[[NSUserDefaults standardUserDefaults] setInteger:tm.currentFaceIndex forKey:@"Theme"];
 	
 	SKNode *existingMarkings = [self childNodeWithName:@"Markings"];
 	SKNode *existingDualMaskMarkings = [self childNodeWithName:@"Markings Alternate"];

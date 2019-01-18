@@ -28,8 +28,6 @@
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
 	
-//    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"Theme":@(ThemeMarques)}];
-
 	FaceScene *scene = [FaceScene nodeWithFileNamed:@"FaceScene"];
 	
 	CGSize currentDeviceSize = [WKInterfaceDevice currentDevice].screenBounds.size;
@@ -114,9 +112,23 @@ CGFloat totalRotation = 0;
     FaceScene *scene = (FaceScene *)self.scene.scene;
     [scene changeEditModeTo:EditModeTypeface];
 }
-- (IBAction)resetStyles {
+- (void)resetStyles {
     FaceScene *scene = (FaceScene *)self.scene.scene;
     [scene resetStyles];
+}
+- (IBAction)askForResetStyles:(id)sender {
+    
+    [self presentAlertControllerWithTitle: @"Alert!" message:@"Reset faces to their default styles?" preferredStyle: WKAlertControllerStyleActionSheet actions: @[
+     
+        [WKAlertAction actionWithTitle: @"YES" style: WKAlertActionStyleDestructive handler:^{
+
+        [self resetStyles];
+    }],
+    [WKAlertAction actionWithTitle: @"NO" style: WKAlertActionStyleCancel handler:^{
+        NSLog(@"Canceled");
+    }]]];
+     
+    
 }
 
 //- (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
