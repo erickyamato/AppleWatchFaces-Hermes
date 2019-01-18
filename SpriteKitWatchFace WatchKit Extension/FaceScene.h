@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)nextTypeface;
 -(void)nextColorRegionStyle;
 -(void)nextColorDialStyle;
-- (void)changeEditModeTo:(EditMode)editMode;
+-(void)changeEditModeTo:(EditMode)editMode;
+-(void)resetStyles;
 
 @property Theme theme;
 //@property DialStyle dialStyle;
@@ -39,10 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property SKColor *logoAndDateColor;
 
 @property SKSpriteNode *datePlaceHolder;
-
-@property SKColor *majorMarkColor;
-@property SKColor *minorMarkColor;
-@property SKColor *textColor;
 
 @property SKColor *alternateTextColor;
 

@@ -73,15 +73,26 @@ CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
 
 CGFloat regionTransitionDuration = 0.2;
 
+
+@interface FaceScene()
+
+
+@property (nonatomic, retain) ThemeManager *tm;
+
+
+@end
+
 @implementation FaceScene
 
-@synthesize logo1, logo2, logo3, bgColor1, bgColor2, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier, crownEditMode;
+@synthesize logo1, logo2, logo3, bgColor1, bgColor2, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier, crownEditMode, tm;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
 	self = [super initWithCoder:coder];
 	if (self) {
 		
+        self.tm = [ThemeManager sharedInstance];
+        
 		self.faceSize = (CGSize){184, 224};
         
         self.theme = ThemeHermesBlackOrange; //[[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
@@ -98,7 +109,7 @@ CGFloat regionTransitionDuration = 0.2;
         
         crownEditMode = EditModeNone;
         
-        [[ThemeManager sharedInstance] setCurrentFaceIndex: ThemeHermesBlackOrange];
+        [tm setCurrentFaceIndex: ThemeHermesBlackOrange];
         
 		[self refreshTheme];
 		
@@ -123,7 +134,7 @@ CGFloat regionTransitionDuration = 0.2;
 	
 	/* Numerals */
     
-    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+    FaceTheme *theme = [tm currentTheme];
 
     if (theme.dialStyle == DialStyleTweoveOnTop) { //12 only
         
@@ -262,7 +273,7 @@ CGFloat regionTransitionDuration = 0.2;
     
     NSString *imgName = @"";
 
-    switch ([[ThemeManager sharedInstance] currentTheme].typeface) {
+    switch ([tm currentTheme].typeface) {
             
         case TypefaceNormal:
             
@@ -308,7 +319,7 @@ CGFloat regionTransitionDuration = 0.2;
 }
 
 - (NSString *)dateFontIdentifierForCurrentTheme {
-    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+    FaceTheme *theme = [tm currentTheme];
     return theme.dateFontIdentifier == DateFontNormal ? @"5" : @"3";
 }
 
@@ -339,15 +350,6 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)setupColors
 {
-	SKColor *colorRegionColor = nil;
-	SKColor *faceBackgroundColor = nil;
-	SKColor *majorMarkColor = nil;
-	SKColor *minorMarkColor = nil;
-    SKColor *textColor = nil;
-	SKColor *secondHandColor = nil;
-	
-	SKColor *alternateMajorMarkColor = nil;
-	SKColor *alternateMinorMarkColor = nil;
 	SKColor *alternateTextColor = nil;
 
 	self.useMasking = NO;
@@ -360,7 +362,7 @@ CGFloat regionTransitionDuration = 0.2;
 }
 
 -(void)showThemenameOnScreenIfNeeded {
-    NSLog(@"theme: %@", [[ThemeManager sharedInstance] currentTheme].name);
+    NSLog(@"theme: %@", [tm currentTheme].name);
 }
 
 -(void)setupScene
@@ -383,7 +385,7 @@ CGFloat regionTransitionDuration = 0.2;
 //    self.datePlaceHolder.color = self.alternateTextColor;
 //    self.datePlaceHolder.colorBlendFactor = 1.0;
     
-    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+    FaceTheme *theme = [tm currentTheme];
     
     [hourHand runAction: [SKAction colorizeWithColor: theme.outerColor colorBlendFactor: 1 duration: regionTransitionDuration]];
 
@@ -450,9 +452,7 @@ CGFloat regionTransitionDuration = 0.2;
 	SKNode *colorRegionReflection = [face childNodeWithName:@"Color Region Reflection"];
 	
 	faceMarkings.maskNode = colorRegion;
-	
-	self.textColor = self.alternateTextColor;
-	
+		
 	[self setupTickmarksForRectangularFaceWithLayerName:@"Markings Alternate"];
 	
 	SKCropNode *alternateFaceMarkings = (SKCropNode *)[self childNodeWithName:@"Markings Alternate"];
@@ -485,7 +485,7 @@ CGFloat regionTransitionDuration = 0.2;
 	SKNode *minuteHand = [face childNodeWithName:@"Minutes"];
 	SKNode *secondHand = [face childNodeWithName:@"Seconds"];
     
-    FaceTheme *theme = [[ThemeManager sharedInstance] currentTheme];
+    FaceTheme *theme = [tm currentTheme];
     secondHand.alpha = theme.showSeconds ? 1.0 : 0;
     
 	
@@ -581,9 +581,14 @@ CGFloat regionTransitionDuration = 0.2;
     }
 }
 
+-(void)resetStyles {
+    [tm setCurrentFaceIndex: ThemeHermesBlackOrange];
+    [tm buildThemeList];
+
+    [self refreshTheme];
+}
+
 -(void)nextTheme {
-    
-    ThemeManager *tm = [ThemeManager sharedInstance];
     
     int themeId = tm.currentFaceIndex;
     themeId++;
@@ -598,8 +603,6 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)previousTheme {
     
-    ThemeManager *tm = [ThemeManager sharedInstance];
-    
     int themeId = tm.currentFaceIndex;
     themeId--;
     if (themeId < 0) {
@@ -613,49 +616,64 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)nextTypeface {
     
-    
-    ThemeManager *tm = [ThemeManager sharedInstance];
-    
     Typeface currentTypeface = tm.currentTheme.typeface;
     
-    currentTypeface++;
-    
-    if (currentTypeface >= TypefaceMAX) {
-        tm.currentTheme.typeface = 0;
+    if (currentTypeface == TypefaceRoman) {
+        currentTypeface = 0;
     } else {
-        tm.currentTheme.typeface = currentTypeface;
+        currentTypeface++;
     }
+    
+    tm.currentTheme.typeface = currentTypeface;
     
     [self refreshTheme];
 }
 
 -(void)previousTypeface {
     
-    [self nextTypeface];
+    Typeface currentTypeface = tm.currentTheme.typeface;
+    
+    if (currentTypeface == TypefaceNormal) {
+        currentTypeface = TypefaceRoman;
+    } else {
+        --currentTypeface;
+    }
+    
+    tm.currentTheme.typeface = currentTypeface;
+    
+    [self refreshTheme];
     
 }
 
 
 -(void)nextColorDialStyle {
     
-    ThemeManager *tm = [ThemeManager sharedInstance];
-    
     DialStyle dialStyle = tm.currentTheme.dialStyle;
     
-    dialStyle++;
-    
-    if (dialStyle >= DialStyleMAX) {
-        tm.currentTheme.dialStyle = 0;
+    if (dialStyle == DialStyleTweoveOnTop) {
+        dialStyle = 0;
     } else {
-        tm.currentTheme.dialStyle = dialStyle;
+        dialStyle++;
     }
+    tm.currentTheme.dialStyle = dialStyle;
     
      [self refreshTheme];
 }
 
 
 -(void)previousColorDialStyle {
-    [self nextColorDialStyle];
+    
+    DialStyle dialStyle = tm.currentTheme.dialStyle;
+    
+    if (dialStyle == DialStyleNone) {
+        dialStyle = DialStyleTweoveOnTop;
+    } else {
+        --dialStyle;
+    }
+    
+    tm.currentTheme.dialStyle = dialStyle;
+    
+    [self refreshTheme];
 }
 
 

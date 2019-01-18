@@ -114,6 +114,10 @@ CGFloat totalRotation = 0;
     FaceScene *scene = (FaceScene *)self.scene.scene;
     [scene changeEditModeTo:EditModeTypeface];
 }
+- (IBAction)resetStyles {
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    [scene resetStyles];
+}
 
 //- (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
 //    if ([message objectForKey:@"themeChange"]) {
@@ -297,15 +301,15 @@ CGFloat totalRotation = 0;
 }
 
 //- (IBAction)toogleCardinal:(id)sender {
-//    
+//
 //    FaceScene *scene = (FaceScene *)self.scene.scene;
-//    
+//
 //    if (scene.dialStyle == DialStyleAll) {
 //        scene.dialStyle = DialStyleCardinal;
 //    } else {
 //        scene.dialStyle = DialStyleAll;
 //    }
-//    
+//
 //    [scene refreshTheme];
 //}
 
