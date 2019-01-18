@@ -16,44 +16,35 @@
                     <items>
                         <group width="1" alignment="left" spacing="0.0" id="r4w-8v-T2Z">
                             <items>
-                                <spriteKitScene width="184" height="224" alignment="center" preferredFramesPerSecond="60" scene="FaceScene.sks" id="Vbc-Dd-smI">
-                                    <gestureRecognizers>
-                                        <tapGestureRecognizer delaysTouchesBegan="YES" id="1do-da-mBQ">
-                                            <connections>
-                                                <action selector="tapped:" destination="OkN-RN-cDt" id="NYa-A6-8OC"/>
-                                            </connections>
-                                        </tapGestureRecognizer>
-                                        <swipeGestureRecognizer id="UMI-Hv-KGc">
-                                            <connections>
-                                                <action selector="swipedRight:" destination="OkN-RN-cDt" id="hHd-Jv-JoL"/>
-                                            </connections>
-                                        </swipeGestureRecognizer>
-                                        <swipeGestureRecognizer direction="8" id="DhP-0I-GSJ">
-                                            <connections>
-                                                <action selector="swipedDown:" destination="OkN-RN-cDt" id="R86-Mo-2Bl"/>
-                                            </connections>
-                                        </swipeGestureRecognizer>
-                                        <swipeGestureRecognizer direction="2" id="Jx1-9n-OR5">
-                                            <connections>
-                                                <action selector="dynamicDuo:" destination="OkN-RN-cDt" id="LKK-pR-xVO"/>
-                                            </connections>
-                                        </swipeGestureRecognizer>
-                                        <swipeGestureRecognizer direction="4" id="zJx-l1-tIO">
-                                            <connections>
-                                                <action selector="alternateColorAction:" destination="OkN-RN-cDt" id="GlH-g9-W04"/>
-                                            </connections>
-                                        </swipeGestureRecognizer>
-                                        <tapGestureRecognizer numberOfTapsRequired="3" id="h0g-g3-AtQ">
-                                            <connections>
-                                                <action selector="toogleCardinal:" destination="OkN-RN-cDt" id="Pk1-Ew-fm6"/>
-                                            </connections>
-                                        </tapGestureRecognizer>
-                                    </gestureRecognizers>
-                                </spriteKitScene>
+                                <spriteKitScene width="184" height="224" alignment="center" preferredFramesPerSecond="60" scene="FaceScene.sks" id="Vbc-Dd-smI"/>
                             </items>
                             <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
+                    <menu key="menu" id="3v7-Zg-AtG">
+                        <items>
+                            <menuItem title="Edit mode off" icon="accept" id="Z1C-8S-c7R">
+                                <connections>
+                                    <action selector="editModeOffTapped" destination="OkN-RN-cDt" id="V56-Ay-Obd"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Face" icon="add" id="qOz-n3-x01">
+                                <connections>
+                                    <action selector="editFaceModeTapped" destination="OkN-RN-cDt" id="6Po-kt-W0a"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Dial Style" icon="block" id="IpP-iX-O4N">
+                                <connections>
+                                    <action selector="editDialTypeModeTapped" destination="OkN-RN-cDt" id="idv-Lj-s12"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Font" icon="speaker" id="BIw-y5-gA0">
+                                <connections>
+                                    <action selector="editFontModeTapped" destination="OkN-RN-cDt" id="Lfc-Mw-e5U"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                     <connections>
                         <outlet property="scene" destination="Vbc-Dd-smI" id="Is8-Wc-8BM"/>

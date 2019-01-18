@@ -98,6 +98,22 @@ CGFloat totalRotation = 0;
 		totalRotation = 0;
 	}
 }
+- (IBAction)editModeOffTapped {
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    [scene changeEditModeTo:EditModeNone];
+}
+- (IBAction)editFaceModeTapped {
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    [scene changeEditModeTo:EditModeFace];
+}
+- (IBAction)editDialTypeModeTapped {
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    [scene changeEditModeTo:EditModeDialStyle];
+}
+- (IBAction)editFontModeTapped {
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    [scene changeEditModeTo:EditModeTypeface];
+}
 
 //- (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {
 //    if ([message objectForKey:@"themeChange"]) {
@@ -280,18 +296,18 @@ CGFloat totalRotation = 0;
     [scene refreshTheme];
 }
 
-- (IBAction)toogleCardinal:(id)sender {
-    
-    FaceScene *scene = (FaceScene *)self.scene.scene;
-    
-    if (scene.dialStyle == DialStyleAll) {
-        scene.dialStyle = DialStyleCardinal;
-    } else {
-        scene.dialStyle = DialStyleAll;
-    }
-    
-    [scene refreshTheme];
-}
+//- (IBAction)toogleCardinal:(id)sender {
+//    
+//    FaceScene *scene = (FaceScene *)self.scene.scene;
+//    
+//    if (scene.dialStyle == DialStyleAll) {
+//        scene.dialStyle = DialStyleCardinal;
+//    } else {
+//        scene.dialStyle = DialStyleAll;
+//    }
+//    
+//    [scene refreshTheme];
+//}
 
 @end
 

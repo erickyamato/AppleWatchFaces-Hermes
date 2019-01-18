@@ -20,11 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)nextTypeface;
 -(void)nextColorRegionStyle;
 -(void)nextColorDialStyle;
+- (void)changeEditModeTo:(EditMode)editMode;
 
 @property Theme theme;
-@property DialStyle dialStyle;
+//@property DialStyle dialStyle;
 @property ColorRegionStyle colorRegionStyle;
-@property Typeface typeface;
+//@property Typeface typeface;
 @property DateFontIdentifier dateFontIdentifier;
 @property EditMode crownEditMode;
 

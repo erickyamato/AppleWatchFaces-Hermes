@@ -75,7 +75,7 @@ CGFloat regionTransitionDuration = 0.2;
 
 @implementation FaceScene
 
-@synthesize logo1, logo2, logo3, bgColor1, bgColor2, typeface, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier, crownEditMode;
+@synthesize logo1, logo2, logo3, bgColor1, bgColor2, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier, crownEditMode;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -85,11 +85,8 @@ CGFloat regionTransitionDuration = 0.2;
 		self.faceSize = (CGSize){184, 224};
         
         self.theme = ThemeHermesBlackOrange; //[[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
-		self.dialStyle = DialStyleAll;
 
         self.colorRegionStyle = ColorRegionStyleDynamicDuo;
-
-        self.typeface = TypefaceNormal;
         
         self.useAlternateColorOnLogosAndDate = YES;
         
@@ -99,7 +96,7 @@ CGFloat regionTransitionDuration = 0.2;
         
         showSeconds = YES;
         
-        crownEditMode = EditModeFace;
+        crownEditMode = EditModeNone;
         
         [[ThemeManager sharedInstance] setCurrentFaceIndex: ThemeHermesBlackOrange];
         
@@ -265,7 +262,6 @@ CGFloat regionTransitionDuration = 0.2;
     
     NSString *imgName = @"";
 
-    
     switch ([[ThemeManager sharedInstance] currentTheme].typeface) {
             
         case TypefaceNormal:
@@ -541,6 +537,11 @@ CGFloat regionTransitionDuration = 0.2;
     
 }
 
+- (void)changeEditModeTo:(EditMode)editMode {
+    crownEditMode = editMode;
+    NSLog(@"editMode: %d", crownEditMode);
+}
+
 -(void)digitalCrownScrolledUp {
     
     switch (crownEditMode) {
@@ -549,11 +550,11 @@ CGFloat regionTransitionDuration = 0.2;
             break;
             
         case EditModeTypeface:
-            //
+            [self nextTypeface];
             break;
             
         case EditModeDialStyle:
-            //
+            [self nextColorDialStyle];
             break;
             
         default:
@@ -568,11 +569,11 @@ CGFloat regionTransitionDuration = 0.2;
             break;
             
         case EditModeTypeface:
-            //
+            [self previousTypeface];
             break;
             
         case EditModeDialStyle:
-            //
+            [self previousColorDialStyle];
             break;
             
         default:
@@ -612,12 +613,52 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)nextTypeface {
     
-    if (self.typeface >= TypefaceMAX - 1) {
-        self.typeface = 0;
+    
+    ThemeManager *tm = [ThemeManager sharedInstance];
+    
+    Typeface currentTypeface = tm.currentTheme.typeface;
+    
+    currentTypeface++;
+    
+    if (currentTypeface >= TypefaceMAX) {
+        tm.currentTheme.typeface = 0;
     } else {
-        self.typeface++;
+        tm.currentTheme.typeface = currentTypeface;
     }
+    
+    [self refreshTheme];
 }
+
+-(void)previousTypeface {
+    
+    [self nextTypeface];
+    
+}
+
+
+-(void)nextColorDialStyle {
+    
+    ThemeManager *tm = [ThemeManager sharedInstance];
+    
+    DialStyle dialStyle = tm.currentTheme.dialStyle;
+    
+    dialStyle++;
+    
+    if (dialStyle >= DialStyleMAX) {
+        tm.currentTheme.dialStyle = 0;
+    } else {
+        tm.currentTheme.dialStyle = dialStyle;
+    }
+    
+     [self refreshTheme];
+}
+
+
+-(void)previousColorDialStyle {
+    [self nextColorDialStyle];
+}
+
+
 
 -(void)nextColorRegionStyle {
     if (self.colorRegionStyle >= ColorRegionStyleMAX - 1) {
@@ -628,13 +669,7 @@ CGFloat regionTransitionDuration = 0.2;
 }
 
 
--(void)nextColorDialStyle {
-    if (self.dialStyle >= DialStyleMAX - 1) {
-        self.dialStyle = 0;
-    } else {
-        self.dialStyle++;
-    }
-}
+
 
 -(void)refreshTheme
 {
