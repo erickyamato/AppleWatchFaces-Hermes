@@ -77,4 +77,36 @@
 #define marquesLogoColor [SKColor whiteColor]
 #define marquesAlternateColor [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000]
 
+//navy
+#define navyBg1Color [SKColor colorWithRed:0.067 green:0.471 blue:0.651 alpha:1.000]
+#define navyBg2Color [SKColor colorWithRed:0.118 green:0.188 blue:0.239 alpha:1.000]
+#define navyTypefaceColor [SKColor whiteColor]
+#define navyHandsOutterColor [SKColor whiteColor]
+#define navyHandsInnerColor [SKColor colorWithRed:0.067 green:0.471 blue:0.651 alpha:1.000]
+#define navySecondHandColor [SKColor colorWithWhite:0.9 alpha:1]
+#define navyLogoColor [SKColor whiteColor]
+
+//tidepod
+#define tidepodBg1Color [SKColor colorWithRed:1.000 green:0.450 blue:0.136 alpha:1.000]
+#define tidepodBg2Color [SKColor colorWithRed:0.067 green:0.471 blue:0.651 alpha:1.000]
+#define tidepodTypefaceColor [SKColor whiteColor]
+#define tidepodHandsOutterColor [SKColor whiteColor]
+#define tidepodHandsInnerColor [SKColor colorWithRed:0.953 green:0.569 blue:0.196 alpha:1.000]
+#define tidepodSecondHandColor [SKColor whiteColor]
+#define tidepodLogoColor [SKColor whiteColor]
+
+
+//royal
+#define royalBg1Color [SKColor colorWithRed:0.118 green:0.188 blue:0.239 alpha:1.000]
+#define royalBg2Color [SKColor colorWithWhite:0.9 alpha:1.0]
+#define royalTypefaceColor [SKColor colorWithWhite:0.9 alpha:1]
+#define royalHandsOutterColor [SKColor whiteColor]
+#define royalHandsInnerColor [SKColor colorWithRed:0.118 green:0.188 blue:0.239 alpha:1.000]
+#define royalSecondHandColor [SKColor colorWithRed:0.912 green:0.198 blue:0.410 alpha:1.000]
+#define royalLogoColor [SKColor whiteColor]
+#define royalAlternateColor [SKColor colorWithRed:0.218 green:0.288 blue:0.439 alpha:1.000]
+
+
+
 #endif /* HermesPalette_h */
+

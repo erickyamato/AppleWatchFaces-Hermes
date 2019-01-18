@@ -33,43 +33,6 @@
 
 #define PREPARE_SCREENSHOT 0
 
-CGFloat workingRadiusForFaceOfSizeWithAngle(CGSize faceSize, CGFloat angle)
-{
-	CGFloat faceHeight = faceSize.height;
-	CGFloat faceWidth = faceSize.width;
-	
-	CGFloat workingRadius = 0;
-	
-	double vx = cos(angle);
-	double vy = sin(angle);
-	
-	double x1 = 0;
-	double y1 = 0;
-	double x2 = faceHeight;
-	double y2 = faceWidth;
-	double px = faceHeight/2;
-	double py = faceWidth/2;
-	
-	double t[4];
-	double smallestT = 1000;
-	
-	t[0]=(x1-px)/vx;
-	t[1]=(x2-px)/vx;
-	t[2]=(y1-py)/vy;
-	t[3]=(y2-py)/vy;
-	
-	for (int m = 0; m < 4; m++)
-	{
-		double currentT = t[m];
-		
-		if (currentT > 0 && currentT < smallestT)
-			smallestT = currentT;
-	}
-	
-	workingRadius = smallestT;
-	
-	return workingRadius;
-}
 
 CGFloat regionTransitionDuration = 0.2;
 
@@ -107,7 +70,13 @@ CGFloat regionTransitionDuration = 0.2;
         
         crownEditMode = EditModeNone;
         
-        [tm setCurrentFaceIndex: [[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"]]; //ThemeHermesBlackOrange; //
+        int themeIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"Theme"];
+        
+        if (themeIndex >=  [tm faces].count) {
+            themeIndex = 0;
+        }
+        
+        [tm setCurrentFaceIndex: themeIndex]; //ThemeHermesBlackOrange; //
         
 		[self refreshTheme];
 		
@@ -664,8 +633,8 @@ CGFloat regionTransitionDuration = 0.2;
 -(void)refreshTheme
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:tm.currentFaceIndex forKey:@"Theme"];
-	
-	SKNode *existingMarkings = [self childNodeWithName:@"Markings"];
+
+    SKNode *existingMarkings = [self childNodeWithName:@"Markings"];
 	SKNode *existingDualMaskMarkings = [self childNodeWithName:@"Markings Alternate"];
 
 	[existingMarkings removeAllChildren];
