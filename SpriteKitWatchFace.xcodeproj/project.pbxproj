@@ -15,7 +15,6 @@
 		B0D30AE3216D5B2700444765 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D30AE2216D5B2700444765 /* main.m */; };
 		B0D30AE7216D5B2700444765 /* SpriteKitWatchFace WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B0D30AE6216D5B2700444765 /* SpriteKitWatchFace WatchKit App.app */; };
 		B0D30AED216D5B2700444765 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D30AEB216D5B2700444765 /* Interface.storyboard */; };
-		B0D30AEF216D5B2700444765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0D30AEE216D5B2700444765 /* Assets.xcassets */; };
 		B0D30AF6216D5B2700444765 /* SpriteKitWatchFace WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B0D30AF5216D5B2700444765 /* SpriteKitWatchFace WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B0D30AFC216D5B2700444765 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D30AFB216D5B2700444765 /* InterfaceController.m */; };
 		B0D30AFF216D5B2700444765 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D30AFE216D5B2700444765 /* ExtensionDelegate.m */; };
@@ -29,6 +28,7 @@
 		B0EB7303216E69C00098CF27 /* FaceScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B0D30B13216D5C6A00444765 /* FaceScene.sks */; };
 		B0EB7307216E6C380098CF27 /* FaceScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7306216E6C380098CF27 /* FaceScene.m */; };
 		B0EB7308216E6C380098CF27 /* FaceScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7306216E6C380098CF27 /* FaceScene.m */; };
+		E8249AFB21F183A80099369A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8249AF921F183A80099369A /* Assets.xcassets */; };
 		E8DA9ECE21F0F6310064559F /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ECD21F0F6310064559F /* ThemeManager.m */; };
 		E8DA9ED121F0F98A0064559F /* FaceTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ED021F0F98A0064559F /* FaceTheme.m */; };
 		E8DA9ED321F1400C0064559F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8DA9ED221F1400B0064559F /* Assets.xcassets */; };
@@ -94,7 +94,6 @@
 		B0D30AE2216D5B2700444765 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B0D30AE6216D5B2700444765 /* SpriteKitWatchFace WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SpriteKitWatchFace WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D30AEC216D5B2700444765 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		B0D30AEE216D5B2700444765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0D30AF0216D5B2700444765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0D30AF5216D5B2700444765 /* SpriteKitWatchFace WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SpriteKitWatchFace WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D30AFA216D5B2700444765 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		B0EB72FF216E69AB0098CF27 /* DesktopShim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesktopShim.entitlements; sourceTree = "<group>"; };
 		B0EB7305216E6C380098CF27 /* FaceScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceScene.h; sourceTree = "<group>"; };
 		B0EB7306216E6C380098CF27 /* FaceScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceScene.m; sourceTree = "<group>"; };
+		E8249AFA21F183A80099369A /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
 		E834C7F721F0304C0002BA48 /* HermesPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HermesPalette.h; sourceTree = "<group>"; };
 		E8CBFA8321ED980500B8A553 /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		E8DA9ECC21F0F6310064559F /* ThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				B0D30AEB216D5B2700444765 /* Interface.storyboard */,
-				B0D30AEE216D5B2700444765 /* Assets.xcassets */,
+				E8249AF921F183A80099369A /* Assets.xcassets */,
 				B0D30AF0216D5B2700444765 /* Info.plist */,
 			);
 			path = "SpriteKitWatchFace WatchKit App";
@@ -401,7 +401,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0D30AEF216D5B2700444765 /* Assets.xcassets in Resources */,
+				E8249AFB21F183A80099369A /* Assets.xcassets in Resources */,
 				B0D30AED216D5B2700444765 /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +512,14 @@
 				B0EB72FA216E69AB0098CF27 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E8249AF921F183A80099369A /* Assets.xcassets */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E8249AFA21F183A80099369A /* Base */,
+			);
+			name = Assets.xcassets;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

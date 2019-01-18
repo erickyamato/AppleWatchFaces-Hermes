@@ -580,9 +580,9 @@ CGFloat regionTransitionDuration = 0.2;
 }
 
 -(void)resetStyles {
-    [tm setCurrentFaceIndex: ThemeHermesBlackOrange];
+//    [tm setCurrentFaceIndex: ThemeHermesBlackOrange];
     [tm buildThemeList];
-
+    crownEditMode = EditModeNone;
     [self refreshTheme];
 }
 
