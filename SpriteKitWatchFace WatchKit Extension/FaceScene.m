@@ -129,6 +129,8 @@ CGFloat regionTransitionDuration = 0.2;
 	
 	SKCropNode *faceMarkings = [SKCropNode node];
 	faceMarkings.name = layerName;
+    
+    BOOL isAlternateLayer = [layerName isEqualToString:@"Markings Alternate"] ? YES : NO;
 	
 	/* Numerals */
     
@@ -146,7 +148,7 @@ CGFloat regionTransitionDuration = 0.2;
         [faceMarkings addChild:labelNode];
         
         SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: 12]];
-        numberImg.color = theme.typefaceColor;
+        numberImg.color = isAlternateLayer ? theme.alternateColor : theme.typefaceColor;
         numberImg.colorBlendFactor = 1.0;
         numberImg.xScale = 1;
         numberImg.yScale = 1;
@@ -183,7 +185,7 @@ CGFloat regionTransitionDuration = 0.2;
 
 
             SKSpriteNode *numberImg = [SKSpriteNode spriteNodeWithTexture: [self textureForNumeral: i]];
-            numberImg.color = theme.typefaceColor;
+            numberImg.color = isAlternateLayer ? theme.alternateColor : theme.typefaceColor;
             numberImg.colorBlendFactor = 1.0;
             numberImg.xScale = 0.9;
             numberImg.yScale = 0.9;
@@ -204,9 +206,6 @@ CGFloat regionTransitionDuration = 0.2;
                 [labelNode addChild: numberImg];
                 [allNumbers addObject:numberImg];
             }
-            
-            
-
 
         }
         
@@ -231,7 +230,7 @@ CGFloat regionTransitionDuration = 0.2;
     SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
     SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
     [faceMarkings addChild:logo1Img];
-    logo1Img.color = theme.logoAndDateColor;
+    logo1Img.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
     logo1Img.colorBlendFactor = 1.0;
     logo1Img.xScale = 1.2;
     logo1Img.yScale = 1.2;
@@ -241,7 +240,7 @@ CGFloat regionTransitionDuration = 0.2;
     SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
     SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
     [faceMarkings addChild:logo2Img];
-    logo2Img.color = theme.logoAndDateColor;
+    logo2Img.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
     logo2Img.colorBlendFactor = 1.0;
     logo2Img.xScale = 1.2;
     logo2Img.yScale = 1.2;
@@ -250,7 +249,7 @@ CGFloat regionTransitionDuration = 0.2;
     SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
     SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
     [faceMarkings addChild:moonImg];
-    moonImg.color = theme.logoAndDateColor;
+    moonImg.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
     moonImg.colorBlendFactor = 1.0;
     moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 27));
             
@@ -258,7 +257,7 @@ CGFloat regionTransitionDuration = 0.2;
         
         SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
         [faceMarkings addChild:dayImg];
-        dayImg.color = theme.logoAndDateColor;
+        dayImg.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
         dayImg.colorBlendFactor = 1.0;
         dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 40));
     }
@@ -319,28 +318,6 @@ CGFloat regionTransitionDuration = 0.2;
 - (NSString *)dateFontIdentifierForCurrentTheme {
     FaceTheme *theme = [tm currentTheme];
     return theme.dateFontIdentifier == DateFontNormal ? @"5" : @"3";
-}
-
-#pragma Theme names cnvenience -
-
-- (NSString *)themeNameFor: (int)theme {
-    
-    switch (self.theme) {
-        case ThemeHermesRose: { return @"Rose"; }
-        case ThemeHermesOrange: { return @"Orange"; }
-        case ThemeHermesYellowPink: { return @"YellowPink"; }
-        case ThemeHermesBlackElegance: { return @"BlackElegance"; }
-        case ThemeHermesBlackOrange: { return @"BlackOrange"; }
-//        case ThemeContrast: { return @"ThemeContrast"; }
-//        case ThemeMarques: { return @"ThemeMarques"; }
-//        case ThemeNavy: { return @"ThemeNavy"; }
-//        case ThemeRoyal: { return @"ThemeRoyal"; }
-//        case ThemeTidepod: { return @"ThemeTidepod"; }
-//        case ThemeSummer: { return @"ThemeSummer"; }
-//        case ThemeBretonnia: { return @"ThemeBretonnia"; }
-        default:
-            return @"";
-    }
 }
 
 #pragma mark -
@@ -493,8 +470,7 @@ CGFloat regionTransitionDuration = 0.2;
 	hourHand.zRotation =  - (2*M_PI)/12.0 * (CGFloat)(components.hour%12 + 1.0/60.0*components.minute);
 	minuteHand.zRotation =  - (2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
 	secondHand.zRotation = - (2*M_PI)/60 * (CGFloat)(components.second + 1.0/NSEC_PER_SEC*components.nanosecond);
-	
-	
+    
 	if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
 	{
         [colorRegion runAction: [SKAction fadeInWithDuration:0.20]];
@@ -521,7 +497,6 @@ CGFloat regionTransitionDuration = 0.2;
     } else if (self.colorRegionStyle == ColorRegionStyleHalfVertical) {
         
         colorRegion.alpha = 1.0;
-        
         
         CGFloat desiredRotation = M_PI_2;
         
@@ -702,7 +677,7 @@ CGFloat regionTransitionDuration = 0.2;
 	[self setupColors];
 	[self setupScene];
 	
-	if (self.useMasking && ((self.colorRegionStyle == ColorRegionStyleDynamicDuo) || (self.colorRegionStyle == ColorRegionStyleHalfHorizontal)  || (self.colorRegionStyle == ColorRegionStyleHalfVertical)))
+	if (tm.currentTheme.useMasking)
 	{
 		[self setupMasking];
 	}
