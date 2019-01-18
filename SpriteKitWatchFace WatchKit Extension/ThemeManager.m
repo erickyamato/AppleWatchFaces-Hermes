@@ -145,6 +145,25 @@
                         showSeconds:NO];
                 break;
             }
+            case ThemeHermesSportSocial:
+            {
+                
+                face = [[FaceTheme alloc]
+                        initWithName: @"SportSocial"
+                        bgColor1:sportSocialBg1Color
+                        bgColor2:sportSocialBg2Color
+                        innerColor:sportSocialHandsInnerColor
+                        outerColor:sportSocialHandsOutterColor
+                        hourMinuteColor:blackEleganceTypefaceColor
+                        typefaceColor:sportSocialTypefaceColor
+                        logoAndDateColor:sportSocialLogoColor
+                        secondsHandColor:sportSocialSecondHandColor
+                        typeface:TypefaceFunny
+                        dateFontIdentifier:DateFontFunny
+                        dialStyle:DialStyleCardinal
+                        showSeconds:NO];
+                break;
+            }
             default: {}
         }
         

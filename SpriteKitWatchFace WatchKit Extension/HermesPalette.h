@@ -46,11 +46,19 @@
 //blackOrangeSport
 #define blackOrangeBg1Color [SKColor blackColor]
 #define blackOrangeBg2Color [SKColor blackColor]
-//#define blackOrangeTypefaceColor [SKColor colorWithRed:0.87 green:0.83 blue:0.75 alpha:1.0]
 #define blackOrangeTypefaceColor [SKColor colorWithRed:1.00 green:0.47 blue:0.00 alpha:1.0]
 #define blackOrangeLogoColor [SKColor whiteColor]
 #define blackOrangeHandsOutterColor [SKColor whiteColor]
 #define blackOrangeHandsInnerColor [SKColor blackColor]
 #define blackOrangeSecondHandColor [SKColor whiteColor]
+
+//sportSocial
+#define sportSocialBg1Color [SKColor blackColor]
+#define sportSocialBg2Color [SKColor blackColor]
+#define sportSocialTypefaceColor [SKColor whiteColor]
+#define sportSocialLogoColor [SKColor whiteColor]
+#define sportSocialHandsOutterColor [SKColor colorWithRed:1.00 green:0.22 blue:0.18 alpha:1.0]
+#define sportSocialHandsInnerColor [SKColor blackColor]
+#define sportSocialSecondHandColor [SKColor whiteColor]
 
 #endif /* HermesPalette_h */
