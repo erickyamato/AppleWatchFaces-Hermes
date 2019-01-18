@@ -11,7 +11,7 @@
 
 @implementation FaceTheme
 
-@synthesize name, bgColor1, bgColor2, innerColor, outerColor, hourMinuteColor, typefaceColor, logoAndDateColor, secondsHandColor, typeface, dateFontIdentifier, dialStyle, showSeconds;
+@synthesize name, bgColor1, bgColor2, innerColor, outerColor, hourMinuteColor, typefaceColor, logoAndDateColor, secondsHandColor, alternateColor, typeface, dateFontIdentifier, dialStyle, showSeconds, useMasking;
 
 
 - (instancetype)initWithName: (NSString *)name
@@ -23,10 +23,12 @@
                   typefaceColor: (SKColor *)typefaceColor
                logoAndDateColor: (SKColor *)logoAndDateColor
                secondsHandColor: (SKColor *)secondsHandColor
+                 alternateColor: (nullable SKColor *)alternateColor
                        typeface: (Typeface)typeface
               dateFontIdentifier: (DateFontIdentifier)dateFontIdentifier
                       dialStyle: (DialStyle)dialStyle
-                    showSeconds: (bool)showSeconds {
+                    showSeconds: (bool)showSeconds
+                     useMasking: (BOOL)useMasking {
     
     if( [self init]) {
         self.name = name;
@@ -38,10 +40,12 @@
         self.typefaceColor = typefaceColor;
         self.logoAndDateColor = logoAndDateColor;
         self.secondsHandColor = secondsHandColor;
+        self.alternateColor = alternateColor;
         self.typeface = typeface;
         self.dateFontIdentifier = dateFontIdentifier;
         self.dialStyle = dialStyle;
         self.showSeconds = showSeconds;
+        self.useMasking = useMasking;
     }
     
     

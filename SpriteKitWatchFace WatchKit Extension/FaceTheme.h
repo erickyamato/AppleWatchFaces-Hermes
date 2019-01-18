@@ -23,10 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property SKColor *typefaceColor;
 @property SKColor *logoAndDateColor;
 @property SKColor *secondsHandColor;
+@property (nullable) SKColor *alternateColor;
 @property Typeface typeface;
 @property DateFontIdentifier dateFontIdentifier;
 @property DialStyle dialStyle;
 @property BOOL showSeconds;
+@property BOOL useMasking;
 
 - (instancetype)initWithName: (NSString *)name
                     bgColor1: (SKColor *)bgColor1
@@ -37,10 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
                typefaceColor: (SKColor *)typefaceColor
             logoAndDateColor: (SKColor *)logoAndDateColor
             secondsHandColor: (SKColor *)secondsHandColor
+              alternateColor: (nullable SKColor *)alternateColor
                     typeface: (Typeface)typeface
           dateFontIdentifier: (DateFontIdentifier)dateFontIdentifier
                    dialStyle: (DialStyle)dialStyle
-                 showSeconds: (bool)showSeconds;
+                 showSeconds: (BOOL)showSeconds
+                  useMasking: (BOOL)useMasking;
 @end
 
 NS_ASSUME_NONNULL_END

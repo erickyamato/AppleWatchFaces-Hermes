@@ -24,9 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)resetStyles;
 
 @property Theme theme;
-//@property DialStyle dialStyle;
 @property ColorRegionStyle colorRegionStyle;
-//@property Typeface typeface;
 @property DateFontIdentifier dateFontIdentifier;
 @property EditMode crownEditMode;
 

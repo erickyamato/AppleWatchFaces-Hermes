@@ -61,4 +61,20 @@
 #define sportSocialHandsInnerColor [SKColor blackColor]
 #define sportSocialSecondHandColor [SKColor whiteColor]
 
+
+// *************************
+// Non Hermès
+// *************************
+
+
+//marques
+#define marquesBg1Color [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000]
+#define marquesBg2Color [SKColor colorWithRed:0.145 green:0.157 blue:0.176 alpha:1.000]
+#define marquesTypefaceColor [SKColor whiteColor]
+#define marquesHandsOutterColor [SKColor whiteColor]
+#define marquesHandsInnerColor [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000]
+#define marquesSecondHandColor [SKColor colorWithWhite:0.9 alpha:1]
+#define marquesLogoColor [SKColor whiteColor]
+#define marquesAlternateColor [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000]
+
 #endif /* HermesPalette_h */

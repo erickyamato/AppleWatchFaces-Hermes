@@ -19,15 +19,7 @@
 		B0D30AFC216D5B2700444765 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D30AFB216D5B2700444765 /* InterfaceController.m */; };
 		B0D30AFF216D5B2700444765 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D30AFE216D5B2700444765 /* ExtensionDelegate.m */; };
 		B0D30B14216D5C6A00444765 /* FaceScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B0D30B13216D5C6A00444765 /* FaceScene.sks */; };
-		B0D4F2B72172164B00F497E0 /* FaceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D4F2B62172164B00F497E0 /* FaceWindow.m */; };
-		B0EB72EC216E69AA0098CF27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB72EB216E69AA0098CF27 /* AppDelegate.m */; };
-		B0EB72F6216E69AA0098CF27 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB72F5216E69AA0098CF27 /* ViewController.m */; };
-		B0EB72F8216E69AB0098CF27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0EB72F7216E69AB0098CF27 /* Assets.xcassets */; };
-		B0EB72FB216E69AB0098CF27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0EB72F9216E69AB0098CF27 /* Main.storyboard */; };
-		B0EB72FE216E69AB0098CF27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB72FD216E69AB0098CF27 /* main.m */; };
-		B0EB7303216E69C00098CF27 /* FaceScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B0D30B13216D5C6A00444765 /* FaceScene.sks */; };
 		B0EB7307216E6C380098CF27 /* FaceScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7306216E6C380098CF27 /* FaceScene.m */; };
-		B0EB7308216E6C380098CF27 /* FaceScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7306216E6C380098CF27 /* FaceScene.m */; };
 		E8249AFB21F183A80099369A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8249AF921F183A80099369A /* Assets.xcassets */; };
 		E8DA9ECE21F0F6310064559F /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ECD21F0F6310064559F /* ThemeManager.m */; };
 		E8DA9ED121F0F98A0064559F /* FaceTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ED021F0F98A0064559F /* FaceTheme.m */; };
@@ -102,19 +94,7 @@
 		B0D30AFE216D5B2700444765 /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
 		B0D30B02216D5B2800444765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0D30B13216D5C6A00444765 /* FaceScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FaceScene.sks; sourceTree = "<group>"; };
-		B0D4F2B52172164B00F497E0 /* FaceWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceWindow.h; sourceTree = "<group>"; };
-		B0D4F2B62172164B00F497E0 /* FaceWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceWindow.m; sourceTree = "<group>"; };
 		B0EB72E3216E3C350098CF27 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		B0EB72E8216E69AA0098CF27 /* DesktopShim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesktopShim.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0EB72EA216E69AA0098CF27 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B0EB72EB216E69AA0098CF27 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B0EB72F4216E69AA0098CF27 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B0EB72F5216E69AA0098CF27 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B0EB72F7216E69AB0098CF27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B0EB72FA216E69AB0098CF27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B0EB72FC216E69AB0098CF27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B0EB72FD216E69AB0098CF27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B0EB72FF216E69AB0098CF27 /* DesktopShim.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DesktopShim.entitlements; sourceTree = "<group>"; };
 		B0EB7305216E6C380098CF27 /* FaceScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceScene.h; sourceTree = "<group>"; };
 		B0EB7306216E6C380098CF27 /* FaceScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceScene.m; sourceTree = "<group>"; };
 		E8249AFA21F183A80099369A /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
@@ -152,13 +132,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B0EB72E5216E69AA0098CF27 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -169,7 +142,6 @@
 				B0D30AD2216D5B2500444765 /* SpriteKitWatchFace */,
 				B0D30AEA216D5B2700444765 /* SpriteKitWatchFace WatchKit App */,
 				B0D30AF9216D5B2700444765 /* SpriteKitWatchFace WatchKit Extension */,
-				B0EB72E9216E69AA0098CF27 /* DesktopShim */,
 				B0D30AD1216D5B2500444765 /* Products */,
 				FE8B39D92174317C0097622D /* Frameworks */,
 			);
@@ -181,7 +153,6 @@
 				B0D30AD0216D5B2500444765 /* SpriteKitWatchFace.app */,
 				B0D30AE6216D5B2700444765 /* SpriteKitWatchFace WatchKit App.app */,
 				B0D30AF5216D5B2700444765 /* SpriteKitWatchFace WatchKit Extension.appex */,
-				B0EB72E8216E69AA0098CF27 /* DesktopShim.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,24 +211,6 @@
 				B0D30B02216D5B2800444765 /* Info.plist */,
 			);
 			path = "SpriteKitWatchFace WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		B0EB72E9216E69AA0098CF27 /* DesktopShim */ = {
-			isa = PBXGroup;
-			children = (
-				B0EB72EA216E69AA0098CF27 /* AppDelegate.h */,
-				B0EB72EB216E69AA0098CF27 /* AppDelegate.m */,
-				B0EB72F4216E69AA0098CF27 /* ViewController.h */,
-				B0EB72F5216E69AA0098CF27 /* ViewController.m */,
-				B0D4F2B52172164B00F497E0 /* FaceWindow.h */,
-				B0D4F2B62172164B00F497E0 /* FaceWindow.m */,
-				B0EB72F7216E69AB0098CF27 /* Assets.xcassets */,
-				B0EB72F9216E69AB0098CF27 /* Main.storyboard */,
-				B0EB72FC216E69AB0098CF27 /* Info.plist */,
-				B0EB72FD216E69AB0098CF27 /* main.m */,
-				B0EB72FF216E69AB0098CF27 /* DesktopShim.entitlements */,
-			);
-			path = DesktopShim;
 			sourceTree = "<group>";
 		};
 		FE8B39D92174317C0097622D /* Frameworks */ = {
@@ -324,23 +277,6 @@
 			productReference = B0D30AF5216D5B2700444765 /* SpriteKitWatchFace WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
-		B0EB72E7216E69AA0098CF27 /* DesktopShim */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B0EB7300216E69AB0098CF27 /* Build configuration list for PBXNativeTarget "DesktopShim" */;
-			buildPhases = (
-				B0EB72E4216E69AA0098CF27 /* Sources */,
-				B0EB72E5216E69AA0098CF27 /* Frameworks */,
-				B0EB72E6216E69AA0098CF27 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = DesktopShim;
-			productName = DesktopShim;
-			productReference = B0EB72E8216E69AA0098CF27 /* DesktopShim.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -358,9 +294,6 @@
 						CreatedOnToolsVersion = 10.0;
 					};
 					B0D30AF4216D5B2700444765 = {
-						CreatedOnToolsVersion = 10.0;
-					};
-					B0EB72E7216E69AA0098CF27 = {
 						CreatedOnToolsVersion = 10.0;
 					};
 				};
@@ -381,7 +314,6 @@
 				B0D30ACF216D5B2500444765 /* SpriteKitWatchFace */,
 				B0D30AE5216D5B2700444765 /* SpriteKitWatchFace WatchKit App */,
 				B0D30AF4216D5B2700444765 /* SpriteKitWatchFace WatchKit Extension */,
-				B0EB72E7216E69AA0098CF27 /* DesktopShim */,
 			);
 		};
 /* End PBXProject section */
@@ -415,16 +347,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B0EB72E6216E69AA0098CF27 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B0EB72F8216E69AB0098CF27 /* Assets.xcassets in Resources */,
-				B0EB72FB216E69AB0098CF27 /* Main.storyboard in Resources */,
-				B0EB7303216E69C00098CF27 /* FaceScene.sks in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -451,18 +373,6 @@
 				B0D30AFC216D5B2700444765 /* InterfaceController.m in Sources */,
 				E8DA9ED121F0F98A0064559F /* FaceTheme.m in Sources */,
 				E8DA9ECE21F0F6310064559F /* ThemeManager.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B0EB72E4216E69AA0098CF27 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B0EB72F6216E69AA0098CF27 /* ViewController.m in Sources */,
-				B0D4F2B72172164B00F497E0 /* FaceWindow.m in Sources */,
-				B0EB72FE216E69AB0098CF27 /* main.m in Sources */,
-				B0EB72EC216E69AA0098CF27 /* AppDelegate.m in Sources */,
-				B0EB7308216E6C380098CF27 /* FaceScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,14 +414,6 @@
 				B0D30AEC216D5B2700444765 /* Base */,
 			);
 			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
-		B0EB72F9216E69AB0098CF27 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B0EB72FA216E69AB0098CF27 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		E8249AF921F183A80099369A /* Assets.xcassets */ = {
@@ -772,56 +674,6 @@
 			};
 			name = Release;
 		};
-		B0EB7301216E69AB0098CF27 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DesktopShim/DesktopShim.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = WEP9UKL7GT;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = DesktopShim/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dbo.SKWFDesktopShim;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Debug;
-		};
-		B0EB7302216E69AB0098CF27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DesktopShim/DesktopShim.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = WEP9UKL7GT;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				INFOPLIST_FILE = DesktopShim/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dbo.SKWFDesktopShim;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -857,15 +709,6 @@
 			buildConfigurations = (
 				B0D30B0E216D5B2800444765 /* Debug */,
 				B0D30B0F216D5B2800444765 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B0EB7300216E69AB0098CF27 /* Build configuration list for PBXNativeTarget "DesktopShim" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B0EB7301216E69AB0098CF27 /* Debug */,
-				B0EB7302216E69AB0098CF27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

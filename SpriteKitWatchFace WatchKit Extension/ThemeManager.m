@@ -62,10 +62,12 @@
                        typefaceColor:roseTypefaceColor
                        logoAndDateColor:roseLogoColor
                        secondsHandColor:roseBg2Color
+                       alternateColor: nil
                        typeface:TypefaceFunnyOutline
                        dateFontIdentifier:DateFontFunny
                        dialStyle:DialStyleAll
-                       showSeconds:NO];
+                       showSeconds:NO
+                        useMasking: NO];
                 break;
                 
             }
@@ -81,10 +83,12 @@
                         typefaceColor:orangeTypefaceColor
                         logoAndDateColor:orangeLogoColor
                         secondsHandColor:orangeBg2Color
+                        alternateColor: nil
                         typeface:TypefaceFunnyOutline
                         dateFontIdentifier:DateFontFunny
                         dialStyle:DialStyleAll
-                        showSeconds:NO];
+                        showSeconds:NO
+                        useMasking: NO];
                 break;
                 
             }
@@ -100,10 +104,12 @@
                         typefaceColor:yellowPinkTypefaceColor
                         logoAndDateColor:yellowPinkLogoColor
                         secondsHandColor:yellowPinkBg2Color
+                        alternateColor: nil
                         typeface:TypefaceFunnyOutline
                         dateFontIdentifier:DateFontFunny
                         dialStyle:DialStyleAll
-                        showSeconds:NO];
+                        showSeconds:NO
+                        useMasking: NO];
                 break;
             }
                 
@@ -119,10 +125,12 @@
                         typefaceColor:blackEleganceTypefaceColor
                         logoAndDateColor:blackEleganceLogoColor
                         secondsHandColor:blackEleganceSecondHandColor
+                        alternateColor: nil
                         typeface:TypefaceRoman
                         dateFontIdentifier:DateFontNormal
                         dialStyle:DialStyleAll
-                        showSeconds:YES];
+                        showSeconds:YES
+                        useMasking: NO];
                 break;
                 
             }
@@ -139,10 +147,12 @@
                         typefaceColor:blackOrangeTypefaceColor
                         logoAndDateColor:blackOrangeLogoColor
                         secondsHandColor:blackOrangeSecondHandColor
+                        alternateColor: nil
                         typeface:TypefaceNormal
                         dateFontIdentifier:DateFontNormal
                         dialStyle:DialStyleCardinal
-                        showSeconds:NO];
+                        showSeconds:NO
+                        useMasking: NO];
                 break;
             }
             case ThemeHermesSportSocial:
@@ -154,14 +164,56 @@
                         bgColor2:sportSocialBg2Color
                         innerColor:sportSocialHandsInnerColor
                         outerColor:sportSocialHandsOutterColor
-                        hourMinuteColor:blackEleganceTypefaceColor
+                        hourMinuteColor:sportSocialTypefaceColor
                         typefaceColor:sportSocialTypefaceColor
                         logoAndDateColor:sportSocialLogoColor
                         secondsHandColor:sportSocialSecondHandColor
+                        alternateColor: nil
                         typeface:TypefaceFunny
                         dateFontIdentifier:DateFontFunny
                         dialStyle:DialStyleCardinal
-                        showSeconds:NO];
+                        showSeconds:NO
+                        useMasking: NO];
+                break;
+            }
+            case ThemeMarques:
+            {
+    
+                face = [[FaceTheme alloc]
+                        initWithName: @"Marques"
+                        bgColor1:marquesBg1Color
+                        bgColor2:marquesBg2Color
+                        innerColor:marquesHandsInnerColor
+                        outerColor:marquesHandsOutterColor
+                        hourMinuteColor:marquesTypefaceColor
+                        typefaceColor:marquesTypefaceColor
+                        logoAndDateColor:marquesLogoColor
+                        secondsHandColor:marquesSecondHandColor
+                        alternateColor: marquesAlternateColor
+                        typeface:TypefaceNormal
+                        dateFontIdentifier:DateFontNormal
+                        dialStyle:DialStyleAll
+                        showSeconds:YES
+                        useMasking: YES];
+                break;
+                
+//                colorRegionColor = ;
+//                faceBackgroundColor = ;
+//                innerColor = colorRegionColor;
+//                outerColor = [SKColor whiteColor];
+//                textColor = ;
+//                secondHandColor = [SKColor colorWithWhite:0.9 alpha:1];
+    
+//                NSColor *logoAndDateColor = textColor;
+//                if (self.useAlternateColorOnLogosAndDate) {
+//                    logoAndDateColor = [SKColor colorWithRed:0.886 green:0.141 blue:0.196 alpha:1.000];
+//                }
+    
+//                alternateTextColor = logoAndDateColor;
+//                alternateMinorMarkColor = [colorRegionColor colorWithAlphaComponent:0.5];
+//                alternateMajorMarkColor = [SKColor colorWithWhite:1 alpha:0.8];
+    
+//                self.useMasking = YES;
                 break;
             }
             default: {}

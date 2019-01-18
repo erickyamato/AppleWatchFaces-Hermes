@@ -717,23 +717,13 @@ CGFloat regionTransitionDuration = 0.2;
 	
 	if (key == 't')
 	{
-		int direction = 1;
-		
-		if ((self.theme+direction > 0) && (self.theme+direction < ThemeMAX))
-			self.theme += direction;
-		else
-			self.theme = 0;
+        [self nextTheme];
 	}
 	else if (key == 'n')
 	{
-        if (self.dialStyle+1 > 0) {
-			self.dialStyle ++;
-        } else
-			self.dialStyle = 0;
+        [self previousTheme];
 	}
 
-	
-	[self refreshTheme];
 }
 #endif
 @end

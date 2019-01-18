@@ -16,6 +16,8 @@ typedef enum : NSUInteger {
     ThemeHermesBlackElegance,
     ThemeHermesBlackOrange,
     ThemeHermesSportSocial,
+    // Non Hermès
+    ThemeMarques,
 //    ThemeContrast,
 //    ThemeMarques,
 //    ThemeNavy,
