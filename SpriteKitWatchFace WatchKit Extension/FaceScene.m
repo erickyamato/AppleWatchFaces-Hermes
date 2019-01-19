@@ -34,7 +34,6 @@
 #define PREPARE_SCREENSHOT 0
 
 
-CGFloat regionTransitionDuration = 0.2;
 
 
 @interface FaceScene()
@@ -48,6 +47,10 @@ CGFloat regionTransitionDuration = 0.2;
 @implementation FaceScene
 
 @synthesize logo1, logo2, logo3, bgColor1, bgColor2, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier, crownEditMode, tm;
+
+BOOL changingFace = NO;
+CGFloat regionTransitionDuration = 0.2;
+
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -232,8 +235,42 @@ CGFloat regionTransitionDuration = 0.2;
     }
 	
 	[self addChild:faceMarkings];
+    
+    
+    if (!isAlternateLayer) {
+        
+        NSDictionary *attribs = @{NSFontAttributeName : [NSFont fontWithName:@"Futura-Medium" size:12], NSForegroundColorAttributeName : theme.typefaceColor, NSBackgroundColorAttributeName : theme.bgColor1};
+    
+        NSAttributedString *labelText = [[NSAttributedString alloc] initWithString:tm.currentTheme.name.uppercaseString attributes:attribs];
+    
+        SKLabelNode *numberLabel = [SKLabelNode labelNodeWithAttributedText:labelText];
+        numberLabel.zPosition = 1000;
+        numberLabel.position = CGPointMake(0, -numberLabel.frame.size.height/2);
+        numberLabel.alpha = 0;
+    
+        [self addChild:numberLabel];
+    
+        [self fadeAndRemove: numberLabel];
+    }
 }
 
+- (void)fadeAndRemove:(SKNode *)node {
+    SKAction *fadeIn = [SKAction fadeInWithDuration: 0.2];
+    SKAction *delay = [SKAction waitForDuration: 0.7];
+    SKAction *fadeOut = [SKAction fadeOutWithDuration: 0.2];
+    SKAction *remove = [SKAction removeFromParent];
+    
+    SKAction *sequence = [SKAction sequence: @[fadeIn, delay, fadeOut, remove]];
+    
+    [node runAction: sequence completion:^{
+        [self releaseFaceChangeLock];
+    }];
+    
+}
+
+- (void)releaseFaceChangeLock {
+    changingFace = NO;
+}
 
 - (SKTexture *)textureForNumeral: (int)number {
     
@@ -297,17 +334,12 @@ CGFloat regionTransitionDuration = 0.2;
 	SKColor *alternateTextColor = nil;
 
 	self.useMasking = NO;
-	
-    [self showThemenameOnScreenIfNeeded];
 
 
 	self.alternateTextColor = alternateTextColor;
     
 }
 
--(void)showThemenameOnScreenIfNeeded {
-    NSLog(@"theme: %@", [tm currentTheme].name);
-}
 
 -(void)setupScene
 {
@@ -326,8 +358,6 @@ CGFloat regionTransitionDuration = 0.2;
     
     
     self.datePlaceHolder = (SKSpriteNode *)[face childNodeWithName:@"Date Number"];
-//    self.datePlaceHolder.color = self.alternateTextColor;
-//    self.datePlaceHolder.colorBlendFactor = 1.0;
     
     FaceTheme *theme = [tm currentTheme];
     
@@ -532,6 +562,10 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)nextTheme {
     
+    if (changingFace) { return; }
+    
+    changingFace = YES;
+    
     int themeId = tm.currentFaceIndex;
     themeId++;
     if (themeId >= ThemeMAX) {
@@ -544,6 +578,10 @@ CGFloat regionTransitionDuration = 0.2;
 }
 
 -(void)previousTheme {
+    
+    if (changingFace) { return; }
+    
+    changingFace = YES;
     
     int themeId = tm.currentFaceIndex;
     themeId--;
@@ -626,8 +664,6 @@ CGFloat regionTransitionDuration = 0.2;
         self.colorRegionStyle++;
     }
 }
-
-
 
 
 -(void)refreshTheme
