@@ -237,7 +237,7 @@ CGFloat regionTransitionDuration = 0.2;
 	[self addChild:faceMarkings];
     
     
-    if (!isAlternateLayer) {
+    if (!isAlternateLayer && changingFace) {
         
         NSDictionary *attribs = @{NSFontAttributeName : [NSFont fontWithName:@"Futura-Medium" size:12], NSForegroundColorAttributeName : theme.typefaceColor, NSBackgroundColorAttributeName : theme.bgColor1};
     
