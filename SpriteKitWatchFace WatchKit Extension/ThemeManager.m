@@ -263,6 +263,50 @@
                 
             }
                 
+            case ThemePeixeUrbano:
+            {
+                face = [[FaceTheme alloc]
+                        initWithName: @"PeixeUrbano"
+                        bgColor1:peixeUrbanoBg1Color
+                        bgColor2:peixeUrbanoBg2Color
+                        innerColor:peixeUrbanoHandsInnerColor
+                        outerColor:peixeUrbanoHandsOutterColor
+                        hourMinuteColor:peixeUrbanoTypefaceColor
+                        typefaceColor:peixeUrbanoTypefaceColor
+                        logoAndDateColor:peixeUrbanoLogoColor
+                        secondsHandColor:peixeUrbanoSecondHandColor
+                        alternateColor: peixeUrbanoAlternateColor
+                        typeface:TypefaceFunnyOutline
+                        dateFontIdentifier:DateFontFunny
+                        dialStyle:DialStyleAll
+                        showSeconds:NO
+                        useMasking: NO];
+                break;
+                
+            }
+                
+            case ThemePeixeUrbanoLight:
+            {
+                face = [[FaceTheme alloc]
+                        initWithName: @"PeixeUrbano Light"
+                        bgColor1:peixeUrbanoLightBg1Color
+                        bgColor2:peixeUrbanoLightBg2Color
+                        innerColor:peixeUrbanoLightHandsInnerColor
+                        outerColor:peixeUrbanoLightHandsOutterColor
+                        hourMinuteColor:peixeUrbanoLightTypefaceColor
+                        typefaceColor:peixeUrbanoLightTypefaceColor
+                        logoAndDateColor:peixeUrbanoLightLogoColor
+                        secondsHandColor:peixeUrbanoLightSecondHandColor
+                        alternateColor: peixeUrbanoLightAlternateColor
+                        typeface:TypefaceFunny
+                        dateFontIdentifier:DateFontFunny
+                        dialStyle:DialStyleAll
+                        showSeconds:NO
+                        useMasking: YES];
+                break;
+                
+            }
+                
             default: {}
         }
         

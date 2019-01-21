@@ -199,39 +199,51 @@ CGFloat regionTransitionDuration = 0.2;
     
     }
     
-    SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
-    SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
-    [faceMarkings addChild:logo1Img];
-    logo1Img.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
-    logo1Img.colorBlendFactor = 1.0;
-    logo1Img.xScale = 1.2;
-    logo1Img.yScale = 1.2;
-    logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 25));
     
+    if ([theme.name isEqualToString: @"PeixeUrbano"] || [theme.name isEqualToString: @"PeixeUrbano Light"]) {
+        
+        SKTexture *logo1Texture = [SKTexture textureWithImage: isAlternateLayer ? [NSImage imageNamed: @"pu_logo_white"] : [NSImage imageNamed: @"pu_logo"]];
+        SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
+        [faceMarkings addChild:logo1Img];
+        logo1Img.xScale = 1.2;
+        logo1Img.yScale = 1.2;
+        logo1Img.position = CGPointMake(4, (self.faceSize.height / 2) - (labelYMargin + 40));
+        
+    } else {
+        SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
+        SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
+        [faceMarkings addChild:logo1Img];
+        logo1Img.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
+        logo1Img.colorBlendFactor = 1.0;
+        logo1Img.xScale = 1.2;
+        logo1Img.yScale = 1.2;
+        logo1Img.position = CGPointMake(0, (self.faceSize.height / 2) - (labelYMargin + 25));
+        
+        
+        SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
+        SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
+        [faceMarkings addChild:logo2Img];
+        logo2Img.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
+        logo2Img.colorBlendFactor = 1.0;
+        logo2Img.xScale = 1.2;
+        logo2Img.yScale = 1.2;
+        logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 11));
+        
+        SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
+        SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
+        [faceMarkings addChild:moonImg];
+        moonImg.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
+        moonImg.colorBlendFactor = 1.0;
+        moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 27));
+    }
     
-    SKTexture *logo2Texture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusLogo2-394h"]];
-    SKSpriteNode *logo2Img = [SKSpriteNode spriteNodeWithTexture: logo2Texture];
-    [faceMarkings addChild:logo2Img];
-    logo2Img.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
-    logo2Img.colorBlendFactor = 1.0;
-    logo2Img.xScale = 1.2;
-    logo2Img.yScale = 1.2;
-    logo2Img.position = CGPointMake(logo1Img.position.x, (logo1Img.position.y - 11));
-    
-    SKTexture *moonTexture = [SKTexture textureWithImage:[NSImage imageNamed: @"ZeusMoon_0088-regular"]];
-    SKSpriteNode *moonImg = [SKSpriteNode spriteNodeWithTexture: moonTexture];
-    [faceMarkings addChild:moonImg];
-    moonImg.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
-    moonImg.colorBlendFactor = 1.0;
-    moonImg.position = CGPointMake(logo2Img.position.x, (logo1Img.position.y - 27));
-            
     if (theme.dialStyle != DialStyleNone) {
         
         SKSpriteNode *dayImg = [SKSpriteNode spriteNodeWithTexture: [self textureForToday]];
         [faceMarkings addChild:dayImg];
         dayImg.color = isAlternateLayer ? theme.alternateColor : theme.logoAndDateColor;
         dayImg.colorBlendFactor = 1.0;
-        dayImg.position = CGPointMake(logo2Img.position.x, -(self.faceSize.height / 2) + (labelYMargin + 40));
+        dayImg.position = CGPointMake(0, -(self.faceSize.height / 2) + (labelYMargin + 40));
     }
 	
 	[self addChild:faceMarkings];
@@ -470,7 +482,17 @@ CGFloat regionTransitionDuration = 0.2;
 	minuteHand.zRotation =  - (2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
 	secondHand.zRotation = - (2*M_PI)/60 * (CGFloat)(components.second + 1.0/NSEC_PER_SEC*components.nanosecond);
     
-	if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
+    if ([theme.name isEqualToString: @"PeixeUrbano"]) {
+        colorRegion.alpha = 1.0;
+        
+        CGFloat desiredRotation = M_PI_2 / 2;
+        
+        SKAction *rotation = [SKAction rotateToAngle:desiredRotation duration:0.15 shortestUnitArc:YES];
+        
+        [colorRegionReflection runAction: rotation];
+        [colorRegion runAction: rotation];
+    }
+	else if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
 	{
         [colorRegion runAction: [SKAction fadeInWithDuration:0.20]];
         

@@ -104,7 +104,28 @@
 #define royalHandsInnerColor [SKColor colorWithRed:0.118 green:0.188 blue:0.239 alpha:1.000]
 #define royalSecondHandColor [SKColor colorWithRed:0.912 green:0.198 blue:0.410 alpha:1.000]
 #define royalLogoColor [SKColor whiteColor]
-#define royalAlternateColor [SKColor colorWithRed:0.218 green:0.288 blue:0.439 alpha:1.000]
+#define royalAlternateColor [SKColor colorWithRed:0.0 green:0.415 blue:0.439 alpha:1.000]
+
+
+//peixeUrbano
+#define peixeUrbanoBg1Color [SKColor whiteColor]
+#define peixeUrbanoBg2Color [SKColor colorWithRed:0.0 green:0.207 blue:0.407 alpha:1.000]
+#define peixeUrbanoTypefaceColor [SKColor colorWithRed:1.000 green:0.450 blue:0.0 alpha:1.000]
+#define peixeUrbanoHandsOutterColor [SKColor whiteColor]
+#define peixeUrbanoHandsInnerColor [SKColor colorWithRed:1.000 green:0.450 blue:0.0 alpha:1.000]
+#define peixeUrbanoSecondHandColor [SKColor whiteColor]
+#define peixeUrbanoLogoColor [SKColor colorWithRed:1.000 green:0.450 blue:0.0 alpha:1.000] //[SKColor colorWithRed:1.000 green:0.450 blue:0.136 alpha:1.000]
+#define peixeUrbanoAlternateColor [SKColor whiteColor]
+
+//peixeUrbanoLight
+#define peixeUrbanoLightBg1Color [SKColor whiteColor]
+#define peixeUrbanoLightBg2Color [SKColor colorWithRed:0.0 green:0.415 blue:0.796 alpha:1.000] //[SKColor colorWithRed:0.0 green:0.207 blue:0.407 alpha:1.000]
+#define peixeUrbanoLightTypefaceColor [SKColor colorWithRed:1.000 green:0.450 blue:0.0 alpha:1.000]
+#define peixeUrbanoLightHandsOutterColor [SKColor whiteColor]
+#define peixeUrbanoLightHandsInnerColor [SKColor colorWithRed:1.000 green:0.450 blue:0.0 alpha:1.000]
+#define peixeUrbanoLightSecondHandColor [SKColor whiteColor]
+#define peixeUrbanoLightLogoColor [SKColor colorWithRed:1.000 green:0.450 blue:0.0 alpha:1.000]
+#define peixeUrbanoLightAlternateColor [SKColor  whiteColor]
 
 
 
