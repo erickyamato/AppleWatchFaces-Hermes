@@ -8,6 +8,7 @@
 
 #import "InterfaceController.h"
 #import "FaceScene.h"
+#import "GeneralSettingsInterfaceController.h"
 
 @import ObjectiveC.runtime;
 @import SpriteKit;
@@ -108,6 +109,15 @@ CGFloat totalRotation = 0;
     FaceScene *scene = (FaceScene *)self.scene.scene;
     [scene changeEditModeTo:EditModeDialStyle];
 }
+- (IBAction)moreTapped {
+    
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    
+    NSDictionary *context = @{@"scene": scene};
+    
+    [self presentControllerWithName:@"Settings" context:context];
+    
+}
 - (IBAction)editFontModeTapped {
     FaceScene *scene = (FaceScene *)self.scene.scene;
     [scene changeEditModeTo:EditModeTypeface];
@@ -129,6 +139,10 @@ CGFloat totalRotation = 0;
     }]]];
      
     
+}
+- (IBAction)flyFish:(id)sender {
+    FaceScene *scene = (FaceScene *)self.scene.scene;
+    [scene flyFish];
 }
 
 //- (void)session:(nonnull WCSession *)session didReceiveMessage:(nonnull NSDictionary<NSString *,id> *)message replyHandler:(nonnull void (^)(NSDictionary<NSString *,id> * __nonnull))replyHandler {

@@ -21,6 +21,9 @@
 		B0D30B14216D5C6A00444765 /* FaceScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B0D30B13216D5C6A00444765 /* FaceScene.sks */; };
 		B0EB7307216E6C380098CF27 /* FaceScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7306216E6C380098CF27 /* FaceScene.m */; };
 		E8249AFB21F183A80099369A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8249AF921F183A80099369A /* Assets.xcassets */; };
+		E86A852221FBB17B005E162A /* EditModeTableRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E86A852121FBB17B005E162A /* EditModeTableRowController.m */; };
+		E86A852521FBB1CA005E162A /* FaceTableRowOption.m in Sources */ = {isa = PBXBuildFile; fileRef = E86A852421FBB1CA005E162A /* FaceTableRowOption.m */; };
+		E8C6B18021F5681C00A3AAB2 /* GeneralSettingsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8C6B17F21F5681C00A3AAB2 /* GeneralSettingsInterfaceController.m */; };
 		E8DA9ECE21F0F6310064559F /* ThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ECD21F0F6310064559F /* ThemeManager.m */; };
 		E8DA9ED121F0F98A0064559F /* FaceTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DA9ED021F0F98A0064559F /* FaceTheme.m */; };
 		E8DA9ED321F1400C0064559F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8DA9ED221F1400B0064559F /* Assets.xcassets */; };
@@ -99,6 +102,12 @@
 		B0EB7306216E6C380098CF27 /* FaceScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceScene.m; sourceTree = "<group>"; };
 		E8249AFA21F183A80099369A /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Base; path = Base.lproj/Assets.xcassets; sourceTree = "<group>"; };
 		E834C7F721F0304C0002BA48 /* HermesPalette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HermesPalette.h; sourceTree = "<group>"; };
+		E86A852021FBB17B005E162A /* EditModeTableRowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditModeTableRowController.h; sourceTree = "<group>"; };
+		E86A852121FBB17B005E162A /* EditModeTableRowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditModeTableRowController.m; sourceTree = "<group>"; };
+		E86A852321FBB1CA005E162A /* FaceTableRowOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FaceTableRowOption.h; sourceTree = "<group>"; };
+		E86A852421FBB1CA005E162A /* FaceTableRowOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceTableRowOption.m; sourceTree = "<group>"; };
+		E8C6B17E21F5681C00A3AAB2 /* GeneralSettingsInterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneralSettingsInterfaceController.h; sourceTree = "<group>"; };
+		E8C6B17F21F5681C00A3AAB2 /* GeneralSettingsInterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneralSettingsInterfaceController.m; sourceTree = "<group>"; };
 		E8CBFA8321ED980500B8A553 /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		E8DA9ECC21F0F6310064559F /* ThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemeManager.h; sourceTree = "<group>"; };
 		E8DA9ECD21F0F6310064559F /* ThemeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemeManager.m; sourceTree = "<group>"; };
@@ -205,6 +214,12 @@
 				B0EB7306216E6C380098CF27 /* FaceScene.m */,
 				B0D30AFA216D5B2700444765 /* InterfaceController.h */,
 				B0D30AFB216D5B2700444765 /* InterfaceController.m */,
+				E8C6B17E21F5681C00A3AAB2 /* GeneralSettingsInterfaceController.h */,
+				E8C6B17F21F5681C00A3AAB2 /* GeneralSettingsInterfaceController.m */,
+				E86A852321FBB1CA005E162A /* FaceTableRowOption.h */,
+				E86A852421FBB1CA005E162A /* FaceTableRowOption.m */,
+				E86A852021FBB17B005E162A /* EditModeTableRowController.h */,
+				E86A852121FBB17B005E162A /* EditModeTableRowController.m */,
 				B0D30AFD216D5B2700444765 /* ExtensionDelegate.h */,
 				B0D30AFE216D5B2700444765 /* ExtensionDelegate.m */,
 				B0D30B13216D5C6A00444765 /* FaceScene.sks */,
@@ -369,10 +384,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0D30AFF216D5B2700444765 /* ExtensionDelegate.m in Sources */,
+				E8C6B18021F5681C00A3AAB2 /* GeneralSettingsInterfaceController.m in Sources */,
+				E86A852221FBB17B005E162A /* EditModeTableRowController.m in Sources */,
 				B0EB7307216E6C380098CF27 /* FaceScene.m in Sources */,
 				B0D30AFC216D5B2700444765 /* InterfaceController.m in Sources */,
 				E8DA9ED121F0F98A0064559F /* FaceTheme.m in Sources */,
 				E8DA9ECE21F0F6310064559F /* ThemeManager.m in Sources */,
+				E86A852521FBB1CA005E162A /* FaceTableRowOption.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "FaceScene.h"
 #import "HermesPalette.h"
 #import "ThemeManager.h"
+#import <WatchKit/WatchKit.h>
 
 @import CoreText;
 
@@ -48,9 +49,10 @@
 
 @synthesize logo1, logo2, logo3, bgColor1, bgColor2, hourMinuteColor, secondsHandColor, innerColor, outerColor, typefaceColor, logoAndDateColor, showSeconds, dateFontIdentifier, crownEditMode, tm;
 
-BOOL changingFace = NO;
-CGFloat regionTransitionDuration = 0.2;
+BOOL crownEventRunning = NO;
 
+CGFloat regionTransitionDuration = 0.2;
+SKSpriteNode *logoSprite;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -205,9 +207,12 @@ CGFloat regionTransitionDuration = 0.2;
         SKTexture *logo1Texture = [SKTexture textureWithImage: isAlternateLayer ? [NSImage imageNamed: @"pu_logo_white"] : [NSImage imageNamed: @"pu_logo"]];
         SKSpriteNode *logo1Img = [SKSpriteNode spriteNodeWithTexture: logo1Texture];
         [faceMarkings addChild:logo1Img];
+        logo1Img.name = @"PU_LOGO";
         logo1Img.xScale = 1.2;
         logo1Img.yScale = 1.2;
         logo1Img.position = CGPointMake(4, (self.faceSize.height / 2) - (labelYMargin + 40));
+        
+        logo1 = logo1Img;
         
     } else {
         SKTexture *logo1Texture = [SKTexture textureWithImage: [NSImage imageNamed: @"ZeusLogo1-394h"]];
@@ -249,7 +254,7 @@ CGFloat regionTransitionDuration = 0.2;
 	[self addChild:faceMarkings];
     
     
-    if (!isAlternateLayer && changingFace) {
+    if (!isAlternateLayer && crownEventRunning) {
         
         NSDictionary *attribs = @{NSFontAttributeName : [NSFont fontWithName:@"Futura-Medium" size:12], NSForegroundColorAttributeName : theme.typefaceColor, NSBackgroundColorAttributeName : theme.bgColor1};
     
@@ -262,11 +267,11 @@ CGFloat regionTransitionDuration = 0.2;
     
         [self addChild:numberLabel];
     
-        [self fadeAndRemove: numberLabel];
+        [self fadeAndRemove: numberLabel runningCrownEvent: crownEventRunning];
     }
 }
 
-- (void)fadeAndRemove:(SKNode *)node {
+- (void)fadeAndRemove:(SKNode *)node runningCrownEvent: (BOOL)runningCrownEvent {
     SKAction *fadeIn = [SKAction fadeInWithDuration: 0.2];
     SKAction *delay = [SKAction waitForDuration: 0.7];
     SKAction *fadeOut = [SKAction fadeOutWithDuration: 0.2];
@@ -275,13 +280,14 @@ CGFloat regionTransitionDuration = 0.2;
     SKAction *sequence = [SKAction sequence: @[fadeIn, delay, fadeOut, remove]];
     
     [node runAction: sequence completion:^{
-        [self releaseFaceChangeLock];
+        if (runningCrownEvent)
+            [self crownFiredEventUnlock];
     }];
     
 }
 
-- (void)releaseFaceChangeLock {
-    changingFace = NO;
+- (void)crownFiredEventUnlock {
+    crownEventRunning = NO;
 }
 
 - (SKTexture *)textureForNumeral: (int)number {
@@ -454,6 +460,17 @@ CGFloat regionTransitionDuration = 0.2;
 	[self updateHands];
 }
  CGFloat testRotation = -1.8;
+
+
+-(void)flyFish {
+    
+    
+    NSLog(@"start!");
+
+    
+}
+
+
 -(void)updateHands
 {
    
@@ -538,55 +555,125 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)digitalCrownScrolledUp {
     
-    switch (crownEditMode) {
-        case EditModeFace:
-            [self nextTheme];
-            break;
-            
-        case EditModeTypeface:
-            [self nextTypeface];
-            break;
-            
-        case EditModeDialStyle:
-            [self nextColorDialStyle];
-            break;
-            
-        default:
-            break;
-    }
-}
--(void)digitalCrownScrolledDown {
+    if (crownEventRunning) { return; }
+    
     
     switch (crownEditMode) {
         case EditModeFace:
-            [self previousTheme];
+            
+            [self activateCrownEvent];
+            [self nextTheme];
+            
             break;
             
         case EditModeTypeface:
-            [self previousTypeface];
+            
+            [self activateCrownEvent];
+            [self nextTypeface];
+            
             break;
             
         case EditModeDialStyle:
-            [self previousColorDialStyle];
+            
+            [self activateCrownEvent];
+            [self nextColorDialStyle];
+            
+            break;
+            
+        case EditModeShowSeconds:
+            
+            [self activateCrownEvent];
+            [self toogleShowSeconds];
+            
+            break;
+            
+        case EditModeUseMasking:
+            
+            [self toogleUseMasking];
+            [self toogleShowSeconds];
+            
             break;
             
         default:
             break;
     }
+    
+}
+
+-(void)activateCrownEvent {
+    crownEventRunning = YES;
+    [[WKInterfaceDevice currentDevice] playHaptic: WKHapticTypeStart];
+}
+
+-(void)digitalCrownScrolledDown {
+    
+    
+    if (crownEventRunning) { return; }
+    
+    switch (crownEditMode) {
+        case EditModeFace:
+
+            [self activateCrownEvent];
+            [self previousTheme];
+            
+            break;
+            
+        case EditModeTypeface:
+
+            [self activateCrownEvent];
+            [self previousTypeface];
+
+            break;
+            
+        case EditModeDialStyle:
+
+            [self activateCrownEvent];
+            [self previousColorDialStyle];
+
+            break;
+            
+        case EditModeShowSeconds:
+            
+            [self activateCrownEvent];
+            [self toogleShowSeconds];
+
+            break;
+            
+        case EditModeUseMasking:
+            
+            [self toogleUseMasking];
+            [self toogleShowSeconds];
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+}
+
+-(void)toogleUseMasking {
+    tm.currentTheme.useMasking = !tm.currentTheme.useMasking;
+    [self refreshTheme];
+}
+
+-(void)toogleShowSeconds {
+    tm.currentTheme.showSeconds = !tm.currentTheme.showSeconds;
+    [self refreshTheme];
 }
 
 -(void)resetStyles {
-//    [tm setCurrentFaceIndex: ThemeHermesBlackOrange];
+
     [tm buildThemeList];
     crownEditMode = EditModeNone;
+    [[WKInterfaceDevice currentDevice] playHaptic: WKHapticTypeStart];
     [self refreshTheme];
 }
 
 -(void)nextTheme {
     
-    if (changingFace) { return; }
     
-    changingFace = YES;
     
     int themeId = tm.currentFaceIndex;
     themeId++;
@@ -601,9 +688,6 @@ CGFloat regionTransitionDuration = 0.2;
 
 -(void)previousTheme {
     
-    if (changingFace) { return; }
-    
-    changingFace = YES;
     
     int themeId = tm.currentFaceIndex;
     themeId--;

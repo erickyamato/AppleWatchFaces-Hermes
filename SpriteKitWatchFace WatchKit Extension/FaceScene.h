@@ -57,7 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)digitalCrownScrolledUp;
 -(void)digitalCrownScrolledDown;
-
+-(void)nextTheme;
+-(void)flyFish;
+-(void)toogleShowSeconds;
+-(void)toogleUseMasking;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -66,6 +66,8 @@ typedef enum : NSUInteger {
     EditModeTypeface,
     EditModeDialStyle,
     EditModeNone,
+    EditModeShowSeconds,
+    EditModeUseMasking,
     EditModeMax
 } EditMode;
 

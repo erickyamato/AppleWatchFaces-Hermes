@@ -23,6 +23,11 @@
                                                 <action selector="askForResetStyles:" destination="OkN-RN-cDt" id="eYB-Cn-lxk"/>
                                             </connections>
                                         </tapGestureRecognizer>
+                                        <tapGestureRecognizer id="jQF-xb-M0w">
+                                            <connections>
+                                                <action selector="flyFish:" destination="OkN-RN-cDt" id="RlX-Te-YSC"/>
+                                            </connections>
+                                        </tapGestureRecognizer>
                                     </gestureRecognizers>
                                 </spriteKitScene>
                             </items>
@@ -46,9 +51,9 @@
                                     <action selector="editDialTypeModeTapped" destination="OkN-RN-cDt" id="idv-Lj-s12"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Font" image="font" id="BIw-y5-gA0">
+                            <menuItem title="More" icon="more" id="BIw-y5-gA0">
                                 <connections>
-                                    <action selector="editFontModeTapped" destination="OkN-RN-cDt" id="Lfc-Mw-e5U"/>
+                                    <action selector="moreTapped" destination="OkN-RN-cDt" id="ek6-yg-jBX"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -60,6 +65,34 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="-43.608695652173914" y="-49.330357142857146"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="831-K0-62j">
+            <objects>
+                <controller identifier="Settings" id="f8a-gV-e71" customClass="GeneralSettingsInterfaceController">
+                    <items>
+                        <table alignment="left" id="GyI-k6-LwR">
+                            <items>
+                                <tableRow identifier="OptionTableRow" id="dhW-z8-K7t" customClass="EditModeTableRowController">
+                                    <group key="rootItem" width="1" alignment="left" id="yXR-Zy-ck3">
+                                        <items>
+                                            <imageView alignment="left" verticalAlignment="center" image="NearbyButtonIcon" id="p1W-sT-WTA"/>
+                                            <label alignment="left" verticalAlignment="center" text="Por Aqui" id="Dlt-rZ-RLW"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="Dlt-rZ-RLW" id="FQD-06-z1s"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="GyI-k6-LwR" id="fyH-Gf-hDz"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="266.82608695652175" y="-60.714285714285715"/>
         </scene>
     </scenes>
     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
