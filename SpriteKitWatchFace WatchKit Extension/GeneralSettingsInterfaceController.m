@@ -25,14 +25,15 @@ NSString * const kOptionTableRowIdentifier = @"OptionTableRow";
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-    
-    [self setTitle: @"Crown Edit Mode"];
-    
+        
     self.options = @[
+                     @(EditModeDialStyleOption),
                      @(EditModeTypefaceOption),
+                     @(EditModeDuotoneStyleOption),
                      @(EditModeUseMaskingOption),
                      @(EditModeShowSecondsOption),
-                     @(ResetStyles)
+                     @(ResetStyles),
+                     @(ResetCurrentFace)
                      ];
     
     
@@ -75,8 +76,16 @@ NSString * const kOptionTableRowIdentifier = @"OptionTableRow";
 - (void)performActionForOption:(EditOption)option
 {
     switch (option) {
+        case EditModeDialStyleOption:
+            [scene setCrownEditMode: EditModeDialStyle];
+            [self dismissController];
+            break;
         case EditModeTypefaceOption:
             [scene setCrownEditMode: EditModeTypeface];
+            [self dismissController];
+            break;
+        case EditModeDuotoneStyleOption:
+            [scene setCrownEditMode: EditModeDuotoneStyle];
             [self dismissController];
             break;
         case EditModeShowSecondsOption:
@@ -90,27 +99,54 @@ NSString * const kOptionTableRowIdentifier = @"OptionTableRow";
         case ResetStyles:
             [self askForResetStyles];
             break;
+        case ResetCurrentFace:
+            [self askForResetCurrentFaceStyle];
+            break;
         default:
             break;
     }
 }
 
-
 - (void)resetStyles {
     [scene resetStyles];
+    
+    // should be outside WKAlertAction handler
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self dismissController];
+        
+    });
+    
 }
 - (void)askForResetStyles {
     
-    [self presentAlertControllerWithTitle: @"Alert!" message:@"Reset faces to their default styles?" preferredStyle: WKAlertControllerStyleActionSheet actions: @[
-                                                                                                                                                                  
-                                                                                                                                                                  [WKAlertAction actionWithTitle: @"YES" style: WKAlertActionStyleDestructive handler:^{
-        
+    [self presentAlertControllerWithTitle: @"Alert!" message:@"Reset faces to their default styles?" preferredStyle: WKAlertControllerStyleActionSheet actions: @[ [WKAlertAction actionWithTitle: @"YES" style: WKAlertActionStyleDestructive handler:^{
         [self resetStyles];
-    }],
-                                                                                                                                                                  [WKAlertAction actionWithTitle: @"NO" style: WKAlertActionStyleCancel handler:^{
+    }], [WKAlertAction actionWithTitle: @"NO" style: WKAlertActionStyleCancel handler:^{
         NSLog(@"Canceled");
     }]]];
     
+}
+
+
+- (void)resetCurrentFaceStyle {
+    [scene resetCurrentFaceStyle];
+    
+    // should be outside WKAlertAction handler
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self dismissController];
+        
+    });
+    
+}
+- (void)askForResetCurrentFaceStyle {
+    
+    [self presentAlertControllerWithTitle: @"Alert!" message:@"Reset current face to it's default style?" preferredStyle: WKAlertControllerStyleActionSheet actions: @[ [WKAlertAction actionWithTitle: @"YES" style: WKAlertActionStyleDestructive handler:^{
+        [self resetCurrentFaceStyle];
+    }], [WKAlertAction actionWithTitle: @"NO" style: WKAlertActionStyleCancel handler:^{
+        NSLog(@"Canceled");
+    }]]];
     
 }
 

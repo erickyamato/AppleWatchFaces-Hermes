@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property Typeface typeface;
 @property DateFontIdentifier dateFontIdentifier;
 @property DialStyle dialStyle;
+@property DuotoneMode duotoneMode;
 @property BOOL showSeconds;
 @property BOOL useMasking;
 
@@ -43,6 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
                     typeface: (Typeface)typeface
           dateFontIdentifier: (DateFontIdentifier)dateFontIdentifier
                    dialStyle: (DialStyle)dialStyle
+                 duotoneMode: (DuotoneMode)duotoneMode
                  showSeconds: (BOOL)showSeconds
                   useMasking: (BOOL)useMasking;
 @end

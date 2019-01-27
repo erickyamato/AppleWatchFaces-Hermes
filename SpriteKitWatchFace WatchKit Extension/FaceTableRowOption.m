@@ -17,10 +17,13 @@ NSDictionary <NSNumber *, NSString *> *kNanoRowOptionToTitleMapping;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         kNanoRowOptionToTitleMapping = @{
+                                         @(EditModeDialStyleOption): @"Dial Style",
                                          @(EditModeTypefaceOption): @"Typeface",
+                                         @(EditModeDuotoneStyleOption): @"Duotone mode",
                                          @(EditModeUseMaskingOption): @"Masking on/off",
                                          @(EditModeShowSecondsOption): @"Seconds show/hide",
                                          @(ResetStyles): @"Reset all faces",
+                                         @(ResetCurrentFace): @"Reset current face"
                                          };
     });
     

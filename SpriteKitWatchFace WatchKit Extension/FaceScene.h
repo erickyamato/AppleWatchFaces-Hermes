@@ -22,9 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)nextColorDialStyle;
 -(void)changeEditModeTo:(EditMode)editMode;
 -(void)resetStyles;
+-(void)resetCurrentFaceStyle;
 
 @property Theme theme;
-@property ColorRegionStyle colorRegionStyle;
+@property DuotoneMode duotoneMode;
 @property DateFontIdentifier dateFontIdentifier;
 @property EditMode crownEditMode;
 

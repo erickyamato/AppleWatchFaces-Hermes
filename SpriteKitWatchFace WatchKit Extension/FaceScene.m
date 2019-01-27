@@ -63,8 +63,6 @@ SKSpriteNode *logoSprite;
         
 		self.faceSize = (CGSize){184, 224};
         
-        self.colorRegionStyle = ColorRegionStyleDynamicDuo;
-        
         self.useAlternateColorOnLogosAndDate = YES;
         
         self.updatingTypeFace = YES;
@@ -391,7 +389,12 @@ SKSpriteNode *logoSprite;
 	
     [self runAction: [SKAction colorizeWithColor: theme.bgColor2 colorBlendFactor: 1 duration: regionTransitionDuration]];
     
-    [colorRegion runAction: [SKAction colorizeWithColor: theme.bgColor1 colorBlendFactor: 1 duration: regionTransitionDuration]];
+    if (tm.currentTheme.duotoneMode == DuotoneModeNone)
+    {
+        [colorRegion runAction: [SKAction colorizeWithColor: theme.bgColor2 colorBlendFactor: 1 duration: regionTransitionDuration]];
+    } else {
+        [colorRegion runAction: [SKAction colorizeWithColor: theme.bgColor1 colorBlendFactor: 1 duration: regionTransitionDuration]];
+    }
 	
 	numbers.color = theme.typefaceColor;
 	numbers.colorBlendFactor = 1.0;
@@ -400,12 +403,7 @@ SKSpriteNode *logoSprite;
     secondHand.color = theme.secondsHandColor;
     secondHand.colorBlendFactor = 1.0;
 		
-	if (self.colorRegionStyle == ColorRegionStyleNone)
-	{
-        colorRegion.alpha = 0.0;
-		
-	}
-	else if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
+	if (tm.currentTheme.duotoneMode == DuotoneModeDynamic)
 	{
 		colorRegion.alpha = 1.0;
 		colorRegion.texture = nil;
@@ -499,7 +497,7 @@ SKSpriteNode *logoSprite;
 	minuteHand.zRotation =  - (2*M_PI)/60.0 * (CGFloat)(components.minute + 1.0/60.0*components.second);
 	secondHand.zRotation = - (2*M_PI)/60 * (CGFloat)(components.second + 1.0/NSEC_PER_SEC*components.nanosecond);
     
-    if ([theme.name isEqualToString: @"PeixeUrbano"]) {
+    if (tm.currentTheme.duotoneMode == DuotoneModeAngular) {
         colorRegion.alpha = 1.0;
         
         CGFloat desiredRotation = M_PI_2 / 2;
@@ -509,7 +507,7 @@ SKSpriteNode *logoSprite;
         [colorRegionReflection runAction: rotation];
         [colorRegion runAction: rotation];
     }
-	else if (self.colorRegionStyle == ColorRegionStyleDynamicDuo)
+	else if (tm.currentTheme.duotoneMode == DuotoneModeDynamic)
 	{
         [colorRegion runAction: [SKAction fadeInWithDuration:0.20]];
         
@@ -521,7 +519,7 @@ SKSpriteNode *logoSprite;
         
         [colorRegionReflection runAction: [SKAction rotateToAngle:reflectionDesiredRotation duration:0.2 shortestUnitArc:YES]];
 	}
-	else if (self.colorRegionStyle == ColorRegionStyleHalfHorizontal)
+	else if (tm.currentTheme.duotoneMode == DuotoneModeHorizontal)
 	{
 		colorRegion.alpha = 1.0;
 
@@ -532,7 +530,7 @@ SKSpriteNode *logoSprite;
         [colorRegionReflection runAction: rotation];
         [colorRegion runAction: rotation];
         
-    } else if (self.colorRegionStyle == ColorRegionStyleHalfVertical) {
+    } else if (tm.currentTheme.duotoneMode == DuotoneModeVertical) {
         
         colorRegion.alpha = 1.0;
         
@@ -589,8 +587,15 @@ SKSpriteNode *logoSprite;
             
         case EditModeUseMasking:
             
+            [self activateCrownEvent];
             [self toogleUseMasking];
-            [self toogleShowSeconds];
+            
+            break;
+            
+        case EditModeDuotoneStyle:
+            
+            [self activateCrownEvent];
+            [self nextDuotoneMode];
             
             break;
             
@@ -641,8 +646,15 @@ SKSpriteNode *logoSprite;
             
         case EditModeUseMasking:
             
+            [self activateCrownEvent];
             [self toogleUseMasking];
-            [self toogleShowSeconds];
+            
+            break;
+            
+        case EditModeDuotoneStyle:
+            
+            [self activateCrownEvent];
+            [self previousDuotoneMode];
             
             break;
             
@@ -664,8 +676,14 @@ SKSpriteNode *logoSprite;
 }
 
 -(void)resetStyles {
-
     [tm buildThemeList];
+    crownEditMode = EditModeNone;
+    [[WKInterfaceDevice currentDevice] playHaptic: WKHapticTypeStart];
+    [self refreshTheme];
+}
+
+-(void)resetCurrentFaceStyle {
+    [tm resetCurrentFace];
     crownEditMode = EditModeNone;
     [[WKInterfaceDevice currentDevice] playHaptic: WKHapticTypeStart];
     [self refreshTheme];
@@ -762,14 +780,42 @@ SKSpriteNode *logoSprite;
 }
 
 
-
--(void)nextColorRegionStyle {
-    if (self.colorRegionStyle >= ColorRegionStyleMAX - 1) {
-        self.colorRegionStyle = 0;
+-(void)nextDuotoneMode {
+    
+    DuotoneMode dtMode = tm.currentTheme.duotoneMode;
+    
+    if (dtMode == DuotoneModeAngular) {
+        dtMode = 0;
     } else {
-        self.colorRegionStyle++;
+        dtMode++;
     }
+    tm.currentTheme.duotoneMode = dtMode;
+    
+    [self refreshTheme];
 }
+
+
+-(void)previousDuotoneMode {
+    
+    DuotoneMode dtMode = tm.currentTheme.duotoneMode;
+    
+    if (dtMode == DialStyleNone) {
+        dtMode = DuotoneModeAngular;
+    } else {
+        --dtMode;
+    }
+    
+    tm.currentTheme.duotoneMode = dtMode;
+  
+    [self refreshTheme];
+}
+
+
+
+
+
+
+
 
 
 -(void)refreshTheme
@@ -788,7 +834,7 @@ SKSpriteNode *logoSprite;
 	[self setupColors];
 	[self setupScene];
 	
-	if (tm.currentTheme.useMasking)
+	if (tm.currentTheme.useMasking && tm.currentTheme.duotoneMode != DuotoneModeNone)
 	{
 		[self setupMasking];
 	}

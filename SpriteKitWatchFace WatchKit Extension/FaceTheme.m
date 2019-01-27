@@ -27,6 +27,7 @@
                        typeface: (Typeface)typeface
               dateFontIdentifier: (DateFontIdentifier)dateFontIdentifier
                       dialStyle: (DialStyle)dialStyle
+                    duotoneMode: (DuotoneMode)duotoneMode
                     showSeconds: (bool)showSeconds
                      useMasking: (BOOL)useMasking {
     
@@ -44,6 +45,7 @@
         self.typeface = typeface;
         self.dateFontIdentifier = dateFontIdentifier;
         self.dialStyle = dialStyle;
+        self.duotoneMode = duotoneMode;
         self.showSeconds = showSeconds;
         self.useMasking = useMasking;
     }

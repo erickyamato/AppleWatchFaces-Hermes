@@ -7,7 +7,7 @@
 //
 
 #import "EditModeTableRowController.h"
-
+#import <SpriteKit/SpriteKit.h>
 
 @interface EditModeTableRowController ()
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *titleLabel;
@@ -21,8 +21,8 @@
 {
     _tableRowOption = tableRowOption;
     
-//    [self.iconImageView setImage:_tableRowOption.icon];
     [self.titleLabel setText:_tableRowOption.title];
+    
 }
 
 @end

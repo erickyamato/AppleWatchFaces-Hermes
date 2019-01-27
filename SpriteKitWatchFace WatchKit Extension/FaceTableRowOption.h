@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, EditOption) {
+    EditModeDialStyleOption,
     EditModeTypefaceOption,
+    EditModeDuotoneStyleOption,
     EditModeUseMaskingOption,
     EditModeShowSecondsOption,
-    ResetStyles
+    ResetStyles,
+    ResetCurrentFace
 };
 
 NS_ASSUME_NONNULL_BEGIN

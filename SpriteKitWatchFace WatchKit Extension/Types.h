@@ -38,12 +38,13 @@ typedef enum : NSUInteger {
 
 
 typedef enum : NSUInteger {
-    ColorRegionStyleNone,
-    ColorRegionStyleDynamicDuo,
-    ColorRegionStyleHalfHorizontal,
-    ColorRegionStyleHalfVertical,
-    ColorRegionStyleMAX,
-} ColorRegionStyle;
+    DuotoneModeNone,
+    DuotoneModeDynamic,
+    DuotoneModeHorizontal,
+    DuotoneModeVertical,
+    DuotoneModeAngular,
+    DuotoneModeMAX,
+} DuotoneMode;
 
 typedef enum : NSUInteger {
     TypefaceNormal,
@@ -68,6 +69,7 @@ typedef enum : NSUInteger {
     EditModeNone,
     EditModeShowSeconds,
     EditModeUseMasking,
+    EditModeDuotoneStyle,
     EditModeMax
 } EditMode;
 
